@@ -1,0 +1,12 @@
+@use '../../styles/base/mixins' as m;
+@use '../../styles/base/variables' as v;
+
+
+.btnPrimary {
+  @include m.btn(v.$primary-color);
+  width: max-content;
+
+  @include m.mq(768px) {
+    font-size: 1.8rem;
+  }
+}

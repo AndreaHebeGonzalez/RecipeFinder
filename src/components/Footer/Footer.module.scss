@@ -1,0 +1,17 @@
+@use '../../styles/base/mixins' as m;
+@use '../../styles/base/variables' as v;
+
+.footer {
+  @include m.flex(row, 1rem);
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: v.$primary-color;
+  
+  p,
+  span {
+    color: v.$white;
+    font-size: 1.8rem;
+    font-family: v.$secondary-font;
+  }
+}

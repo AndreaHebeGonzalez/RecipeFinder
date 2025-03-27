@@ -1,0 +1,140 @@
+@use 'sass:color';
+@use '../../styles/base/variables' as v;
+@use '../../styles/base/mixins' as m;
+
+.searchSection {
+  backdrop-filter: blur(1rem);
+  background-color: rgba(v.$white, 0.3);
+  border-radius: v.$radius;
+  padding: 2.5rem;
+  @include m.flex(column, 2rem);
+}
+
+.resultContainer {
+  @include m.flex(column, 1rem);
+
+  @include m.mq(v.$tablet) {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 1rem;
+  }
+
+  @include m.mq(v.$tablet-2) {
+    grid-template-columns: 1.95fr 1fr;
+  }
+
+  @include m.mq(1100px) {
+    grid-template-columns: 2.5fr 1fr;
+  }
+
+  @include m.mq(v.$desktop-2) {
+    grid-template-columns: 3fr 1fr;
+  }
+  
+
+  .recipeResult,
+  .suggestions {
+    backdrop-filter: blur(1rem);
+    background-color: rgba(v.$white, 0.3);
+    border-radius: v.$radius;
+    padding: 2rem;
+    @include m.flex(column, 2rem);
+
+    @include m.mq(v.$mobile) {
+      padding: 3rem;
+    }
+
+    @include m.mq(v.$mobile-2) {
+      padding: 3rem 4rem;
+    }
+    
+    @include m.mq(v.$tablet) {
+      padding: 2.8rem;
+    }
+  }
+
+  .suggestions {
+    
+    
+    
+    @include m.mq(v.$desktop) {
+      padding: 2.8rem; 
+    }
+
+    h3 {
+      font-size: 3rem;
+    }
+    
+  }
+  
+  .cardList {
+    overflow-y: auto;
+    scroll-snap-type: y mandatory; 
+    padding-right: 2rem;
+    &::-webkit-scrollbar {
+      width: 8px; 
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.438);
+      border-radius: 4px;
+    }
+  
+    @include m.grid-c(1, 3rem);
+    place-items: center;
+
+    @include m.mq(550px) {
+      @include m.grid-c(2, 2rem); 
+    }
+
+    @include m.mq(v.$tablet) {
+      @include m.grid-c(1, 2.5rem); 
+      
+    }
+
+    @include m.mq(992px) {
+      @include m.grid-c(2, 1.5rem); 
+    }
+
+    @include m.mq(1280px) {
+      @include m.grid-c(3, 2.2rem); 
+    }
+  }
+
+  .suggestions .cardList {
+    
+    @include m.flex(row, 2rem);
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    padding-bottom: 2rem;
+    
+    &::-webkit-scrollbar {
+      height: 8px; 
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.438);
+      border-radius: 4px;
+    }
+  
+    max-width: 100%; 
+    white-space: nowrap; 
+
+    
+    @include m.mq(v.$tablet) {
+      @include m.flex(column, 2rem);
+      overflow-x: initial;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory; 
+      padding-right: 2rem;
+      &::-webkit-scrollbar {
+        width: 8px; 
+      }
+    
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.438);
+        border-radius: 4px;
+      }
+    }
+  }
+}

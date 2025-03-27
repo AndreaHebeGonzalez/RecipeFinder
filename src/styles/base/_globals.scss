@@ -1,0 +1,92 @@
+@use './variables' as v;
+@use './mixins' as m;
+
+/* Reset */
+
+html {
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: v.$primary-font;
+  font-size: 1.8rem;
+  color: v.$black;
+  background-color: v.$primary-color;
+  background-image: url('/images/bg-body.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  @include m.mq(768px) {
+    font-size: 2rem;
+  }
+}
+
+#root {
+  @include m.flex(column, 0);
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.container {
+  width: 98%;
+  max-width: 140rem;
+  margin: 0 auto;
+
+  @include m.mq(1600px) {
+    max-width: 150rem;
+  }
+}
+
+main {
+  max-width: 100vw;
+  overflow: hidden;
+  padding: v.$spacing-mobile 0;
+  @include m.flex(column, v.$spacing-mobile);
+
+  @include m.mq(1024px) {
+    padding: v.$spacing-desktop 0;
+    @include m.flex(column, v.$spacing-desktop);
+  }
+}
+
+.icon-size {
+  width: 2rem;
+  height: auto;
+}
+
+.icon-size-2 {
+  width: 2.5rem;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block
+}
+
+
+
+
+
+
+
+
+
+
+
+

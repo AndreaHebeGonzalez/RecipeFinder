@@ -1,0 +1,60 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+@use "../Buttons/ButtonPrimary.module.scss";
+
+.form {
+  @include m.flex(column, 2rem);
+
+  input[type="text"] {
+    background-color: v.$white;
+    border: none;
+    width: 100%;
+    font-size: 1.8rem;
+    font-family: "Roboto Flex", sans-serif;
+    border-radius: v.$radius;
+    padding: 1rem;
+
+    @include m.mq(v.$tablet-2) {
+      width: 70%;
+    }
+  }  
+
+  .wrapper {
+    @include m.flex(row, 0);
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @include m.mq(v.$tablet-2) {
+      width: 70%;
+    }
+  }
+
+  .searchPreferencies {
+    @include m.flex(column, 1.5rem);
+    cursor: pointer;
+    
+    text-align: end;
+    align-items: end;
+
+    @include m.mq(v.$mobile-2) {
+      text-align: initial;
+      align-items: initial;
+    }
+
+    p {
+      width: 70%;
+      font-weight: 500;
+
+      @include m.mq(v.$mobile-2) {
+        width: 100%;
+      }
+    }
+
+    .line {
+      height: 1px;
+      width: 50%;
+      background-color: v.$black;
+    }
+  }
+}

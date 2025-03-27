@@ -1,0 +1,58 @@
+@use './mixins' as m;
+@use './variables' as v;
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 400;
+
+  @include m.mq(v.$mobile) {
+    font-size: 2.8rem;
+  }
+
+  @include m.mq(v.$tablet) {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-size: 3rem;
+
+  @include m.mq(v.$mobile) {
+    font-size: 3.5rem;
+  }
+
+  @include m.mq(v.$tablet) {
+    font-size: 3.8rem;
+  }
+}
+
+h3 {
+  font-size: 3rem;
+  
+  @include m.mq(v.$tablet) {
+    font-size: 3.5rem;
+  }
+}
+
+h4 {
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 1.6rem;
+  font-weight: 300;
+  @include m.mq(v.$mobile) {
+    font-size: 1.8rem;
+  }
+  @include m.mq(v.$tablet) {
+    font-size: 2rem;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: v.$black;
+  line-height: 1;
+}

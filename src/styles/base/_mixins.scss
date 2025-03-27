@@ -1,0 +1,61 @@
+@use 'sass:color';
+@use './variables' as v;
+
+
+/* Responsive display */
+
+@mixin mq($value) {
+  @media (min-width: $value) {
+    @content;
+  }
+}
+
+/* Grid - flex */
+
+@mixin grid-c($columns, $spacing) {
+  display: grid;
+  gap: $spacing;
+  grid-template-columns: repeat($columns, 1fr);
+}
+
+@mixin flex($direction, $spacing) {
+  display: flex;
+  flex-direction: $direction;
+  gap: $spacing;
+}
+
+/* Buttons */
+
+@mixin btn($color) {
+  cursor: pointer;
+  background-color: $color;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 1rem;
+  color: v.$white;
+
+  &:hover {
+    background-color: color.scale($color, $lightness: 4%);
+  }
+}  
+
+
+
+/* 
+
+Aclarar y oscurecer colores 
+
+@use 'sass:color';
+
+$primary: #3498db; // Azul
+
+.lighter {
+  background-color: color.lighten($primary, 20%); // Aclara el color
+}
+
+.darker {
+  background-color: color.darken($primary, 20%); // Oscurece el color
+}
+
+*/
