@@ -1,10 +1,9 @@
 
 export const getHeight = (element: HTMLElement | null) => {
     if (!element) return 0;
-    const rect = element.getBoundingClientRect()
-    const height = rect.height;
-    console.log('altura', height)
-    return parseFloat(height.toFixed(2))
+    //const rect = element.getBoundingClientRect()
+    const height = element.scrollHeight //rect.height;
+    return height //parseFloat(height.toFixed(2))
 }
 
 export const getPadding = (element: HTMLElement | null) => {

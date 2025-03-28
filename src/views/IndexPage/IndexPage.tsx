@@ -43,7 +43,7 @@ const IndexPage = () => {
   }, [windowWidth]); 
 
   return (
-    <>
+    <div className="main-layout container">
       <section className={styles.searchSection}>
         <h2>Find Recipe By Ingredients</h2>
         <Form />
@@ -77,7 +77,7 @@ const IndexPage = () => {
           </div>
         </aside>
       </div>
-    </>
+    </div>
   )
 }
 

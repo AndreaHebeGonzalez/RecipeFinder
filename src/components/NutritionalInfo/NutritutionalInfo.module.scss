@@ -1,0 +1,87 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.nutritionInfo {
+  width: 100%;
+  
+  @include m.mq(768px) {
+    width: 85%;
+  }
+
+  @include m.mq(1024px) {
+    width: 65%;
+  }
+
+  h3 {
+    display: none;
+    font-size: 2.5rem;
+    color: v.$secondary-color;
+    font-weight: 500;
+    font-style: italic;
+    padding-bottom: 2.5rem;
+
+    @include m.mq(768px) {
+      display: block;
+    }
+
+    @include m.mq(1024px) {
+      font-size: 3rem;
+    }
+  }
+
+  .listNutrition {
+    @include m.flex(row, 3rem);
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    @include m.mq(v.$tablet) {
+      @include m.flex(column, 1rem);
+    }
+
+    @include m.mq(1024px) {
+      gap: 1.5rem
+    }
+
+    .itemNutrition {
+      @include m.flex(column, 1rem);
+      justify-content: center;
+      align-items: center;
+      
+      
+      @include m.mq(768px) {
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid v.$grey-line;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      @include m.mq(v.$desktop-2) {
+        padding-bottom: 1rem;
+      }
+
+      .nutritionKey {
+        font-weight: 500;
+        font-size: 2rem;
+        color: v.$secondary-color;
+        font-style: italic;
+
+        @include m.mq(1024px) {
+          font-weight: 400;
+        }
+      }
+
+      .nutritionValue {
+        color: v.$primary-color;
+        font-weight: 500;
+        font-size: 2.2rem;
+        font-style: italic;
+      }
+    }
+  }
+
+  
+
+
+
+}

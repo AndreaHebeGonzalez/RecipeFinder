@@ -20,11 +20,6 @@ body {
   font-family: v.$primary-font;
   font-size: 1.8rem;
   color: v.$black;
-  background-color: v.$primary-color;
-  background-image: url('/images/bg-body.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 
   @include m.mq(768px) {
     font-size: 2rem;
@@ -39,7 +34,7 @@ body {
 }
 
 .container {
-  width: 98%;
+  width: 95%;
   max-width: 140rem;
   margin: 0 auto;
 
@@ -51,6 +46,10 @@ body {
 main {
   max-width: 100vw;
   overflow: hidden;
+  background-color: v.$bg-body;
+}
+
+.main-layout {
   padding: v.$spacing-mobile 0;
   @include m.flex(column, v.$spacing-mobile);
 
@@ -58,6 +57,14 @@ main {
     padding: v.$spacing-desktop 0;
     @include m.flex(column, v.$spacing-desktop);
   }
+}
+
+.background-1 {
+  background-color: v.$primary-color;
+  background-image: url('/images/bg-body.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .icon-size {

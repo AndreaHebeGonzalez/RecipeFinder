@@ -15,19 +15,27 @@ const Nav = ({ openMenu, isMobile } : NavProps) => {
 
   const navRef = useRef<HTMLElement | null>(null)
   
-  const [heightNav, setHeightNav] = useState<number>(0)
+  const [heightNav, setHeightNav] = useState<number | null>(0)
 
   useLayoutEffect(() => {
     if(!isMobile) return
     if(navRef.current) {
-      setHeightNav(getHeight(navRef.current))
+      setTimeout(() => {
+        setHeightNav(getHeight(navRef.current))
+      }, 100);
+      
     }
   }, [isMobile])
+
+  useLayoutEffect(() => {
+    console.log(heightNav)
+  }, [heightNav])
   
   
   useLayoutEffect(() => {
     if (!navRef.current) return;
     if(isMobile) {
+      console.log('Es mobile and Open debe abrirse el menu con la altura', heightNav)
       navRef.current.style.height = openMenu ? `${heightNav}px`: `0px`
     } else {
       navRef.current!.style.height = '';

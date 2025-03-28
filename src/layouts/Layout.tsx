@@ -1,17 +1,20 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import Header from "../components/Header/Header"
 import Footer from "../components/Footer/Footer"
 import useWindowWidth from "../hooks/useWindowWidth"
 
 
 
+
 const Layout = () => {
+
   useWindowWidth();
+  const path = useLocation().pathname
 
   return (
     <> 
       <Header />
-      <main className="container">
+      <main className={ path === '/' ? `background-1`:''}>
         <Outlet />
       </main>
       <Footer />
