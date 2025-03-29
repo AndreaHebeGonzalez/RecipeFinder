@@ -5,12 +5,12 @@ import { useAppStore } from "../stores/useAppStore";
 
 const useWindowWidth = () => {
   const updateWindowWidth = useAppStore(state => state.updateWindowWidth)
-  const getIsMobile = useAppStore(state=>state.getIsMobile)
+  const getIsTablet = useAppStore(state=>state.getIsTablet)
 
   useEffect(() => {
     const handleGetWindowWidth = () => {
       updateWindowWidth(window.innerWidth)
-      getIsMobile(window.innerWidth<1024)
+      getIsTablet(window.innerWidth<1024)
     }
     window.addEventListener('resize', handleGetWindowWidth)
     return () => {

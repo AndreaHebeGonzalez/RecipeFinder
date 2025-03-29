@@ -6,18 +6,18 @@ import styles from "./RecipeDetails.module.scss"
 const RecipeDetails = () => {
 
   
-  const isMobile = useAppStore(state=>state.isMobile)
+  const isTablet = useAppStore(state=>state.isTablet)
   
   return (
     <div className={styles.recipeWrapper}>
       <div className={`${styles.recipe} container`}>
         <section className={styles.recipeHeader}>
-          <span className={styles.timePreparation}>{isMobile ? '':'Preparation time: '} <span>45'</span></span>  
+          <span className={styles.timePreparation}>{isTablet ? '':'Preparation time: '} <span>45'</span></span>  
           <div className={styles.recipeContent}>
             <h2>Apricot Glazed Apple Tart</h2>
             <div className={styles.contentWrapp}>
               <div className={styles.imageContainer}>
-                <img src="/public/images/recipe-1.jpg" alt="Nombre del receta" />
+                <img src="/images/recipe-1.jpg" alt="Nombre del receta" />
               </div>
 
               <div className={styles.infoContainer}>
@@ -29,29 +29,59 @@ const RecipeDetails = () => {
         <section className="recipeDescription">
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt a quasi accusamus perspiciatis excepturi facilis id ipsum nisi hic doloremque alias harum, nihil velit quo necessitatibus fugit, ipsa incidunt suscipit!</p>
         </section>
-        <section className="recipeDetails">
-          <div className="ingredientsContainer">
+        <section className={styles.recipeDetails}>
+          <div className={styles.ingredientsContainer}>
             <h3>Ingredients</h3>
-            <ul className="ingredients">
+            <ul className={styles.ingredients}>
+              <IngredientCard />
+              <IngredientCard />
+              <IngredientCard />
               <IngredientCard />
               <IngredientCard />
               <IngredientCard />
             </ul>
           </div>
-          <div className="instructionsContainer">
+          <div className={styles.instructionsContainer}>
             <h3>Instructions</h3>
-            <ol className="instructions">
-              <li className="instruction">
-                Instruccion - 1
+            <ol className={styles.instructions}>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
               </li>
-              <li className="instruction">
-                Instruccion - 1
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
               </li>
-              <li className="instruction">
-                Instruccion - 1
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
               </li>
-              <li className="instruction">
-                Instruccion - 1
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
+              </li>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
+              </li>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
+              </li>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
+              </li>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
+              </li>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
+              </li>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
+              </li>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
+              </li>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
+              </li>
+              <li className={styles.instruction}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum quod nam vitae harum ratione, minima sed nihil id asperiores neque perferendis a earum placeat!</p>
               </li>
             </ol>
           </div>

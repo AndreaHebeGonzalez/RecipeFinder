@@ -4,11 +4,11 @@
 .nutritionInfo {
   width: 100%;
   
-  @include m.mq(768px) {
+  @include m.mq(v.$tablet) {
     width: 85%;
   }
 
-  @include m.mq(1024px) {
+  @include m.mq(v.$desktop) {
     width: 65%;
   }
 
@@ -20,11 +20,11 @@
     font-style: italic;
     padding-bottom: 2.5rem;
 
-    @include m.mq(768px) {
+    @include m.mq(v.$tablet) {
       display: block;
     }
 
-    @include m.mq(1024px) {
+    @include m.mq(v.$desktop) {
       font-size: 3rem;
     }
   }
@@ -38,7 +38,7 @@
       @include m.flex(column, 1rem);
     }
 
-    @include m.mq(1024px) {
+    @include m.mq(v.$desktop) {
       gap: 1.5rem
     }
 
@@ -48,7 +48,7 @@
       align-items: center;
       
       
-      @include m.mq(768px) {
+      @include m.mq(v.$tablet) {
         padding-bottom: 0.5rem;
         border-bottom: 1px solid v.$grey-line;
         flex-direction: row;
@@ -66,7 +66,7 @@
         color: v.$secondary-color;
         font-style: italic;
 
-        @include m.mq(1024px) {
+        @include m.mq(v.$desktop) {
           font-weight: 400;
         }
       }

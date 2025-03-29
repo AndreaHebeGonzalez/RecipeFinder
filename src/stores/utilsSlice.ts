@@ -4,16 +4,16 @@ import { StateCreator } from "zustand";
 export type utilsSliceTypes = {
   windowWidth: number,
   isLightMode: boolean,
-  isMobile: boolean,
+  isTablet: boolean,
   updateWindowWidth: (width : utilsSliceTypes['windowWidth']) => void,
-  getIsMobile: (isMobile: boolean) => void,
+  getIsTablet: (isTablet: boolean) => void,
   toggleMode: () => void,
 }
 
 export const utilsSliceStore: StateCreator<utilsSliceTypes> = (set) => ({
   windowWidth: window.innerWidth,
   isLightMode: true,
-  isMobile: window.innerWidth < 1024,
+  isTablet: window.innerWidth < 1024,
   updateWindowWidth: (width) => {
     set({
       windowWidth: width
@@ -24,9 +24,9 @@ export const utilsSliceStore: StateCreator<utilsSliceTypes> = (set) => ({
       isLightMode: state.isLightMode ? false : true
     }))
   },
-  getIsMobile: (isMobile) => {
+  getIsTablet: (isTablet) => {
     set({
-      isMobile
+      isTablet
     })
   }
 })
