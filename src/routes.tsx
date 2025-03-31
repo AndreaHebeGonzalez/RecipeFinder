@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Layout from "./layouts/Layout"
 import IndexPage from "./views/IndexPage/IndexPage"
-import FavoritesPage from "./views/FavoritesPage"
+import FavoritesPage from "./views/Favorites/FavoritesPage"
 import RecipeDetails from "./views/RecipeDetails/RecipeDetails"
 
 

@@ -14,7 +14,7 @@ const Layout = () => {
   return (
     <> 
       <Header />
-      <main className={ path === '/' ? `background-1`:''}>
+      <main className={ path === '/' || path === '/favorites' ? `background-1`:''}>
         <Outlet />
       </main>
       <Footer />

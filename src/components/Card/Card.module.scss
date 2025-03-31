@@ -11,8 +11,8 @@
   overflow: hidden;
   min-width: 23.3rem;
 
-  @include m.mq(v.$tablet) {
-    min-height: 28.5rem ;
+  @include m.mq(v.$tablet-2) {
+    min-height: 27.24rem ;
   }
 
   .cardContainer {
