@@ -20,6 +20,7 @@ body {
   font-family: v.$primary-font;
   font-size: 1.8rem;
   color: v.$black;
+  position: relative;
 
   @include m.mq(768px) {
     font-size: 2rem;
@@ -86,6 +87,12 @@ img {
   display: block
 }
 
+
+.line {
+  height: 0.5px;
+  width: 100%;
+  background-color: v.$grey-line;
+}
 
 
 

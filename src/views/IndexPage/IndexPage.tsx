@@ -1,20 +1,23 @@
 import Form from "../../components/Form/Form"
 import styles from "./IndexPage.module.scss"
 import CardsContainer from "../../components/CardsContainer/CardsContainer"
+import Modal from "../../components/Modal/Modal"
 
 
 const IndexPage = () => {
 
+
   return (
     <div className="main-layout container">
-      <section className={styles.searchSection}>
+      <div className={styles.searchSection}>
         <h2>Find Recipe By Ingredients</h2>
         <Form />
-      </section>
-
+      </div>
       <CardsContainer 
         title= {"Search Results"}
-      />
+        secondaryTitle= { "Suggestions" }
+      /> 
+      <Modal />
     </div>
   )
 }

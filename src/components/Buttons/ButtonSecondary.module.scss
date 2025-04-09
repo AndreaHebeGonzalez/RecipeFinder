@@ -1,0 +1,16 @@
+@use '../../styles/base/mixins' as m;
+@use '../../styles/base/variables' as v;
+@use 'sass:color';
+
+.btnSecondary {
+  @include m.btn(v.$primary-color);
+  border-radius: 0.5rem;
+  
+  @include m.mq(768px) {
+    font-size: 1.8rem;
+  }
+
+  &:disabled {
+    background-color: rgba(v.$primary-color, 0.3)
+  }
+}

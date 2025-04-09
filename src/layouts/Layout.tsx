@@ -2,14 +2,22 @@ import { Outlet, useLocation } from "react-router-dom"
 import Header from "../components/Header/Header"
 import Footer from "../components/Footer/Footer"
 import useWindowWidth from "../hooks/useWindowWidth"
+import { useEffect } from "react"
+import { useAppStore } from "../stores/useAppStore"
 
 
 
 
 const Layout = () => {
+  const loadFromStorage = useAppStore(state => state.loadFromStorage)
 
   useWindowWidth();
   const path = useLocation().pathname
+
+  useEffect(() => {
+    loadFromStorage()
+  }, [])
+  
 
   return (
     <> 

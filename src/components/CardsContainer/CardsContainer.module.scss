@@ -1,7 +1,7 @@
 @use "../../styles/base/variables" as v;
 @use "../../styles/base/mixins" as m;
 
-.resultContainer {
+.cardsContainer {
   @include m.flex(column, 1rem);
 
   @include m.mq(v.$desktop) {
@@ -19,8 +19,8 @@
   }
   
 
-  .recipeResult,
-  .suggestions {
+  .displayedItems,
+  .extraItems {
     backdrop-filter: blur(1rem);
     background-color: rgba(v.$white, 0.3);
     border-radius: v.$radius;
@@ -40,10 +40,7 @@
     }
   }
 
-  .suggestions {
-    
-    
-    
+  .extraItems {
     @include m.mq(v.$desktop) {
       padding: 2.8rem; 
     }
@@ -51,7 +48,6 @@
     h3 {
       font-size: 3rem;
     }
-    
   }
   
   .cardList {
@@ -87,7 +83,7 @@
     }
   }
 
-  .suggestions .cardList {
+  .extraItems .cardList {
     
     @include m.flex(row, 2rem);
     overflow-x: auto; 
@@ -107,7 +103,7 @@
     white-space: nowrap; 
 
     
-    @include m.mq(v.$tablet-2) {
+    @include m.mq(v.$desktop) {
       @include m.flex(column, 2rem);
       overflow-x: initial;
       overflow-y: auto;

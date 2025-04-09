@@ -2,7 +2,7 @@
 @use '../../styles/base/mixins' as m;
 
 .nav {
-  z-index: 50;
+  z-index: 100;
   
   .navItems {
     padding: 2rem;
@@ -33,7 +33,7 @@
 .dropdownMenu {
   height: 0;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   top: 15%;
   right: 10%;
   background: #fff;

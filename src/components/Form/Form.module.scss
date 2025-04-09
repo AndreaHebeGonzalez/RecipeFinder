@@ -4,6 +4,7 @@
 
 .form {
   @include m.flex(column, 2rem);
+  z-index: 10;
 
   input[type="text"] {
     background-color: v.$white;
@@ -57,4 +58,7 @@
       background-color: v.$black;
     }
   }
+
+  
+
 }

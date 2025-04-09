@@ -26,11 +26,6 @@ const Nav = ({ openMenu, isMobile } : NavProps) => {
       
     }
   }, [isMobile])
-
-  useLayoutEffect(() => {
-    console.log(heightNav)
-  }, [heightNav])
-  
   
   useLayoutEffect(() => {
     if (!navRef.current) return;
