@@ -1,40 +1,17 @@
-import { useState, FormEvent, useMemo } from "react"
+import { FormEvent, useMemo } from "react"
 import styles from "./FormPreferencies.module.scss"
 import { listDiets, listIntolerances } from "../../data"
-import type { preferencesSearchType } from "../../types"
 import { useAppStore } from "../../stores/useAppStore"
-
-
-type dietState = {
-  selected: boolean,
-  disabled: boolean
-}
-
-type dietsOptions = { [key:string] : dietState }
-
-type allergiesOptions = { [key:string] : boolean }
-
+import useDietPreferences from "../../hooks/useDietPreferences"
+import useAllergyPreferences from "../../hooks/useAllergyPreferences"
+import type { PreferencesSearchType } from "../../types"
 
 const FormPreferencies = () => {
 
-  const handleSavePreferences = useAppStore(state=>state.handleSavePreferences)
+  const { handleSavePreferences, userPreferences } = useAppStore();
 
-  const [selectedDiets, setSelectedDiets] = useState<dietsOptions>(
-    listDiets.reduce((acc, key) => {
-      acc[key] = {
-        selected: false,
-        disabled: false
-      }
-      return acc
-    }, {} as dietsOptions)
-  )  
-
-  const [selectedAllergies, setSelectedAllergies] = useState<allergiesOptions>(
-    listIntolerances.reduce((acc, key) => {
-      acc[key] = false
-      return acc
-    }, {} as allergiesOptions) 
-  )
+  const { selectedDiets, handleSelectDiet } = useDietPreferences(userPreferences.diets)
+  const { selectedAllergies,  handleSelectAllergies } = useAllergyPreferences(userPreferences.allergies)
 
   const isSaveEnable = useMemo(() => Object.entries(selectedDiets).some(([_, value]) => (
     value.selected
@@ -44,37 +21,6 @@ const FormPreferencies = () => {
   )) , [selectedDiets, selectedAllergies])
 
 
-
-  const setCompatibility = (diet: string, current: dietsOptions) : dietsOptions => {
-    return Object.fromEntries(
-      Object.entries(current).map(([key, value]) => {
-        if(key === diet || key === 'Ketogenic' || key === 'Gluten Free') {
-          return [key, value]
-        }
-        return [key, {...value, disabled: !value.disabled}]
-      })
-    )
-  } 
-
-  const handleSelectDiet = (diet: string) => {
-    let updatedSelectedDiets : dietsOptions = {
-      ...selectedDiets,
-      [diet]: { 
-        ...selectedDiets[diet],
-        selected: !selectedDiets[diet].selected
-      }
-    }
-    const updatedWithCompatibility = (diet != 'Ketogenic' && diet != 'Gluten Free') ? setCompatibility(diet, updatedSelectedDiets) : updatedSelectedDiets   
-    setSelectedDiets(updatedWithCompatibility)
-  }
-
-  const handleSelectAllergies = (intolerance : string) => {
-    setSelectedAllergies((prev) => ({
-      ...prev,
-      [intolerance]: !prev[intolerance]
-    }))
-  }
-  
   const handleSave = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const diets = Object.entries(selectedDiets)
@@ -84,14 +30,14 @@ const FormPreferencies = () => {
     const allergies = Object.entries(selectedAllergies)
     .filter(([_, selected]) => selected)
     .map(([key]) => key)
-    
-    const preferencesUser : preferencesSearchType = {
+
+    const preferencesUser : PreferencesSearchType = {
       diets,
       allergies
     }
     handleSavePreferences(preferencesUser)
   } 
-
+  
   return (
     <>
       <form className={styles.formContainer} onSubmit={(e) => handleSave(e)}>

@@ -1,16 +1,16 @@
 import { StateCreator } from "zustand";
 
 
-export type utilsSliceTypes = {
+export type UtilsSliceTypes = {
   windowWidth: number,
   isLightMode: boolean,
   isTablet: boolean,
-  updateWindowWidth: (width : utilsSliceTypes['windowWidth']) => void,
+  updateWindowWidth: (width : UtilsSliceTypes['windowWidth']) => void,
   getIsTablet: (isTablet: boolean) => void,
   toggleMode: () => void,
 }
 
-export const utilsSliceStore: StateCreator<utilsSliceTypes> = (set) => ({
+export const utilsSliceStore: StateCreator<UtilsSliceTypes> = (set) => ({
   windowWidth: window.innerWidth,
   isLightMode: true,
   isTablet: window.innerWidth < 1024,

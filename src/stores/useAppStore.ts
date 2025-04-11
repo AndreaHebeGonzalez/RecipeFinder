@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { utilsSliceTypes, utilsSliceStore } from "./utilsSlice";
-import { userSliceStore, userSliceType } from "./userSlice";
-import { modalSliceStore, modalSliceType } from "./modalSlice";
+import { UtilsSliceTypes, utilsSliceStore } from "./utilsSlice";
+import { userSliceStore, UserSliceType } from "./userSlice";
+import { modalSliceStore, ModalSliceType } from "./modalSlice";
 
-export const useAppStore = create<utilsSliceTypes & userSliceType & modalSliceType>((...a) => ({
+export const useAppStore = create<UtilsSliceTypes & UserSliceType & ModalSliceType>((...a) => ({
   ...utilsSliceStore(...a),
   ...userSliceStore(...a),
   ...modalSliceStore(...a),

@@ -1,4 +1,13 @@
 import { z } from "zod";
-import { preferencesSearchSchema } from "../schemas"; 
+import { PreferencesSearchSchema } from "../schemas"; 
 
-export type preferencesSearchType = z.infer<typeof preferencesSearchSchema>
+type DietState = {
+  selected: boolean,
+  disabled: boolean
+}
+
+export type DietsOptions = { [key:string] : DietState }
+
+export type allergiesOptions = { [key:string] : boolean }
+
+export type PreferencesSearchType = z.infer<typeof PreferencesSearchSchema>

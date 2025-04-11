@@ -30,7 +30,6 @@ const Nav = ({ openMenu, isMobile } : NavProps) => {
   useLayoutEffect(() => {
     if (!navRef.current) return;
     if(isMobile) {
-      console.log('Es mobile and Open debe abrirse el menu con la altura', heightNav)
       navRef.current.style.height = openMenu ? `${heightNav}px`: `0px`
     } else {
       navRef.current!.style.height = '';
