@@ -10,7 +10,6 @@ import { useAppStore } from "../stores/useAppStore"
 
 const Layout = () => {
   const loadFromStorage = useAppStore(state => state.loadFromStorage)
-  const userPreferences =  useAppStore(state => state.userPreferences)
 
   useWindowWidth();
   const path = useLocation().pathname
@@ -18,11 +17,6 @@ const Layout = () => {
   useEffect(() => {
     loadFromStorage()
   }, [])
-
-  useEffect(() => {
-    console.log(userPreferences)
-  }, [userPreferences])
-  
 
   return (
     <> 

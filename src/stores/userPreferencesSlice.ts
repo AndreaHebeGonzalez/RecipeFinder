@@ -3,14 +3,14 @@ import { PreferencesSearchType } from "../types";
 import { getState } from "./useAppStore";
 
 
-export type UserSliceType = {
+export type UserPreferencesSliceType = {
   userPreferences: PreferencesSearchType,
   handleSavePreferences: (preferences : PreferencesSearchType) => void,
   preferencesExist: () => boolean,
   loadFromStorage: () => void
 }
 
-export const userSliceStore : StateCreator<UserSliceType> = (set, get) => ({
+export const userPreferencesSlice : StateCreator<UserPreferencesSliceType> = (set, get) => ({
   userPreferences: {
     diets: [],
     allergies: []

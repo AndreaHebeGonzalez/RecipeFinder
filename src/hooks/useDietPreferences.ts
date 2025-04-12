@@ -3,17 +3,20 @@ import { listDiets } from "../data"
 import { PreferencesSearchType, DietsOptions } from "../types"
 
 
-const useDietPreferences = (initialDiets : PreferencesSearchType['diets']) => {
+const useDietPreferences = (initialDiets : PreferencesSearchType['diets'] = []) => {
 
-  const [selectedDiets, setSelectedDiets] = useState<DietsOptions>(
-    listDiets.reduce((acc, key) => {
-      acc[key] = {
-        selected: false,
-        disabled: false
-      }
-      return acc
-    }, {} as DietsOptions)
-  )  
+  const buildInitial = () : DietsOptions => (listDiets.reduce((acc, key) => {
+    console.log('se ejecuto en diet')
+    acc[key] = {
+      selected: false,
+      disabled: false
+    }
+    return acc
+  }, {} as DietsOptions))
+
+  const resetDiets = () => setSelectedDiets(buildInitial())
+
+  const [selectedDiets, setSelectedDiets] = useState<DietsOptions>(buildInitial())   
 
   const setCompatibility = (diet: string, current: DietsOptions) : DietsOptions => {
     return Object.fromEntries(
@@ -44,17 +47,11 @@ const useDietPreferences = (initialDiets : PreferencesSearchType['diets']) => {
 
   useEffect(() => {
     if(initialDiets.length > 0) {
-      let updatedSelectedDiets : DietsOptions = Object.entries(selectedDiets).reduce((acc, [key, value]) => {
-        acc[key] = {
-          ...value
-        }
-        return acc
-      }, {} as DietsOptions)
-      
+      let updatedSelectedDiets : DietsOptions = buildInitial()
       initialDiets.forEach(diet => {
-        console.log(diet)
         updatedSelectedDiets = toggleDiet(diet, updatedSelectedDiets)
-        updatedSelectedDiets = (diet != 'Ketogenic' && diet != 'Gluten Free') ? setCompatibility(diet, updatedSelectedDiets) : updatedSelectedDiets 
+        updatedSelectedDiets = 
+        (diet != 'Ketogenic' && diet != 'Gluten Free') ? setCompatibility(diet, updatedSelectedDiets) : updatedSelectedDiets 
       }),
       setSelectedDiets(updatedSelectedDiets)
     }
@@ -64,8 +61,8 @@ const useDietPreferences = (initialDiets : PreferencesSearchType['diets']) => {
   return ({
     selectedDiets, 
     handleSelectDiet,
+    resetDiets
   })
 }
-
 
 export default useDietPreferences

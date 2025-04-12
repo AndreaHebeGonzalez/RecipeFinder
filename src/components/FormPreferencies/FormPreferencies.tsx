@@ -13,6 +13,7 @@ const FormPreferencies = () => {
   const { selectedDiets, handleSelectDiet } = useDietPreferences(userPreferences.diets)
   const { selectedAllergies,  handleSelectAllergies } = useAllergyPreferences(userPreferences.allergies)
 
+
   const isSaveEnable = useMemo(() => Object.entries(selectedDiets).some(([_, value]) => (
     value.selected
   )) 
@@ -31,13 +32,14 @@ const FormPreferencies = () => {
     .filter(([_, selected]) => selected)
     .map(([key]) => key)
 
-    const preferencesUser : PreferencesSearchType = {
+    const preferences : PreferencesSearchType = {
       diets,
       allergies
     }
-    handleSavePreferences(preferencesUser)
+    console.log('Se ejecuto Save')
+    handleSavePreferences(preferences)
   } 
-  
+
   return (
     <>
       <form className={styles.formContainer} onSubmit={(e) => handleSave(e)}>

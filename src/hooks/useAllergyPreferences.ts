@@ -4,10 +4,11 @@ import { PreferencesSearchType, allergiesOptions } from "../types"
 
 
 
-const useAllergyPreferences = (initialAllergies : PreferencesSearchType['allergies']) => {
+const useAllergyPreferences = (initialAllergies : PreferencesSearchType['allergies'] = []) => {
 
   const [selectedAllergies, setSelectedAllergies] = useState<allergiesOptions>(
       listIntolerances.reduce((acc, key) => {
+        console.log('se ejecuto en allergies')
         acc[key] = false
         return acc
       }, {} as allergiesOptions) 
@@ -15,12 +16,14 @@ const useAllergyPreferences = (initialAllergies : PreferencesSearchType['allergi
   
   const handleSelectAllergies = (intolerance : string) => {
       setSelectedAllergies((prev) => ({
+        
         ...prev,
         [intolerance]: !prev[intolerance]
       }))
     }
 
   useEffect(() => {
+    console.log('Se ejecuto el useEffect de Allergies')
     if(initialAllergies.length > 0) {
       let updatedSelectedAllergies : allergiesOptions = {
         ...selectedAllergies
