@@ -10,30 +10,44 @@ export type UserPreferencesSliceType = {
   loadFromStorage: () => void
 }
 
-export const userPreferencesSlice : StateCreator<UserPreferencesSliceType> = (set, get) => ({
-  userPreferences: {
+export const userPreferencesSlice : StateCreator<UserPreferencesSliceType> = (set, get) => {
+
+  let storedPreferences : PreferencesSearchType = {
     diets: [],
     allergies: []
-  },
-  
-  handleSavePreferences: (userPreferences) => {
-    set({
-      userPreferences
-    })
-    localStorage.setItem('userPreferences', JSON.stringify(get().userPreferences)) 
-    getState().closeModal()
-  },
+  }
 
-  preferencesExist: () => {
-    return Object.keys(get().userPreferences).length !== 0 ? true : false
-  },
+  const fromStorage = localStorage.getItem('userPreferences')
+  if(fromStorage) {
+    storedPreferences = JSON.parse(fromStorage)
+  }
 
-  loadFromStorage: () => {
-    let storedPreferences = localStorage.getItem('userPreferences')
-    if(storedPreferences) {
+  return {
+
+    userPreferences: storedPreferences,
+    
+    handleSavePreferences: (userPreferences) => {
       set({
-        userPreferences: JSON.parse(storedPreferences)
+        userPreferences
       })
+      localStorage.setItem('userPreferences', JSON.stringify(get().userPreferences)) 
+      getState().closeModal()
+    },
+
+    preferencesExist: () => {
+      return Object.keys(get().userPreferences).length !== 0 ? true : false
+    },
+
+    loadFromStorage: () => {
+      let storedPreferences = localStorage.getItem('userPreferences')
+      if(storedPreferences) {
+        set({
+          userPreferences: JSON.parse(storedPreferences)
+        })
+      }
     }
   }
-})
+}
+  
+  
+  

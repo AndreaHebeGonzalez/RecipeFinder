@@ -1,24 +1,33 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { listDiets } from "../data"
 import { PreferencesSearchType, DietsOptions } from "../types"
 
+const buildInitial = () : DietsOptions => (listDiets.reduce((acc, key) => {
+  acc[key] = {
+    selected: false,
+    disabled: false
+  }
+  return acc
+}, {} as DietsOptions))
 
 const useDietPreferences = (initialDiets : PreferencesSearchType['diets'] = []) => {
 
-  const buildInitial = () : DietsOptions => (listDiets.reduce((acc, key) => {
-    console.log('se ejecuto en diet')
-    acc[key] = {
-      selected: false,
-      disabled: false
+  const [selectedDiets, setSelectedDiets] = useState<DietsOptions>(initialValue())   
+
+  function initialValue()  {
+    let base : DietsOptions = buildInitial()
+
+    if(initialDiets.length > 0 ) {
+      initialDiets.forEach(diet => {
+        base = toggleDiet(diet, base)
+        base = 
+        (diet != 'Ketogenic' && diet != 'Gluten Free') ? setCompatibility(diet, base) : base 
+      })
     }
-    return acc
-  }, {} as DietsOptions))
-
-  const resetDiets = () => setSelectedDiets(buildInitial())
-
-  const [selectedDiets, setSelectedDiets] = useState<DietsOptions>(buildInitial())   
-
-  const setCompatibility = (diet: string, current: DietsOptions) : DietsOptions => {
+    return base
+  }
+  
+  function setCompatibility (diet: string, current: DietsOptions) : DietsOptions {
     return Object.fromEntries(
       Object.entries(current).map(([key, value]) => {
         if(key === diet || key === 'Ketogenic' || key === 'Gluten Free') {
@@ -29,7 +38,7 @@ const useDietPreferences = (initialDiets : PreferencesSearchType['diets'] = []) 
     )
   }
 
-  const toggleDiet = (diet: string, current:  DietsOptions) : DietsOptions => {
+  function toggleDiet (diet: string, current:  DietsOptions) : DietsOptions {
     return ({
       ...current,
       [diet]: { 
@@ -39,29 +48,15 @@ const useDietPreferences = (initialDiets : PreferencesSearchType['diets'] = []) 
     })
   }
 
-  const handleSelectDiet = (diet: string) => {
+  function handleSelectDiet (diet: string) {
     let updatedSelectedDiets : DietsOptions = toggleDiet(diet, selectedDiets)
     const updatedWithCompatibility = (diet != 'Ketogenic' && diet != 'Gluten Free') ? setCompatibility(diet, updatedSelectedDiets) : updatedSelectedDiets   
     setSelectedDiets(updatedWithCompatibility)
   }
-
-  useEffect(() => {
-    if(initialDiets.length > 0) {
-      let updatedSelectedDiets : DietsOptions = buildInitial()
-      initialDiets.forEach(diet => {
-        updatedSelectedDiets = toggleDiet(diet, updatedSelectedDiets)
-        updatedSelectedDiets = 
-        (diet != 'Ketogenic' && diet != 'Gluten Free') ? setCompatibility(diet, updatedSelectedDiets) : updatedSelectedDiets 
-      }),
-      setSelectedDiets(updatedSelectedDiets)
-    }
-  }, [initialDiets])
     
-
   return ({
     selectedDiets, 
     handleSelectDiet,
-    resetDiets
   })
 }
 

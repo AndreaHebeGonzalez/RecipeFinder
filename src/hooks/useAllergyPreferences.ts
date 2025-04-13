@@ -1,43 +1,41 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { listIntolerances } from "../data"
 import { PreferencesSearchType, allergiesOptions } from "../types"
 
 
+const buildInitial = () => (
+  listIntolerances.reduce((acc, key) => {
+    console.log('se ejecuto en allergies')
+    acc[key] = false
+    return acc
+  }, {} as allergiesOptions) 
+)
 
 const useAllergyPreferences = (initialAllergies : PreferencesSearchType['allergies'] = []) => {
 
-  const [selectedAllergies, setSelectedAllergies] = useState<allergiesOptions>(
-      listIntolerances.reduce((acc, key) => {
-        console.log('se ejecuto en allergies')
-        acc[key] = false
-        return acc
-      }, {} as allergiesOptions) 
-    )
+  const [selectedAllergies, setSelectedAllergies] = useState<allergiesOptions>(initialValue())
   
-  const handleSelectAllergies = (intolerance : string) => {
-      setSelectedAllergies((prev) => ({
-        
-        ...prev,
-        [intolerance]: !prev[intolerance]
-      }))
-    }
+  function initialValue() {
+    let base = buildInitial()
 
-  useEffect(() => {
-    console.log('Se ejecuto el useEffect de Allergies')
     if(initialAllergies.length > 0) {
-      let updatedSelectedAllergies : allergiesOptions = {
-        ...selectedAllergies
-      } 
       initialAllergies.forEach(intolerance => {
-        updatedSelectedAllergies = {
-          ...updatedSelectedAllergies,
-          [intolerance] : true
+        base = {
+          ...base,
+          [intolerance]: true 
         }
       })
-      setSelectedAllergies(updatedSelectedAllergies)
     }
-  }, [initialAllergies])
-  
+    return base
+  }
+
+  function handleSelectAllergies(intolerance : string) {
+    setSelectedAllergies((prev) => ({
+      
+      ...prev,
+      [intolerance]: !prev[intolerance]
+    }))
+  }
 
   return ({
     selectedAllergies,
