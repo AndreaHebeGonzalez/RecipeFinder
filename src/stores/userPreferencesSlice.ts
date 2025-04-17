@@ -13,8 +13,8 @@ export type UserPreferencesSliceType = {
 export const userPreferencesSlice : StateCreator<UserPreferencesSliceType> = (set, get) => {
 
   let storedPreferences : PreferencesSearchType = {
-    diets: [],
-    allergies: []
+    diet: '',
+    intolerances: ''
   }
 
   const fromStorage = localStorage.getItem('userPreferences')

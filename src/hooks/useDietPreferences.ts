@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { listDiets } from "../data"
-import { PreferencesSearchType, DietsOptions } from "../types"
+import { DietsOptions } from "../types"
+
 
 const buildInitial = () : DietsOptions => (listDiets.reduce((acc, key) => {
   acc[key] = {
@@ -10,18 +11,17 @@ const buildInitial = () : DietsOptions => (listDiets.reduce((acc, key) => {
   return acc
 }, {} as DietsOptions))
 
-const useDietPreferences = (initialDiets : PreferencesSearchType['diets'] = []) => {
-
+const useDietPreferences = (initialDiets : string[] = []) => {
   const [selectedDiets, setSelectedDiets] = useState<DietsOptions>(initialValue())   
 
   function initialValue()  {
     let base : DietsOptions = buildInitial()
 
-    if(initialDiets.length > 0 ) {
+    if(initialDiets.length > 0 && !(Object.values(initialDiets).includes('')) ) {
       initialDiets.forEach(diet => {
         base = toggleDiet(diet, base)
         base = 
-        (diet != 'Ketogenic' && diet != 'Gluten Free') ? setCompatibility(diet, base) : base 
+        (diet != 'Ketogenic' && diet != 'Gluten free') ? setCompatibility(diet, base) : base 
       })
     }
     return base
@@ -30,7 +30,7 @@ const useDietPreferences = (initialDiets : PreferencesSearchType['diets'] = []) 
   function setCompatibility (diet: string, current: DietsOptions) : DietsOptions {
     return Object.fromEntries(
       Object.entries(current).map(([key, value]) => {
-        if(key === diet || key === 'Ketogenic' || key === 'Gluten Free') {
+        if(key === diet || key === 'Ketogenic' || key === 'Gluten free') {
           return [key, value]
         }
         return [key, {...value, disabled: !value.disabled}]
@@ -43,14 +43,14 @@ const useDietPreferences = (initialDiets : PreferencesSearchType['diets'] = []) 
       ...current,
       [diet]: { 
         ...current[diet],
-        selected: !current[diet].selected
+        selected: !current[diet]?.selected
       }
     })
   }
 
   function handleSelectDiet (diet: string) {
     let updatedSelectedDiets : DietsOptions = toggleDiet(diet, selectedDiets)
-    const updatedWithCompatibility = (diet != 'Ketogenic' && diet != 'Gluten Free') ? setCompatibility(diet, updatedSelectedDiets) : updatedSelectedDiets   
+    const updatedWithCompatibility = (diet != 'Ketogenic' && diet != 'Gluten free') ? setCompatibility(diet, updatedSelectedDiets) : updatedSelectedDiets   
     setSelectedDiets(updatedWithCompatibility)
   }
     

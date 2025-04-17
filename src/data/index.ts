@@ -1,10 +1,13 @@
 
+export const preferencesParams = ['diet', 'intolerances'] as const
+export const searchFilters  = ['query', 'includeIngredients', 'type'] as const 
+
 export const listDiets = [
-  "Gluten Free",
+  "Gluten free",
   "Ketogenic",
   "Vegetarian",
-  "Lacto-Vegetarian",
-  "Ovo-Vegetarian",
+  "Lacto-vegetarian",
+  "Ovo-vegetarian",
   "Vegan"
 ]
 
@@ -19,6 +22,25 @@ export const listIntolerances = [
   "Shellfish",
   "Soy",
   "Sulfite",
-  "Tree Nut",
+  "Tree nut",
   "Wheat"
 ]
+
+
+export const mealTypes = [
+  "main course",
+  "side dish",
+  "dessert",
+  "appetizer",
+  "salad",
+  "bread",
+  "breakfast",
+  "soup",
+  "beverage",
+  "sauce",
+  "marinade",
+  "fingerfood",
+  "snack",
+  "drink"
+] as const 
+

@@ -1,19 +1,18 @@
 import { useState } from "react"
 import { listIntolerances } from "../data"
-import { PreferencesSearchType, allergiesOptions } from "../types"
+import { AllergiesOptions } from "../types"
 
 
 const buildInitial = () => (
   listIntolerances.reduce((acc, key) => {
-    console.log('se ejecuto en allergies')
     acc[key] = false
     return acc
-  }, {} as allergiesOptions) 
+  }, {} as AllergiesOptions) 
 )
 
-const useAllergyPreferences = (initialAllergies : PreferencesSearchType['allergies'] = []) => {
+const useAllergyPreferences = (initialAllergies : string[]= []) => {
 
-  const [selectedAllergies, setSelectedAllergies] = useState<allergiesOptions>(initialValue())
+  const [selectedAllergies, setSelectedAllergies] = useState<AllergiesOptions>(initialValue())
   
   function initialValue() {
     let base = buildInitial()
@@ -31,7 +30,6 @@ const useAllergyPreferences = (initialAllergies : PreferencesSearchType['allergi
 
   function handleSelectAllergies(intolerance : string) {
     setSelectedAllergies((prev) => ({
-      
       ...prev,
       [intolerance]: !prev[intolerance]
     }))

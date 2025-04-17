@@ -10,8 +10,11 @@ const FormPreferencies = () => {
 
   const { handleSavePreferences, userPreferences } = useAppStore();
 
-  const { selectedDiets, handleSelectDiet } = useDietPreferences(userPreferences.diets)
-  const { selectedAllergies,  handleSelectAllergies } = useAllergyPreferences(userPreferences.allergies)
+  const dietArray = useMemo(() => userPreferences.diet?.split(',').map((key) => key.slice(0,1).toUpperCase() + key.slice(1)).filter(key=>key!==''), [userPreferences])
+  const intolerancesArray = useMemo(() => userPreferences.intolerances?.split(',').map((key) => key.slice(0,1).toUpperCase() + key.slice(1)).filter(key=>key!==''), [userPreferences])
+
+  const { selectedDiets, handleSelectDiet } = useDietPreferences(dietArray)
+  const { selectedAllergies,  handleSelectAllergies } = useAllergyPreferences(intolerancesArray)
 
 
   const isSaveEnable = useMemo(() => Object.entries(selectedDiets).some(([_, value]) => (
@@ -24,19 +27,18 @@ const FormPreferencies = () => {
 
   const handleSave = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const diets = Object.entries(selectedDiets)
+    const diet = Object.entries(selectedDiets)
     .filter(([_, value]) => value.selected)
-    .map(([key]) => key)
+    .map(([key]) => key.toLowerCase()).join(',')
 
-    const allergies = Object.entries(selectedAllergies)
+    const intolerances = Object.entries(selectedAllergies)
     .filter(([_, selected]) => selected)
-    .map(([key]) => key)
+    .map(([key]) => key.toLowerCase()).join(',')
 
     const preferences : PreferencesSearchType = {
-      diets,
-      allergies
+      diet,
+      intolerances
     }
-    console.log('Se ejecuto Save')
     handleSavePreferences(preferences)
   } 
 
