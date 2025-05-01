@@ -1,0 +1,14 @@
+@use '../../styles/base/variables' as v;
+@use '../../styles/base/mixins' as m;
+
+.formFilters {
+
+  .filtersWrap {
+    width: 100%;
+    @include m.flex(column, 2rem);
+
+    .rangeWrap {
+      width: 23rem;
+    }
+  }
+}

@@ -77,31 +77,36 @@ const Form = () => {
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Enter name or ingredients separated by commas. Ej. potatoes, tomato, chicken"
-          className="field"
-          name="includeIngredients"
-          value={searchFilter.includeIngredients}
-          onChange={e => handleChange(e)}
-        />
-        <select 
-          name="type" 
-          id="mealType" 
-          value={searchFilter.type}
-          onChange={e => handleChange(e)}
-        >
-          <option value="">-- Select a meal type --</option>
-          {
-            mealTypes.map(type => (
-              <option 
-                key={type}  
-                value={type}
-              >{type}</option>
-            ))
-          }
-        </select>
-        <div className={styles.wrapper}>
+        <div className={styles.flexGroup}>
+          <input 
+            type="text" 
+            placeholder="Enter name or ingredients separated by commas. Ej. potatoes, tomato, chicken"
+            className="field"
+            name="includeIngredients"
+            value={searchFilter.includeIngredients}
+            onChange={e => handleChange(e)}
+          />
+          <div className={styles.mealType}>
+            <label htmlFor="mealType">Meal Type</label>
+            <select 
+            name="type" 
+            id="mealType" 
+            value={searchFilter.type}
+            onChange={e => handleChange(e)}
+          >
+            <option value="">-- Select a meal type --</option>
+            {
+              mealTypes.map(type => (
+                <option 
+                  key={type}  
+                  value={type}
+                >{type}</option>
+              ))
+            }
+            </select>
+          </div>
+        </div>
+        <div className={styles.searchActions}>
           <input 
             type="submit"
             value={'Search'} 

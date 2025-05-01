@@ -23,6 +23,9 @@
 
     .cardTitle {
       font-size: 2.5rem;
+      white-space: nowrap;  
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 

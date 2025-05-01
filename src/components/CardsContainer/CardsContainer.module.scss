@@ -49,11 +49,14 @@
       font-size: 3rem;
     }
   }
-  
-  .cardList {
+  .cardsScroll {
     overflow-y: auto;
     scroll-snap-type: y mandatory; 
+    scrollbar-width: thin;               // <-- Firefox
+    scrollbar-color: rgba(0, 0, 0, 0.438) transparent;  // <-- Firefox
     padding-right: 2rem;
+
+    
     &::-webkit-scrollbar {
       width: 8px; 
     }
@@ -62,7 +65,17 @@
       background-color: rgba(0, 0, 0, 0.438);
       border-radius: 4px;
     }
-  
+
+    scrollbar-gutter: stable;   
+
+    & > * {
+      scroll-snap-align: start;
+    }
+  }
+
+  .cardsList {
+
+    
     @include m.grid-c(1, 3rem);
     place-items: center;
 

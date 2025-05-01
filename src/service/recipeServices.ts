@@ -1,5 +1,7 @@
 import axios from "axios"
 import type { Filters } from "../types"
+import { RecipeCarsListSchema } from "../schemas";
+
 
 
 const urlBase = "https://api.spoonacular.com/recipes/complexSearch"
@@ -21,11 +23,11 @@ const getParams = (filters : Filters) : ParamsType =>  {
 export const recipeSearchFetch = async (filters : Filters) => {
   try {
     const params = getParams(filters)
-    const response = await axios.get(urlBase, { params })
-    
-    if(response) {
-      console.log(response)
-    }
+    const {data : { results } } = await axios.get(urlBase, { params })
+    const result = RecipeCarsListSchema.safeParse(results)
+
+    if(!result.success) throw new Error('Invalid response structure')
+    return result.data
   } catch (error) {
     console.log(error)
   }

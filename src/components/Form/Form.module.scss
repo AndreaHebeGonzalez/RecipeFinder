@@ -6,21 +6,57 @@
   @include m.flex(column, 2rem);
   z-index: 10;
 
-  input[type="text"] {
+  @include m.mq(v.$desktop-2) {
+    gap: 2.5rem
+  }
+
+  .flexGroup {
+    @include m.flex(column, 2rem);
+
+    @include m.mq(v.$mobile-2) {
+      @include m.flex(row, 2rem);
+      align-items: end;
+    }
+  }
+
+  input[type="text"], .mealType select {
     background-color: v.$white;
     border: none;
     width: 100%;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-family: "Roboto Flex", sans-serif;
     border-radius: v.$radius;
     padding: 1rem;
 
     @include m.mq(v.$tablet-2) {
-      width: 70%;
+      width: 50%;
+      font-size: 1.8rem;
     }
-  }  
 
-  .wrapper {
+    &:focus {
+      outline: none;  
+      border: 0.8px solid #616161
+    }
+
+    &::placeholder {
+      font-size: 1.6rem;
+      font-family: "Roboto Flex", sans-serif;
+    }
+  }
+  
+  .mealType {
+    @include m.flex(column, 1rem);
+
+    select {
+      width: 100%;
+    }
+    option {
+      font-size: 1.6rem;
+      font-family: "Roboto Flex", sans-serif;
+    }
+  }
+
+  .searchActions {
     @include m.flex(row, 0);
     justify-content: space-between;
     align-items: center;
@@ -58,7 +94,4 @@
       background-color: v.$black;
     }
   }
-
-  
-
 }

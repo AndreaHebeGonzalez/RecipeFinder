@@ -15,7 +15,7 @@ const IndexPage = () => {
       </div>
       <CardsContainer 
         title= {"Search Results"}
-        secondaryTitle= { "Suggestions" }
+        secondaryTitle= { "Filters" }
       /> 
       <Modal />
     </div>

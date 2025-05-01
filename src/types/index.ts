@@ -1,8 +1,10 @@
-import { searchFilters, mealTypes, preferencesParams } from "../data";
+import { z } from "zod";
+import { searchFilters, mealTypes, preferencesParams, filters } from "../data";
+import { RecipeCardSchema, RecipeCarsListSchema } from "../schemas";
 
 /* Preferences Types */
 
-export type PreferencesParams = typeof preferencesParams[number]
+export type PreferencesParams = typeof preferencesParams[number] //De un array de string obtengo union de literales
 
 type SearchParams = typeof searchFilters[number]
 
@@ -31,7 +33,7 @@ export type SearchFilterType = {
 }
 
 
-/* Filter Types */
+/* Query Filter Types */
 
 export type ParamsType = PreferencesParams | SearchParams
 
@@ -41,3 +43,17 @@ export type QueryFilters = {
 
 export type Filters = Partial<QueryFilters>
 
+/* Recipe Types */
+
+export type RecipeCard = z.infer<typeof RecipeCardSchema>
+export type RecipeCardList = z.infer<typeof RecipeCarsListSchema>
+
+
+/* Filters Cards */
+
+export type FilterCardsName = keyof typeof filters; // "Calories" | "Protein" | ...
+export type FiltersCards = typeof filters;
+
+export type rangesType = {
+  [key in FilterCardsName] : [number, number] 
+}

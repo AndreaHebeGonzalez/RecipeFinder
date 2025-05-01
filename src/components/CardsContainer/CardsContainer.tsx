@@ -1,8 +1,9 @@
-import { useLayoutEffect, useRef } from "react"
+import { useLayoutEffect, useMemo, useRef } from "react"
 import styles from "./CardsContainer.module.scss";
 import { getGap, getHeight, getPadding } from "../../utils"
 import { useAppStore } from "../../stores/useAppStore"
 import Card from "../Card/Card"
+import FormFilters from "../FormFilters/FormFilters";
 
 
 type CardsContainerProps = {
@@ -14,6 +15,11 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
 
   const windowWidth = useAppStore(state=> state.windowWidth)
   const isTablet = useAppStore(state => state.isTablet)
+  const recipes = useAppStore( state => state.recipes)
+
+  const hasRecipes = useMemo(() => {
+    return recipes.length > 0
+  }, [recipes])
  
   const displayedItemsRef = useRef<HTMLElement | null>(null)
   const extraItemsRef = useRef<HTMLElement | null>(null)
@@ -35,45 +41,56 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
   }
 
   useLayoutEffect(() => {
-    const height = getHeightRecipes()
-    if(displayedItemsRef.current) {
-      displayedItemsRef.current.style.height = `${height}px`
-    }
-    if (!isTablet && extraItemsRef.current) {
-      extraItemsRef.current.style.height =  `${height}px`;
+    if(hasRecipes) {
+      const height = getHeightRecipes()
+      if(displayedItemsRef.current) {
+        displayedItemsRef.current.style.height = `${height}px`
+      }
+      if (!isTablet && extraItemsRef.current) {
+        extraItemsRef.current.style.height =  `${height}px`;
+      } else {
+        resetHeight()
+      }
     } else {
-      resetHeight();
+      resetHeight()
     }
-  }, [windowWidth]); 
+    
+  }, [windowWidth, hasRecipes]); 
+
 
   return (
     <>
       <div className={styles.cardsContainer}>
         <section ref={displayedItemsRef} className={styles.displayedItems}>
           <h3 ref={h3Ref}>{ title }</h3>
-          <div ref={cardListRef} className={styles.cardList}>
-            <Card 
-              ref = {cardRef}
-            />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
+            {
+              hasRecipes ? (
+                <div className={styles.cardsScroll}>
+                  <div ref={cardListRef} className={styles.cardsList}>
+                    {
+                      recipes.map((recipe, i) => {
+                        if(i === 0) {
+                          return <Card 
+                          recipe = { recipe }
+                          ref = {cardRef}
+                          />
+                        }
+                        return <Card 
+                          recipe = { recipe }
+                        />
+                      })
+                    }
+                  </div>
+                </div>
+              ) : (
+                <p>No results yet. Use the form to search for recipes.</p>
+              )
+            }
+          
         </section>  
         <aside ref={extraItemsRef} className={styles.extraItems}>
           <h3>{secondaryTitle}</h3>
-          <div className={styles.cardList}>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
+          <FormFilters />
         </aside>
       </div>
     </>
