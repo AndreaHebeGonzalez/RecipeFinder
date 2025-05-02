@@ -3,6 +3,10 @@
 
 .rangeSliderContainer {
   width: 100%;
+  
+  .filterName {
+    color: v.$black; 
+  }
 
   .rangeSlider {
     position: relative;
@@ -16,8 +20,8 @@
       position: absolute;
       background: v.$primary-color;
       border-radius: 1rem;
-      
     }
+  
 
     .input {
       position: absolute;
@@ -46,15 +50,39 @@
         height: 1.5rem;
         width: 1.5rem;
         border-radius: 50%;
-        background-color: #038b80;
+        background-color: v.$primary-color;
         border: 0.2rem solid white;
         pointer-events: auto;
         appearance: none;
         -moz-appearance: none;
         cursor: pointer;
       }
-    } 
+    }
+    
+    &.disabledFilter {
+
+      .track {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      .input {
+        &::-webkit-slider-thumb {
+          background-color: #ccc;
+          border: 0.2rem solid #ccc;
+          cursor: not-allowed;
+        }
+
+        &::-moz-range-thumb {
+          background-color: #ccc;
+          border: 0.2rem solid #ccc;
+          cursor: not-allowed;
+        }
+      }
+
+    }
   }
+
 
   .containerValues {
     display: flex;
@@ -66,7 +94,13 @@
       width: 2.5rem;
       display: flex;
       align-items: center;
-      
+      opacity: 1;
+    }
+
+    &.disabled {
+      .containerValue {
+        opacity: 0;
+      }
     }
   }
 }

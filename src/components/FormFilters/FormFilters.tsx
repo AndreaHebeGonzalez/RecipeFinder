@@ -1,27 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useState, FormEvent } from 'react'
 import styles from './FormFilters.module.scss'
-import type { FilterCardsName, rangesType } from '../../types'
+import type { FilterCardsName, RangesType } from '../../types'
 import { RangeSlider } from '../RangeSlider/RangeSlider'
 import { filters } from '../../data'
 
-const buildInitial = () : rangesType =>
+
+
+const buildInitial = () : RangesType =>
   (Object.keys(filters) as Array<FilterCardsName>).reduce((acc, filter) => {
-    acc[filter] = [10, 50]
-    console.log(acc)
+    acc[filter] = [filters[filter].min, filters[filter].max]
     return acc
-  }, {} as rangesType)
+  }, {} as RangesType)
 
 
-const FormFilters = () => {
+const FormFilters = ({ applyFilters } : { applyFilters: (e: FormEvent<HTMLFormElement>, filters: RangesType) => void }) => {
 
-  const [ranges, setRanges] = useState<rangesType>(buildInitial())
+  const [ranges, setRanges] = useState<RangesType>(buildInitial())
 
-  useEffect(() => {
-    console.log(ranges)
-  }, [ranges])
-  
   return (
-    <form className={styles.formFilters}>
+    <form onSubmit={(e) => applyFilters(e, ranges)} className={styles.formFilters}>
       <div className={styles.filtersWrap}>
         {
           (Object.keys(filters) as Array<FilterCardsName>).map((filter) => {
@@ -33,6 +30,10 @@ const FormFilters = () => {
           })
         }
       </div>
+      <input 
+        type="submit"
+        value={'Apply Filter'}
+      />
     </form>
   )
 }

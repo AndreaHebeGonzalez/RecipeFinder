@@ -1,9 +1,10 @@
-import { useLayoutEffect, useMemo, useRef } from "react"
+import { useLayoutEffect, useRef, FormEvent } from "react"
 import styles from "./CardsContainer.module.scss";
 import { getGap, getHeight, getPadding } from "../../utils"
 import { useAppStore } from "../../stores/useAppStore"
 import Card from "../Card/Card"
 import FormFilters from "../FormFilters/FormFilters";
+import type { RangesType } from "../../types";
 
 
 type CardsContainerProps = {
@@ -16,19 +17,17 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
   const windowWidth = useAppStore(state=> state.windowWidth)
   const isTablet = useAppStore(state => state.isTablet)
   const recipes = useAppStore( state => state.recipes)
+  const hasRecipes = useAppStore( state => state.hasRecipe)
 
-  const hasRecipes = useMemo(() => {
-    return recipes.length > 0
-  }, [recipes])
- 
+
   const displayedItemsRef = useRef<HTMLElement | null>(null)
-  const extraItemsRef = useRef<HTMLElement | null>(null)
+  const sectionFiltersRef = useRef<HTMLElement | null>(null)
   const cardListRef = useRef<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement | null>(null)
   const h3Ref = useRef<HTMLDivElement | null>(null)
 
   const resetHeight = () => {
-    extraItemsRef.current!.style.height = ""
+    sectionFiltersRef.current!.style.height = ""
   }
 
   const getHeightRecipes = () => {
@@ -40,14 +39,35 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
       return (totalPadding + gapBox + gapCards + (heightCard * 2 ) + h3Height)
   }
 
+  const applyFilters = (e : FormEvent<HTMLFormElement>, filters : RangesType) => {
+    e.preventDefault()
+    console.log(recipes, filters)
+    let filteredCards = recipes
+    for(let key in filters) {
+      if(key === "Cooking time") {
+        filteredCards = filteredCards.filter(recipe => recipe.readyInMinutes >= filters["Cooking time"][0] && recipe.readyInMinutes <= filters["Cooking time"][1] )
+        continue
+      } 
+      if(key === "Health score") {
+        filteredCards = filteredCards.filter(recipe => recipe.healthScore >= filters["Health score"][0] && recipe.readyInMinutes <= filters["Cooking time"][1] )
+        continue
+      }
+      filteredCards = filteredCards.filter(recipe => recipe.nutrition.nutrients)
+
+      
+
+
+    } 
+  }
+
   useLayoutEffect(() => {
     if(hasRecipes) {
       const height = getHeightRecipes()
       if(displayedItemsRef.current) {
         displayedItemsRef.current.style.height = `${height}px`
       }
-      if (!isTablet && extraItemsRef.current) {
-        extraItemsRef.current.style.height =  `${height}px`;
+      if (!isTablet && sectionFiltersRef.current) {
+        sectionFiltersRef.current.style.height =  `${height}px`;
       } else {
         resetHeight()
       }
@@ -71,11 +91,13 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
                       recipes.map((recipe, i) => {
                         if(i === 0) {
                           return <Card 
+                          key={recipe.id}
                           recipe = { recipe }
                           ref = {cardRef}
                           />
                         }
                         return <Card 
+                          key={recipe.id}
                           recipe = { recipe }
                         />
                       })
@@ -86,11 +108,12 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
                 <p>No results yet. Use the form to search for recipes.</p>
               )
             }
-          
         </section>  
-        <aside ref={extraItemsRef} className={styles.extraItems}>
+        <aside ref={sectionFiltersRef} className={styles.filtersSection}>
           <h3>{secondaryTitle}</h3>
-          <FormFilters />
+          <FormFilters 
+            applyFilters = {applyFilters}
+          />
         </aside>
       </div>
     </>

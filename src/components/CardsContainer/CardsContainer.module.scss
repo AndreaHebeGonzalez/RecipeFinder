@@ -20,7 +20,7 @@
   
 
   .displayedItems,
-  .extraItems {
+  .filtersSection {
     backdrop-filter: blur(1rem);
     background-color: rgba(v.$white, 0.3);
     border-radius: v.$radius;
@@ -40,7 +40,7 @@
     }
   }
 
-  .extraItems {
+  .filtersSection {
     @include m.mq(v.$desktop) {
       padding: 2.8rem; 
     }

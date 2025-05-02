@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { searchFilters, mealTypes, preferencesParams, filters } from "../data";
-import { RecipeCardSchema, RecipeCarsListSchema } from "../schemas";
+import { RecipeCardSchema, RecipeCardsListSchema } from "../schemas";
 
 /* Preferences Types */
 
@@ -26,6 +26,7 @@ export type PreferencesSearchType = {
 
 export type MealTypes = typeof mealTypes[number]
 
+
 export type SearchFilterType = {
   [key in SearchParams]: key extends 'type' 
     ? MealTypes 
@@ -46,7 +47,7 @@ export type Filters = Partial<QueryFilters>
 /* Recipe Types */
 
 export type RecipeCard = z.infer<typeof RecipeCardSchema>
-export type RecipeCardList = z.infer<typeof RecipeCarsListSchema>
+export type RecipeCardList = z.infer<typeof RecipeCardsListSchema>
 
 
 /* Filters Cards */
@@ -54,6 +55,6 @@ export type RecipeCardList = z.infer<typeof RecipeCarsListSchema>
 export type FilterCardsName = keyof typeof filters; // "Calories" | "Protein" | ...
 export type FiltersCards = typeof filters;
 
-export type rangesType = {
+export type RangesType = {
   [key in FilterCardsName] : [number, number] 
 }

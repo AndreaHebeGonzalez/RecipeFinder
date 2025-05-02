@@ -29,7 +29,7 @@ const Form = () => {
     const trimmedIngredients = searchFilter.includeIngredients.trim().toLowerCase()
     const typeLower = searchFilter.type.toLowerCase()
     if(!trimmedIngredients) {
-      console.log('Por favor ingrese al menos un ingrediente')
+      console.log('Please enter at least one ingredient.')
       return
     }
     const regexIngredients = /^[a-zA-Z\s,]+$/

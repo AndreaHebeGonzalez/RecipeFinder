@@ -14,7 +14,7 @@ const IndexPage = () => {
         <Form />
       </div>
       <CardsContainer 
-        title= {"Search Results"}
+        title= {"Recipes"}
         secondaryTitle= { "Filters" }
       /> 
       <Modal />

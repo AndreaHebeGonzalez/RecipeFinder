@@ -1,6 +1,6 @@
 import axios from "axios"
 import type { Filters } from "../types"
-import { RecipeCarsListSchema } from "../schemas";
+import { RecipeCardsListSchema } from "../schemas";
 
 
 
@@ -11,12 +11,13 @@ if (!appId) {
   throw new Error("VITE_API_KEY is missing in your environment variables."); //evitar que la clave sea undefined y la request falle silenciosamente.
 }
 
-type ParamsType = Filters & { apiKey: string }
+type ParamsType = Filters & { apiKey: string,  addRecipeNutrition: boolean}
 
 const getParams = (filters : Filters) : ParamsType =>  {
   return ({
     ...filters,
-    apiKey: appId
+    apiKey: appId,
+    addRecipeNutrition: true,
   })
 }
 
@@ -24,9 +25,13 @@ export const recipeSearchFetch = async (filters : Filters) => {
   try {
     const params = getParams(filters)
     const {data : { results } } = await axios.get(urlBase, { params })
-    const result = RecipeCarsListSchema.safeParse(results)
+    console.log(results)
+    const result = RecipeCardsListSchema.safeParse(results)
 
-    if(!result.success) throw new Error('Invalid response structure')
+    if(!result.success) {
+      console.log('Validation failed:', result.error);
+      throw new Error('Invalid response structure')
+    }
     return result.data
   } catch (error) {
     console.log(error)
