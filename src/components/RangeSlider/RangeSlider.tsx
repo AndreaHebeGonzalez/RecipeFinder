@@ -1,28 +1,29 @@
 import { type Dispatch, memo, type FC, type SetStateAction, useRef, useState, useEffect, ChangeEvent } from "react"
 import styles from './RangeSlider.module.scss'
-import type { FilterCardsName, RangesType } from "../../types"
+import type { FiltersName, FilterCardsName, RangesType } from "../../types"
 import { useAppStore } from "../../stores/useAppStore"
 
 
 type RangeSliderProps = {
-  name: FilterCardsName,
+  name: FiltersName,
+  nameApi: FilterCardsName,
   min: number,
   max: number,
   onChange?: Dispatch<SetStateAction<RangesType>>,
   step: number,
-  value: RangesType
+  value: RangesType[keyof RangesType]
 }
 
-const RangeSliderComponent : FC<RangeSliderProps> = ({name, min, max, onChange, step, value}) => {
+const RangeSliderComponent : FC<RangeSliderProps> = ({name, nameApi, min, max, onChange, step, value}) => {
 
 
   const  hasRecipe = useAppStore(state=>state.hasRecipe)
 
-  const [minValue, setMinValue] = useState(value[name][0])
-  const [maxValue, setMaxValue] = useState(value[name][1])
+  const [minValue, setMinValue] = useState(value[0])
+  const [maxValue, setMaxValue] = useState(value[1])
 
-  const [minDisplay, setMinDisplay] = useState(value[name][0])
-  const [maxDisplay, setMaxDisplay] = useState(value[name][1])
+  const [minDisplay, setMinDisplay] = useState(value[0])
+  const [maxDisplay, setMaxDisplay] = useState(value[1])
 
 
   const trackRef= useRef<HTMLDivElement | null>(null)
@@ -59,7 +60,7 @@ const RangeSliderComponent : FC<RangeSliderProps> = ({name, min, max, onChange, 
       setMinDisplay(value)
       onChange?.(prev => ({
         ...prev,
-        [name]:[value, maxValue]
+        [nameApi]:[value, maxValue]
       }))
     }
   }
@@ -75,7 +76,7 @@ const RangeSliderComponent : FC<RangeSliderProps> = ({name, min, max, onChange, 
       setMaxDisplay(value)
       onChange?.(prev => ({
         ...prev,
-        [name]:[minValue, value]
+        [nameApi]:[minValue, value]
       }))
     }
   }

@@ -24,7 +24,7 @@ const FormFilters = ({ applyFilters } : { applyFilters: (e: FormEvent<HTMLFormEl
           (Object.keys(filters) as Array<FilterCardsName>).map((filter) => {
             return (
               <div key={filter} className={styles.rangeWrap}>
-                <RangeSlider name={filter} min={filters[filter].min} max={filters[filter].max} onChange={setRanges} step={1} value={ranges} />   
+                <RangeSlider name={filters[filter].name} nameApi={filter} min={filters[filter].min} max={filters[filter].max} onChange={setRanges} step={1} value={ranges[filter]} />   
               </div>
             )
           })

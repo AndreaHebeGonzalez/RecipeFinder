@@ -44,17 +44,22 @@ export type QueryFilters = {
 
 export type Filters = Partial<QueryFilters>
 
+/* Filters Cards */
+
+export type FiltersCards = typeof filters;
+export type FilterCardsName = keyof typeof filters; // "Calories" | "Protein" | ...
+export type FiltersName = FiltersCards[keyof FiltersCards]['name'] 
+
+
 /* Recipe Types */
 
 export type RecipeCard = z.infer<typeof RecipeCardSchema>
 export type RecipeCardList = z.infer<typeof RecipeCardsListSchema>
-
-
-/* Filters Cards */
-
-export type FilterCardsName = keyof typeof filters; // "Calories" | "Protein" | ...
-export type FiltersCards = typeof filters;
+export type RecipeMetrics = { [key in FilterCardsName] : number }
+export type RecipesWithMetrics = RecipeCard & {
+  metrics: RecipeMetrics
+}
 
 export type RangesType = {
-  [key in FilterCardsName] : [number, number] 
+  [key in FilterCardsName] : [number, number]
 }

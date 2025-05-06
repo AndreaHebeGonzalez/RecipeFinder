@@ -25,9 +25,7 @@ export const recipeSearchFetch = async (filters : Filters) => {
   try {
     const params = getParams(filters)
     const {data : { results } } = await axios.get(urlBase, { params })
-    console.log(results)
     const result = RecipeCardsListSchema.safeParse(results)
-
     if(!result.success) {
       console.log('Validation failed:', result.error);
       throw new Error('Invalid response structure')

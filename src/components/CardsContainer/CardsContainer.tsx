@@ -1,10 +1,11 @@
-import { useLayoutEffect, useRef, FormEvent } from "react"
+import { useLayoutEffect, useRef, FormEvent, useState } from "react"
 import styles from "./CardsContainer.module.scss";
-import { getGap, getHeight, getPadding } from "../../utils"
+import { getGap, getHeight, getPadding, getRecipesFiltersValues } from "../../utils"
 import { useAppStore } from "../../stores/useAppStore"
 import Card from "../Card/Card"
 import FormFilters from "../FormFilters/FormFilters";
-import type { RangesType } from "../../types";
+import type { FilterCardsName, RangesType } from "../../types";
+
 
 
 type CardsContainerProps = {
@@ -19,6 +20,8 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
   const recipes = useAppStore( state => state.recipes)
   const hasRecipes = useAppStore( state => state.hasRecipe)
 
+
+  const [localRecipes, setLocalRecipes] = useState(recipes)
 
   const displayedItemsRef = useRef<HTMLElement | null>(null)
   const sectionFiltersRef = useRef<HTMLElement | null>(null)
@@ -39,26 +42,24 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
       return (totalPadding + gapBox + gapCards + (heightCard * 2 ) + h3Height)
   }
 
-  const applyFilters = (e : FormEvent<HTMLFormElement>, filters : RangesType) => {
+  const applyFilters = (e : FormEvent<HTMLFormElement>, filtersValues : RangesType) => {
     e.preventDefault()
-    console.log(recipes, filters)
-    let filteredCards = recipes
-    for(let key in filters) {
-      if(key === "Cooking time") {
-        filteredCards = filteredCards.filter(recipe => recipe.readyInMinutes >= filters["Cooking time"][0] && recipe.readyInMinutes <= filters["Cooking time"][1] )
-        continue
-      } 
-      if(key === "Health score") {
-        filteredCards = filteredCards.filter(recipe => recipe.healthScore >= filters["Health score"][0] && recipe.readyInMinutes <= filters["Cooking time"][1] )
-        continue
-      }
-      filteredCards = filteredCards.filter(recipe => recipe.nutrition.nutrients)
-
-      
-
-
-    } 
+    const recipesWithMetrics = getRecipesFiltersValues(recipes)
+    const filteredRecipes = recipesWithMetrics.filter(recipe => {
+      return Object.keys(filtersValues).every(key => {
+        const typedKey = key as FilterCardsName
+        if (!filtersValues[typedKey] || recipe.metrics[typedKey] === undefined) {
+          return false; // Si no existen, no pasa el filtro
+        }
+        const [min, max] = filtersValues[typedKey] || [] //min y max son undefined si []
+        const value = recipe.metrics[typedKey] 
+        return value >= min && value <= max //Si min y max son undefined son NaN y es resultado es false
+      })
+    })
+    console.log(filteredRecipes)
+    setLocalRecipes(filteredRecipes)
   }
+
 
   useLayoutEffect(() => {
     if(hasRecipes) {
@@ -88,7 +89,7 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
                 <div className={styles.cardsScroll}>
                   <div ref={cardListRef} className={styles.cardsList}>
                     {
-                      recipes.map((recipe, i) => {
+                      localRecipes.map((recipe, i) => {
                         if(i === 0) {
                           return <Card 
                           key={recipe.id}

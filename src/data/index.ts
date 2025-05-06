@@ -48,31 +48,37 @@ export const mealTypes = [
 
 export const filters = {
   "Calories": {
+    name: "Calories",
     min: 0,
     max: 1500,
     unit: "kcal"
   },
   "Protein": {
+    name: "Protein",
     min: 0,
     max: 100,
     unit: "g"
   },
   "Carbohydrates": {
+    name:"Carbohydrates",
     min: 0,
     max: 150,
     unit: "g"
   },
   "Fat": {
+    name: "Fat",
     min: 0,
     max: 70,
     unit: "g"
   },
-  "Health score": {
+  "healthScore": {
+    name: "Health score",
     min: 0,
     max: 100,
     unit: ''
   },
-  "Cooking time": {
+  "readyInMinutes": {
+    name: "Cooking time",
     min: 0,
     max: 180,
     unit: 'min'
