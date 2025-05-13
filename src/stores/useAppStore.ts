@@ -14,3 +14,4 @@ export const useAppStore = create<UtilsSliceTypes & UserPreferencesSliceType & M
 )
 
 export const { getState } = useAppStore; 
+

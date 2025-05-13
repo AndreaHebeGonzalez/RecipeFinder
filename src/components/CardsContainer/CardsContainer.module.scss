@@ -22,7 +22,7 @@
   .displayedItems,
   .filtersSection {
     backdrop-filter: blur(1rem);
-    background-color: rgba(v.$white, 0.3);
+    background-color: rgba(v.$white, 0.2);
     border-radius: v.$radius;
     padding: 2rem;
     @include m.flex(column, 2rem);
@@ -40,15 +40,38 @@
     }
   }
 
+  .loadingWrapp {
+    height: 100%;
+    @include m.flex(row, 0);
+    justify-content: center;
+    //align-items: center;
+  }
+
   .filtersSection {
+
     @include m.mq(v.$desktop) {
       padding: 2.8rem; 
     }
 
-    h3 {
-      font-size: 3rem;
+    .headerFilterSection {
+      @include m.flex(row, 0);
+      justify-content: space-between;
+      align-items: center;
+
+      .btnApplyFilters {
+        @include m.btn(v.$primary-color);
+        font-size: 1.5rem;
+        padding: 0.5rem 0.8rem;
+        border-radius: 0.5rem;
+      }
+      h3 {
+        font-size: 3rem;
+      }
     }
+
+    
   }
+
   .cardsScroll {
     overflow-y: auto;
     scroll-snap-type: y mandatory; 
@@ -75,7 +98,6 @@
 
   .cardsList {
 
-    
     @include m.grid-c(1, 3rem);
     place-items: center;
 

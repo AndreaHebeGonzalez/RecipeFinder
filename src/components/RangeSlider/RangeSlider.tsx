@@ -1,6 +1,6 @@
-import { type Dispatch, memo, type FC, type SetStateAction, useRef, useState, useEffect, ChangeEvent } from "react"
+import { memo, type FC, useRef, useState, useEffect, ChangeEvent , Dispatch} from "react"
 import styles from './RangeSlider.module.scss'
-import type { FiltersName, FilterCardsName, RangesType } from "../../types"
+import type { FiltersName, FilterCardsName, Range, RangesType } from "../../types"
 import { useAppStore } from "../../stores/useAppStore"
 
 
@@ -9,21 +9,20 @@ type RangeSliderProps = {
   nameApi: FilterCardsName,
   min: number,
   max: number,
-  onChange?: Dispatch<SetStateAction<RangesType>>,
   step: number,
-  value: RangesType[keyof RangesType]
+  values: Range,
+  onChange: Dispatch<React.SetStateAction<RangesType>>,
 }
 
-const RangeSliderComponent : FC<RangeSliderProps> = ({name, nameApi, min, max, onChange, step, value}) => {
-
+const RangeSliderComponent : FC<RangeSliderProps> = ({ name, nameApi, min, max, step, values, onChange }) => {
 
   const  hasRecipe = useAppStore(state=>state.hasRecipe)
 
-  const [minValue, setMinValue] = useState(value[0])
-  const [maxValue, setMaxValue] = useState(value[1])
+  const [minValue, setMinValue] = useState(values[0])
+  const [maxValue, setMaxValue] = useState(values[1])
 
-  const [minDisplay, setMinDisplay] = useState(value[0])
-  const [maxDisplay, setMaxDisplay] = useState(value[1])
+  const [minDisplay, setMinDisplay] = useState(values[0])
+  const [maxDisplay, setMaxDisplay] = useState(values[1])
 
 
   const trackRef= useRef<HTMLDivElement | null>(null)
@@ -58,9 +57,14 @@ const RangeSliderComponent : FC<RangeSliderProps> = ({name, nameApi, min, max, o
     if(value <= maxValue) {
       setMinValue(value)
       setMinDisplay(value)
-      onChange?.(prev => ({
+
+      const filterValue = {
+        [nameApi]: [value, maxValue]
+      } 
+
+      onChange((prev) => ({
         ...prev,
-        [nameApi]:[value, maxValue]
+        ...filterValue
       }))
     }
   }
@@ -74,9 +78,14 @@ const RangeSliderComponent : FC<RangeSliderProps> = ({name, nameApi, min, max, o
     if(value >= minValue) {
       setMaxValue(value)
       setMaxDisplay(value)
-      onChange?.(prev => ({
+
+      const filterValue = {
+        [nameApi]: [minValue, value]
+      }
+
+      onChange((prev) => ({
         ...prev,
-        [nameApi]:[minValue, value]
+        ...filterValue
       }))
     }
   }

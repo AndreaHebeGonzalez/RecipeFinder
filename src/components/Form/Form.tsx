@@ -1,14 +1,16 @@
 import styles from './Form.module.scss';
 import { useAppStore } from '../../stores/useAppStore';
 import { useState } from 'react';
-import { mealTypes } from '../../data';
+import { mealTypes, searchFilters } from '../../data';
 import type { MealTypes, SearchFilterType } from '../../types';
 
 
-const initialValue = {
-  query: '',
-  includeIngredients: '',
-  type: '' as MealTypes
+const buildInitialParams = () => {
+  const initialValue =  searchFilters.reduce((acc, param) =>  {
+    acc[param]= ''
+    return acc
+  }, {} as SearchFilterType)
+  return initialValue
 }
 
 const Form = () => {
@@ -16,7 +18,7 @@ const Form = () => {
   const openModal = useAppStore(state => state.openModal)
   const searchRecipes = useAppStore(state=>state.searchRecipes)
 
-  const [searchFilter, setSearchFilter] = useState<SearchFilterType>(initialValue)
+  const [searchFilter, setSearchFilter] = useState<SearchFilterType>(buildInitialParams()) //Este objeto se pasará como parámetro a la funcion que ejecuta la peticion
 
   const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setSearchFilter({
@@ -24,20 +26,20 @@ const Form = () => {
       [e.target.name] : e.target.value
     })
   }
-
+  
   const getValidatedIngredients = () =>  {
-    const trimmedIngredients = searchFilter.includeIngredients.trim().toLowerCase()
-    const typeLower = searchFilter.type.toLowerCase()
+    const trimmedIngredients = searchFilter.includeIngredients.trim().toLowerCase() //Pasamos todo a minuscula y eliminamos los espacios en el extremo del input
+    const typeLower = searchFilter.type.toLowerCase() //minuscula al select
     if(!trimmedIngredients) {
-      console.log('Please enter at least one ingredient.')
+      console.log('Please enter at least one ingredient.') //mostrar notificacion por falta de valor 
       return
     }
-    const regexIngredients = /^[a-zA-Z\s,]+$/
+    const regexIngredients = /^[a-zA-Z\s,]+$/ //Exp regular para especificar los caracteres permitidos en el input
     if(!regexIngredients.test(trimmedIngredients)) {
       console.log('Ingredients can only contain letters, commas and spaces.')
       return
     }
-    let ingredientsArray = trimmedIngredients.split(',').map(element => element.trim()).filter(element => element !== '')
+    let ingredientsArray = trimmedIngredients.split(',').map(element => element.trim()).filter(element => element !== '') 
     if(ingredientsArray.length === 0) {
       console.log('Please enter at least one ingredient.')
       return
@@ -61,15 +63,12 @@ const Form = () => {
     e.preventDefault()
     const dateValidated = getValidatedIngredients()
     if(dateValidated) {
-      const searchFilterClean = {
+      const searchFilterClean : SearchFilterType = {
         ...searchFilter,
         includeIngredients: dateValidated.cleanIngredients,
-        type: dateValidated.typeLower as MealTypes
+        type: dateValidated.typeLower as MealTypes | ''
       }
-      setSearchFilter(prev => ({
-        ...prev,
-        includeIngredients: dateValidated.cleanIngredientsSpace
-      }))
+      setSearchFilter(buildInitialParams())
       searchRecipes(searchFilterClean)
     }
   }

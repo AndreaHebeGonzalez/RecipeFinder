@@ -26,24 +26,43 @@ export const RecipeCardSchema = z.object({
 
 export const RecipeCardsListSchema = z.array(RecipeCardSchema);
 
-/* export const RecipeCardSchema = z.object({
-  id: z.number(),
-  title: z.string(),
+export const IngredientSchema = z.object({
+  amount: z.object({
+    metric: z.object({
+      unit: z.string(),
+      value: z.number()
+    })
+  }),
   image: z.string(),
-  cookingMinutes: z.number(),
-  healthScore: z.number(),
-  nutrition: z.object({
-    nutrients: z.array(
-      z.object({
-        name: z.string(),
-        amount: z.number(),
-        percentOfDailyNeeds: z.number(),
-        unit: z.string(),
-      })
-    )
-  })
+  name: z.string()
 })
 
-export const RecipeCardsListSchema = z.array(RecipeCardSchema) */
+export const RecipeIngredientsSchema = z.object({
+    ingredients: z.array(IngredientSchema) 
+  })
 
+
+
+
+const stepSchema = z.object({
+  equipment: z.array(z.object({
+    id: z.number(),
+    image: z.string(),
+    name: z.string()
+  })),
+  ingredients: z.array(z.object({
+    id: z.number(),
+    image: z.string(),
+    name: z.string()
+  })),
+  number: z.number(), //numero de paso para la preparacion
+  step: z.string()
+})
+
+const intructionSchema = z.object({
+  name: z.string(), //Nombre de la preparación
+  steps: z.array(stepSchema)
+})
+
+export const RecipeInstructionsSchema = z.array(intructionSchema)
 

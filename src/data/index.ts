@@ -1,18 +1,22 @@
 export const preferencesParams = ['diet', 'intolerances'] as const
+
 export const searchFilters  = ['query', 'includeIngredients', 'type'] as const 
 
+export const searchParamsKeys = ['includeIngredients', 'diet'] as const 
 
-export const listDiets = [
+
+export const dietsList = [
   "Gluten free",
   "Ketogenic",
   "Vegetarian",
   "Lacto-vegetarian",
   "Ovo-vegetarian",
   "Vegan"
-]
+] as const 
 
 
-export const listIntolerances = [
+
+export const intolerancesList = [
   "Dairy",
   "Egg",
   "Gluten",
@@ -25,7 +29,7 @@ export const listIntolerances = [
   "Sulfite",
   "Tree nut",
   "Wheat"
-]
+] as const
 
 
 export const mealTypes = [
@@ -45,6 +49,9 @@ export const mealTypes = [
   "drink"
 ] as const 
 
+/* mealTypes[2] = 'dsf' */
+
+export const nutrients = ["Calories", "Protein", "Carbohydrates", "Fat"] as const 
 
 export const filters = {
   "Calories": {
@@ -80,7 +87,7 @@ export const filters = {
   "readyInMinutes": {
     name: "Cooking time",
     min: 0,
-    max: 180,
+    max: 1000,
     unit: 'min'
   },
 } as const

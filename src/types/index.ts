@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { searchFilters, mealTypes, preferencesParams, filters } from "../data";
-import { RecipeCardSchema, RecipeCardsListSchema } from "../schemas";
+import { searchFilters, mealTypes, preferencesParams, filters, intolerancesList, dietsList } from "../data";
+import { RecipeCardSchema, RecipeCardsListSchema, RecipeIngredientsSchema, RecipeInstructionsSchema } from "../schemas";
 
 /* Preferences Types */
 
@@ -14,9 +14,13 @@ type DietState = {
   disabled: boolean
 }
 
-export type DietsOptions = { [key:string] : DietState }
+export type DietsOption = typeof dietsList[number]
 
-export type AllergiesOptions = { [key:string] : boolean }
+export type DietsOptions = { [key in DietsOption] : DietState }
+
+export type AllergiesOption = typeof intolerancesList[number]
+
+export type AllergiesOptions = { [key in AllergiesOption] : boolean }
 
 export type PreferencesSearchType = {
   [key in PreferencesParams]: string;
@@ -26,20 +30,19 @@ export type PreferencesSearchType = {
 
 export type MealTypes = typeof mealTypes[number]
 
-
 export type SearchFilterType = {
   [key in SearchParams]: key extends 'type' 
-    ? MealTypes 
+    ? MealTypes | ''
     : string;
 }
-
 
 /* Query Filter Types */
 
 export type ParamsType = PreferencesParams | SearchParams
 
 export type QueryFilters = {
-  [key in ParamsType]: string;
+  [key in ParamsType]: key extends 'type' 
+    ? MealTypes | '' : string 
 }
 
 export type Filters = Partial<QueryFilters>
@@ -56,10 +59,25 @@ export type FiltersName = FiltersCards[keyof FiltersCards]['name']
 export type RecipeCard = z.infer<typeof RecipeCardSchema>
 export type RecipeCardList = z.infer<typeof RecipeCardsListSchema>
 export type RecipeMetrics = { [key in FilterCardsName] : number }
-export type RecipesWithMetrics = RecipeCard & {
+export type RecipesWithMetrics = {
+  recipe: RecipeCard
   metrics: RecipeMetrics
 }
 
+export type Range = [number, number]
+
 export type RangesType = {
-  [key in FilterCardsName] : [number, number]
+  [key in FilterCardsName] : Range
 }
+
+export type RangeType<K extends FilterCardsName> = Pick<RangesType, K>; //Defino el tipo genérico RangeType 
+
+type RecipeIngredients = z.infer<typeof RecipeIngredientsSchema>
+
+type RecipeInstructions = z.infer<typeof RecipeInstructionsSchema>
+
+export type RecipeDetailSubset = RecipeIngredients & {
+  instructions: RecipeInstructions
+}
+
+export type RecipeDetails = RecipeCard & RecipeDetailSubset

@@ -1,5 +1,5 @@
 import { filters } from "../data";
-import { RecipeCard, RecipeCardList, FilterCardsName, RecipesWithMetrics } from "../types";
+import { RecipeCard, RecipeCardList, FilterCardsName, RecipesWithMetrics, RecipeDetailSubset, RecipeDetails } from "../types";
 
 export const getHeight = (element: HTMLElement | null) => {
     if (!element) return 0;
@@ -37,8 +37,18 @@ export const getRecipeFilterValues = (recipe : RecipeCard) : { [key in FilterCar
 
 export const getRecipesFiltersValues = (recipes : RecipeCardList) : RecipesWithMetrics[] => {
     const recipesLWithMetrics = recipes.map(recipe => ({
-        ...recipe,
+        recipe,
         metrics: getRecipeFilterValues(recipe)
     }))
     return recipesLWithMetrics
+}
+
+
+export const getRecipeFormat = (recipe : RecipeCard, recipeDetailSubset : RecipeDetailSubset ) : RecipeDetails => {
+    const recipeDetails = {
+    ...recipe,
+    ...recipeDetailSubset
+    }
+    console.log(recipeDetails)
+    return recipeDetails
 }
