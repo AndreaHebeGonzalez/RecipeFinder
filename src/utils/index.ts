@@ -46,8 +46,8 @@ export const getRecipesFiltersValues = (recipes : RecipeCardList) : RecipesWithM
 
 export const getRecipeFormat = (recipe : RecipeCard, recipeDetailSubset : RecipeDetailSubset ) : RecipeDetails => {
     const recipeDetails = {
-    ...recipe,
-    ...recipeDetailSubset
+    ...recipeDetailSubset,
+    nutrients: recipe.nutrition.nutrients
     }
     console.log(recipeDetails)
     return recipeDetails

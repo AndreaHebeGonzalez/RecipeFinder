@@ -1,6 +1,6 @@
 import axios from "axios"
-import type { Filters, RecipeDetailSubset } from "../types"
-import { RecipeCardsListSchema, RecipeIngredientsSchema, RecipeInstructionsSchema } from "../schemas";
+import type { Filters, RecipeDetailSubset, RecipeCard } from "../types"
+import { RecipeCardsListSchema, RecipeInformationSchema, RecipeInstructionsSchema } from "../schemas";
 
 
 
@@ -25,12 +25,17 @@ export const recipeSearchFetch = async (filters : Filters) => {
   try {
     const params = getParams(filters)
     const {data : { results } } = await axios.get(`${urlBase}complexSearch`, { params })
+
+    console.log(results)
+
     const result = RecipeCardsListSchema.safeParse(results)
 
     if(!result.success) {
       console.log('Validation failed:', result.error);
       throw new Error('Invalid response structure')
     }
+
+    console.log(result.data)
 
     const data = result.data.map(recipe => (
       {
@@ -46,23 +51,25 @@ export const recipeSearchFetch = async (filters : Filters) => {
   }
 }
 
-export const getRecipeDetailSubset = async(id: number) : Promise<RecipeDetailSubset> =>  {
+export const getRecipeDetailSubset = async(recipe : RecipeCard) : Promise<RecipeDetailSubset> =>  {
   try {
     let recipeDetailsSubmit = {} as RecipeDetailSubset
-    /* Obtengo ingredientes de recetas */
-    const { data : ingredientsApi }  = await axios(`${urlBase}${id}/ingredientWidget.json?apiKey=${appId}`)
-    const ingredients = RecipeIngredientsSchema.safeParse(ingredientsApi)
+    const id = recipe.id
 
-    if(!ingredients.success) { 
-      console.error('Validation failed:', ingredients.error); //
+    /* Obtengo ingredientes de recetas */
+    const { data : recipeInformation }  = await axios(`${urlBase}${id}/information?apiKey=${appId}`)
+    const information = RecipeInformationSchema.safeParse(recipeInformation)
+
+    if(!information.success) { 
+      console.error('Validation failed:', information.error); //
       throw new Error('Invalid response structure')
     }
 
-    /* Obtengo instrucciones de rectas */
+    /* Obtengo instrucciones de recetas */
 
-    const { data : instructionsApi } = await axios(`https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${appId}`) 
+    const { data : instructionsRecipe } = await axios(`${urlBase}${id}/analyzedInstructions?apiKey=${appId}`) 
 
-    const instructions = RecipeInstructionsSchema.safeParse(instructionsApi) 
+    const instructions = RecipeInstructionsSchema.safeParse(instructionsRecipe) 
 
     if(!instructions.success) {
       console.error('Validation filed: ', instructions.error)
@@ -70,9 +77,11 @@ export const getRecipeDetailSubset = async(id: number) : Promise<RecipeDetailSub
     }
 
     recipeDetailsSubmit = {
-      ...ingredients.data,
+      ...information.data,
       instructions: instructions.data
     }
+
+    console.log(recipeDetailsSubmit)
 
     return recipeDetailsSubmit
 

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { searchFilters, mealTypes, preferencesParams, filters, intolerancesList, dietsList } from "../data";
-import { RecipeCardSchema, RecipeCardsListSchema, RecipeIngredientsSchema, RecipeInstructionsSchema } from "../schemas";
+import { IngredientSchema, NutrientSchema, RecipeCardSchema, RecipeCardsListSchema, RecipeInformationSchema, RecipeInstructionsSchema } from "../schemas";
 
 /* Preferences Types */
 
@@ -56,6 +56,7 @@ export type FiltersName = FiltersCards[keyof FiltersCards]['name']
 
 /* Recipe Types */
 
+export type NutrientType = z.infer<typeof NutrientSchema>
 export type RecipeCard = z.infer<typeof RecipeCardSchema>
 export type RecipeCardList = z.infer<typeof RecipeCardsListSchema>
 export type RecipeMetrics = { [key in FilterCardsName] : number }
@@ -72,12 +73,16 @@ export type RangesType = {
 
 export type RangeType<K extends FilterCardsName> = Pick<RangesType, K>; //Defino el tipo genérico RangeType 
 
-type RecipeIngredients = z.infer<typeof RecipeIngredientsSchema>
+export type RecipeIngredients = z.infer<typeof IngredientSchema>
+
+export type RecipeInformation = z.infer<typeof RecipeInformationSchema>
 
 type RecipeInstructions = z.infer<typeof RecipeInstructionsSchema>
 
-export type RecipeDetailSubset = RecipeIngredients & {
+export type RecipeDetailSubset = RecipeInformation & {
   instructions: RecipeInstructions
 }
 
-export type RecipeDetails = RecipeCard & RecipeDetailSubset
+export type RecipeDetails = RecipeDetailSubset &  {
+  nutrients: NutrientType[]
+}

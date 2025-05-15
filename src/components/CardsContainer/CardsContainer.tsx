@@ -1,10 +1,10 @@
-import { useLayoutEffect, useRef, useMemo, useState, useEffect } from "react"
+import { useLayoutEffect, useRef, useMemo, useState } from "react"
 import Lottie from 'lottie-react';
 import loadingSpinner from '../../assets/loadingPrimaryColor.json'
 import styles from "./CardsContainer.module.scss";
 import { getGap, getHeight, getPadding, getRecipesFiltersValues } from "../../utils"
 import { useAppStore } from "../../stores/useAppStore"
-import type { FilterCardsName, RangesType } from "../../types";
+import type { FilterCardsName, RangesType, RecipeCardList } from "../../types";
 import { filters } from "../../data";
 import Card from "../Card/Card"
 import FormFilters from "../FormFilters/FormFilters";
@@ -19,14 +19,14 @@ const buildInitialFilters = () : RangesType =>
 type CardsContainerProps = {
   title: string,
   secondaryTitle: string,
+  recipes: RecipeCardList,
+  hasRecipes: boolean
 }
 
-const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
+const CardsContainer = ({ title, secondaryTitle, recipes, hasRecipes } : CardsContainerProps) => {
 
   const windowWidth = useAppStore(state=> state.windowWidth)
   const isTablet = useAppStore(state => state.isTablet)
-  const recipes = useAppStore(state => state.recipes)
-  const hasRecipes = useAppStore(state => state.hasRecipe)
   const filtersValues = useAppStore(state => state.filtersValues)
   const setFiltersValues = useAppStore(state=>state.setFiltersValues)
   const isLoading = useAppStore(state=>state.isLoading)
@@ -96,7 +96,6 @@ const CardsContainer = ({ title, secondaryTitle } : CardsContainerProps) => {
     } else {
       resetHeight()
     }
-    
   }, [windowWidth, hasRecipes]); 
   
   return (

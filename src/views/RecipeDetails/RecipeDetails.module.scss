@@ -3,12 +3,12 @@
 
 .recipeWrapper {
 
-  @include m.mq(v.$desktop-2) {
+  /* @include m.mq(v.$desktop-2) {
     background-image: url(/public//images/v-bg-recipe-detail.svg);
     background-repeat: no-repeat;
     background-position: top right;
     background-size: 531px ;
-  }
+  } */
 }
 
 
@@ -47,12 +47,15 @@
     }
 
     .timePreparation {
+      padding: 1rem 2rem;
       position: absolute;
+      border-radius: 2rem;
       top: 0;
       right: 0;
       font-size: 2.8rem;
       font-weight: 600;
       color: v.$secondary-color;
+      border: 1px solid rgba(v.$primary-color, 0.3);
 
       span {
         font-size: 3.5rem;
@@ -92,11 +95,14 @@
       @include m.flex(row, 0);
       justify-content: center;
       align-items: center;
-
-      @include m.mq(v.$desktop-2) {
-        justify-content: end;
-      }
+      background-color: rgba(v.$primary-color, 0.3);
+      clip-path: polygon(14% 0, 100% 0%, 100% 100%, 14% 100%, 2% 49%);
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
+  }
+
+  .recipeDescription > div {
+    font-weight: 300 
   }
 
   .recipeDetails {
@@ -145,5 +151,7 @@
     }
     
   }
+
+ 
 }
 

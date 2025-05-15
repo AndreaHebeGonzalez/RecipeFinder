@@ -2,7 +2,9 @@
 @use "../../styles/base/mixins" as m;
 
 .nutritionInfo {
+  padding: 2rem;
   width: 100%;
+  
   
   @include m.mq(v.$tablet) {
     width: 85%;

@@ -1,27 +1,35 @@
 import { StateCreator } from "zustand"
 import { getState } from "./useAppStore";
-import { recipeSearchFetch, getRecipeDetailSubset } from "../service/recipeServices"
-import type { QueryFilters, SearchFilterType, Filters, RecipeCardList, RecipeCard, RangesType, RecipeDetails, RecipeDetailSubset } from "../types"
+import { recipeSearchFetch } from "../service/recipeServices"
+import type { QueryFilters, SearchFilterType, Filters, RecipeCardList, RangesType, RecipeDetails } from "../types"
 import { buildRecipeParams } from "../service/apiParams";
-import { getRecipeFormat } from "../utils";
-
 
 export type RecipeSliceType = {
   recipes: RecipeCardList,
-  recipeDetails: RecipeDetails,
+  recipeStored: RecipeDetails,
   hasRecipe: boolean,
   filtersValues: RangesType,
   isLoading : boolean,
   searchRecipes: (searchFilter : SearchFilterType) => Promise<void>,
   setFiltersValues: (filtersValues : RangesType) => void,
-  selectRecipe: (recipe: RecipeCard) => Promise<void>,
 }
 
 export const recipeSlice : StateCreator<RecipeSliceType> = (set, get) => {
 
   let lastSearch :  RecipeCardList = []
   let hasRecipeInitial = false
+
+  /* inicializo recipeStored  */
   
+  let recipeDetailsInitial = {} as RecipeDetails 
+
+  const recipeDetailsStored = localStorage.getItem('recipeDetailsStored')
+  if(recipeDetailsStored) {
+    recipeDetailsInitial = JSON.parse(recipeDetailsStored)
+  }
+
+  /* ------ */
+
   const storedLastSearch = localStorage.getItem('lastSearch')
   if(storedLastSearch) {
     lastSearch = JSON.parse(storedLastSearch)
@@ -29,8 +37,8 @@ export const recipeSlice : StateCreator<RecipeSliceType> = (set, get) => {
   }
   
   return {
-    recipes: lastSearch,
-    recipeDetails: {} as RecipeDetails,
+    recipes: lastSearch, 
+    recipeStored: recipeDetailsInitial,
     hasRecipe: hasRecipeInitial,
     filtersValues: {} as RangesType,
     isLoading: false,
@@ -70,18 +78,6 @@ export const recipeSlice : StateCreator<RecipeSliceType> = (set, get) => {
           isLoading: false
         })
       }, 1000);
-    },
-
-    selectRecipe: async(recipe: RecipeCard) => {
-      console.log('haciendo consulta')
-      const recipeDetailSubset : RecipeDetailSubset = await getRecipeDetailSubset(recipe.id)
-      if(recipe && recipeDetailSubset) {
-        const recipeDetails =  getRecipeFormat(recipe,  recipeDetailSubset)
-        console.log(recipeDetails)
-        set({
-          recipeDetails
-        })
-      } 
     }
   }
 }

@@ -23,7 +23,7 @@ const useDietPreferences = (initialDiets : string[] = []) => {
         const d = diet as DietsOption
         base = toggleDiet(d, base)
         base = 
-        (d != 'Ketogenic' && d != 'Gluten free') ? setCompatibility(d, base) : base 
+        (d != 'Gluten free') ? setCompatibility(d, base) : base 
       })
     }
     return base
@@ -32,9 +32,8 @@ const useDietPreferences = (initialDiets : string[] = []) => {
   function setCompatibility (diet: DietsOption, current: DietsOptions) : DietsOptions {
     return Object.fromEntries(
       Object.entries(current).map(([key, value]) => {
-        console.log(value)
         const k = key as DietsOption
-        if(k === diet || k === 'Ketogenic' || k === 'Gluten free') {
+        if(k === diet || k === 'Gluten free') {
           return [k, value]
         }
         return [k, {...value, disabled: !value.disabled}]
@@ -54,7 +53,7 @@ const useDietPreferences = (initialDiets : string[] = []) => {
 
   function handleSelectDiet (diet: DietsOption) {
     let updatedSelectedDiets : DietsOptions = toggleDiet(diet, selectedDiets)
-    const updatedWithCompatibility = (diet != 'Ketogenic' && diet != 'Gluten free') ? setCompatibility(diet, updatedSelectedDiets) : updatedSelectedDiets   
+    const updatedWithCompatibility = (diet != 'Gluten free') ? setCompatibility(diet, updatedSelectedDiets) : updatedSelectedDiets   
     setSelectedDiets(updatedWithCompatibility)
   }
     

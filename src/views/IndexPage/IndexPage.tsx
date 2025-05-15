@@ -2,10 +2,13 @@ import Form from "../../components/Form/Form"
 import styles from "./IndexPage.module.scss"
 import CardsContainer from "../../components/CardsContainer/CardsContainer"
 import Modal from "../../components/Modal/Modal"
+import { useAppStore } from "../../stores/useAppStore"
 
 
 const IndexPage = () => {
 
+  const recipes = useAppStore(state => state.recipes)
+  const hasRecipes = useAppStore(state => state.hasRecipe)
 
   return (
     <div className="main-layout container">
@@ -16,6 +19,8 @@ const IndexPage = () => {
       <CardsContainer 
         title= {"Recipes"}
         secondaryTitle= { "Filters" }
+        recipes = { recipes }
+        hasRecipes = { hasRecipes }
       /> 
       <Modal />
     </div>

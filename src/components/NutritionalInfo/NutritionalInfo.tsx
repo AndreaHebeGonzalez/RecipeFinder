@@ -1,7 +1,13 @@
 
 import styles from "./NutritutionalInfo.module.scss"
+import type { NutrientType } from "../../types"
 
-const NutritionalInfo = () => {
+type NutritionalInfo = {
+  nutrients: NutrientType[]
+}
+
+const NutritionalInfo = ({ nutrients } : NutritionalInfo) => {
+
   return (
 
     <div className={styles.nutritionInfo}>
@@ -9,27 +15,14 @@ const NutritionalInfo = () => {
         Nutrition Facts
       </h3>
       <ul className={styles.listNutrition}>
-        <li className={styles.itemNutrition}>
-          <span className={styles.nutritionKey}>Calories</span>
-          <span className={styles.nutritionValue}>456</span>
-        </li>
-        <li className={styles.itemNutrition}>
-          <span className={styles.nutritionKey}>Calories</span>
-          <span className={styles.nutritionValue}>456</span>
-        </li>
-        <li className={styles.itemNutrition}>
-          <span className={styles.nutritionKey}>Calories</span>
-          <span className={styles.nutritionValue}>456</span>
-        </li>
-        <li className={styles.itemNutrition}>
-          <span className={styles.nutritionKey}>Calories</span>
-          <span className={styles.nutritionValue}>456</span>
-        </li>
-        <li className={styles.itemNutrition}>
-          <span className={styles.nutritionKey}>Calories</span>
-          <span className={styles.nutritionValue}>456</span>
-        </li>
-        
+        {
+          nutrients.map(nutrient =>(
+            <li className={styles.itemNutrition} key={nutrient.name}>
+              <span className={styles.nutritionKey}>{nutrient.name}</span>
+              <span className={styles.nutritionValue}>{`${nutrient.amount}${nutrient.unit}`}</span>
+            </li>
+          ))
+        }        
       </ul>
     </div>
 

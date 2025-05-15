@@ -7,12 +7,21 @@
   background-color: v.$white;
   max-width: 100%;
   padding: 2.5rem 2rem;
+  padding-top: 2.5rem;
   border-radius: v.$radius;
   overflow: hidden;
   min-width: 23.3rem;
+  position: relative;
 
   @include m.mq(v.$tablet-2) {
     min-height: 27.24rem ;
+  }
+
+  .favorite {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    cursor: pointer;
   }
 
   .cardContainer {
@@ -20,12 +29,13 @@
     margin: 0 auto;
     @include m.flex(column, 1.5rem);
     
-
     .cardTitle {
       font-size: 2.5rem;
       white-space: nowrap;  
       overflow: hidden;
       text-overflow: ellipsis;
+      font-weight: 400;
+      width: 95%;
     }
   }
 
