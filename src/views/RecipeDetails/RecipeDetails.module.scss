@@ -1,21 +1,14 @@
 @use '../../styles/base/variables' as v;
 @use '../../styles/base/mixins' as m;
 
-.recipeWrapper {
-
-  /* @include m.mq(v.$desktop-2) {
-    background-image: url(/public//images/v-bg-recipe-detail.svg);
-    background-repeat: no-repeat;
-    background-position: top right;
-    background-size: 531px ;
-  } */
-}
-
-
 .recipe {
-  padding: 5rem 0 3rem 0;
+  padding: 6rem 0 ;
 
   @include m.flex(column, 3rem);
+
+  @include m.mq(v.$desktop) {
+    gap: 6rem
+  }
 
   .recipeHeader {
     display: grid;
@@ -27,12 +20,7 @@
     .contentWrapp {
       display: grid;
       grid-template-columns: 1fr;
-      row-gap: 2.5rem;
-
-      @include m.mq(v.$tablet) {
-        grid-template-columns: 0.6fr 0.4fr;
-        column-gap: 2.5rem;
-      }
+      row-gap: 4rem;
 
       @include m.mq(v.$desktop) {
         grid-template-columns: repeat(2, 1fr);
@@ -46,6 +34,20 @@
       }
     }
 
+    .recipeContent {
+      @include m.flex(column, 3rem);
+      width: 100%;
+
+      h2 {
+        width: 75%;
+
+        @include m.mq(v.$desktop) {
+          width: 68%;
+        }
+      }
+    }
+
+
     .timePreparation {
       padding: 1rem 2rem;
       position: absolute;
@@ -55,23 +57,9 @@
       font-size: 2.8rem;
       font-weight: 600;
       color: v.$secondary-color;
-      border: 1px solid rgba(v.$primary-color, 0.3);
 
       span {
         font-size: 3.5rem;
-      }
-    }
-
-    .recipeContent {
-      @include m.flex(column, 3rem);
-      width: 100%;
-
-      h2 {
-        width: 75%;
-
-        @include m.mq(v.$desktop) {
-          width: 100%;
-        }
       }
     }
 
@@ -79,6 +67,14 @@
       overflow: hidden;
       border-radius: v.$radius;
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      border: 1rem solid white;
+      transform: rotate(0deg);
+      
+
+
+      @include m.mq(v.$tablet) {
+        max-width: 70rem;
+      } 
       
       @include m.mq(v.$desktop) {
         max-width: 60rem;
@@ -95,14 +91,35 @@
       @include m.flex(row, 0);
       justify-content: center;
       align-items: center;
-      background-color: rgba(v.$primary-color, 0.3);
-      clip-path: polygon(14% 0, 100% 0%, 100% 100%, 14% 100%, 2% 49%);
-      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      width: 100%;
+      justify-self: end;
+
+      @include m.mq(v.$desktop) {
+        background-color: rgba(v.$primary-color, 0.3);
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        width: 85%;
+        transform: translateY(2rem) rotate(4deg);
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: -8%;
+          right: 35%;
+          background-image: url(/public/images/clip.png);
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          z-index: 100;
+          width: 9rem;
+          height: 10rem; 
+        }
+      };
     }
   }
 
   .recipeDescription > div {
-    font-weight: 300 
+    font-weight: 300; 
+    line-height: 1.15
   }
 
   .recipeDetails {
@@ -113,19 +130,33 @@
     }
 
     .ingredientsContainer {
+      @include m.flex(column, 3rem);
 
-      @include m.flex(column, 2rem);
+      .ingredientsScroll {
+        max-height: 100vh;
+        overflow-y: auto;
 
-      .ingredients {
-        @include m.flex(row, 2rem);
-        flex-wrap: wrap;
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: rgba(0, 0, 0, 0.438);
+          border-radius: 4px;
+        }
+
+        .ingredients {
+          @include m.flex(row, 2rem);
+          flex-wrap: wrap;
+        }
+
       }
 
       
     }
 
     .instructionsContainer {
-      @include m.flex(column, 2rem);
+      @include m.flex(column, 3rem);
       max-height: 100vh;
       overflow: hidden;
 
@@ -143,6 +174,23 @@
           border-radius: 4px;
         }
         //padding-left: 6rem;
+
+
+        .preparation {
+          padding-right: 1rem;
+          h4 {
+            font-weight: 400;
+            font-size: 2.8rem;
+          }
+
+          .preparationSteps {
+            @include m.flex(column, 1.5rem);
+
+            li p {
+              line-height: 1.2;
+            }
+          }
+        }
 
         .instruction::marker {
           font-size: 3.2rem;

@@ -48,7 +48,6 @@
   }
 
   .filtersSection {
-
     @include m.mq(v.$desktop) {
       padding: 2.8rem; 
     }
@@ -68,8 +67,6 @@
         font-size: 3rem;
       }
     }
-
-    
   }
 
   .cardsScroll {
@@ -78,6 +75,7 @@
     scrollbar-width: thin;               // <-- Firefox
     scrollbar-color: rgba(0, 0, 0, 0.438) transparent;  // <-- Firefox
     padding-right: 2rem;
+    max-height: 100vh;
 
     
     &::-webkit-scrollbar {

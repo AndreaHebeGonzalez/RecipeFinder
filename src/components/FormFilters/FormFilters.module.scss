@@ -2,6 +2,7 @@
 @use '../../styles/base/mixins' as m;
 
 .formFilters {
+  max-height: 100vh;
 
   .filtersWrap {
     width: 100%;

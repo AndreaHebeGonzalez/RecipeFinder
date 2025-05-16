@@ -8,15 +8,15 @@ type IngredientCard = {
 
 const IngredientCard = ({ ingredient } : IngredientCard) => {
 
-
+  const urlBase = 'https://spoonacular.com/cdn/ingredients_100x100/'
 
   return (
     <li className={styles.ingredientCard}>
       <div className={styles.imageContainer}>
-        <img src={ingredient.image} alt={ingredient.name} />
+        <img src={`${urlBase}${ingredient.image}`} alt={ingredient.name} />
       </div>
       <div className={styles.textContainer}>
-        <h4 className={styles.name}>{ingredient.name}</h4>
+        <h4 className={styles.name} title={ingredient.name}>{ingredient.name}</h4>
         <p  className={styles.quantities}>{`${ingredient.measures.metric.amount} ${ingredient.measures.metric.unitShort}`}</p>
       </div>
       

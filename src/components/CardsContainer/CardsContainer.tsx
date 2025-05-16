@@ -65,24 +65,24 @@ const CardsContainer = ({ title, secondaryTitle, recipes, hasRecipes } : CardsCo
   const cardRef = useRef<HTMLDivElement | null>(null)
   const h3Ref = useRef<HTMLDivElement | null>(null)
 
-  const resetHeight = () => {
+  /* const resetHeight = () => {
     sectionFiltersRef.current!.style.height = ""
-  }
+  } */
 
-  const getHeightRecipes = () => {
+  /* const getHeightRecipes = () => {
     const totalPadding = getPadding(displayedItemsRef.current)
     const gapBox = getGap(displayedItemsRef.current)
     const gapCards = getGap(cardListRef.current)
     const heightCard = getHeight(cardRef.current)
     const h3Height = getHeight(h3Ref.current)
       return (totalPadding + gapBox + gapCards + (heightCard * 2 ) + h3Height)
-  }
+  } */
 
   const applyFilters = () => {
     setFiltersValues(draftFilterValues)
   }
 
-  useLayoutEffect(() => {
+  /* useLayoutEffect(() => {
     if(hasRecipes) {
       const height = getHeightRecipes()
       if(displayedItemsRef.current) {
@@ -96,7 +96,7 @@ const CardsContainer = ({ title, secondaryTitle, recipes, hasRecipes } : CardsCo
     } else {
       resetHeight()
     }
-  }, [windowWidth, hasRecipes]); 
+  }, [windowWidth, hasRecipes]);  */
   
   return (
     <>
@@ -142,7 +142,6 @@ const CardsContainer = ({ title, secondaryTitle, recipes, hasRecipes } : CardsCo
             <h3>{secondaryTitle}</h3>
             <button className={styles.btnApplyFilters} onClick={applyFilters}>Apply</button>
           </div>
-          
           <FormFilters 
             onChange={setDraftFilterValues}
             draftFilterValues = {draftFilterValues}

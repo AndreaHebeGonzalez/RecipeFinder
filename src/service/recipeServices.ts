@@ -41,7 +41,7 @@ export const recipeSearchFetch = async (filters : Filters) => {
       {
         ...recipe,
         nutrition: {
-          nutrients: recipe.nutrition.nutrients.filter(n=>["Calories", "Protein", "Carbohydrates", "Fat"].includes(n.name))
+          nutrients: recipe.nutrition.nutrients.filter(n=>["Calories", "Protein", "Carbohydrates", "Fat", "Sodium", "Cholesterol"].includes(n.name))
         }
       }
     ))
@@ -56,7 +56,8 @@ export const getRecipeDetailSubset = async(recipe : RecipeCard) : Promise<Recipe
     let recipeDetailsSubmit = {} as RecipeDetailSubset
     const id = recipe.id
 
-    /* Obtengo ingredientes de recetas */
+    /* Obtengo informacion de recetas */
+
     const { data : recipeInformation }  = await axios(`${urlBase}${id}/information?apiKey=${appId}`)
     const information = RecipeInformationSchema.safeParse(recipeInformation)
 

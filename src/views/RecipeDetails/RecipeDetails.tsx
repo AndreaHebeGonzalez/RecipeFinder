@@ -9,6 +9,7 @@ import type { RecipeCard, RecipeDetailSubset, RecipeDetails } from "../../types"
 import { getRecipeDetailSubset } from "../../service/recipeServices";
 import { getRecipeFormat } from "../../utils";
 
+const urlBase = 'https://img.spoonacular.com/recipes/'
 
 const RecipeDetails = () => {
 
@@ -16,9 +17,10 @@ const RecipeDetails = () => {
   
   const recipes = useAppStore(state => state.recipes)
   const isTablet = useAppStore(state=>state.isTablet)
-  const recipeStored = useAppStore(state=>state.recipeStored) 
 
-  const [recipeDetails, setRecipeDetails] = useState<RecipeDetails>(recipeStored)
+  console.log(isTablet)
+
+  const [recipeDetails, setRecipeDetails] = useState<RecipeDetails>({} as RecipeDetails)
   const [isLoading, setIsLoading] = useState(true)
 
   const getRecipe = () : RecipeCard => {
@@ -32,19 +34,15 @@ const RecipeDetails = () => {
     if(recipeDetailSubset) {
       const recipeDetails =  getRecipeFormat(recipe,  recipeDetailSubset) 
       setRecipeDetails(recipeDetails)
-      console.log(recipeDetails)
-      localStorage.setItem('recipeDetailsStored', JSON.stringify(recipeDetails))
       setIsLoading(false)
     } 
   }
 
   useEffect(() => {
     const recipe = getRecipe()
-    if(recipe && (Object.keys(recipeStored).length === 0)) {
+    if(recipe) {
       getRecipeDetails(recipe)
     } 
-    console.log(recipeStored)
-    if(!(Object.keys(recipeStored).length === 0)) setIsLoading(false)
   }, [])
   
 
@@ -63,7 +61,7 @@ const RecipeDetails = () => {
             <h2>{recipeDetails.title}</h2>
             <div className={styles.contentWrapp}>
               <div className={styles.imageContainer}>
-                <img src={recipeDetails.image} alt={recipeDetails.title} />
+                <img src={`${urlBase}${id}-636x393.jpg`} alt={recipeDetails.title} />
               </div>
 
               <div className={styles.infoContainer}>
@@ -84,31 +82,36 @@ const RecipeDetails = () => {
         <section className={styles.recipeDetails}>
           <div className={styles.ingredientsContainer}>
             <h3>Ingredients</h3>
-            <ul className={styles.ingredients}>
-              {
-                recipeDetails.extendedIngredients.map(ingredient => (
-                  <IngredientCard 
-                    ingredient = { ingredient }
-                    key={ingredient.id}
-                  />
-                ))
-              }
-            </ul>
+            <div className={styles.ingredientsScroll}>
+                <ul className={styles.ingredients}>
+                  {
+                    recipeDetails.extendedIngredients.map(ingredient => (
+                      <IngredientCard 
+                        ingredient = { ingredient }
+                        key={ingredient.id}
+                      />
+                    ))
+                  }
+                </ul>
+            </div>
           </div>
           <div className={styles.instructionsContainer}>
             <h3>Instructions</h3>
             <div className={styles.instructions}>
               {
                 recipeDetails.instructions.map(instruction => (
-                  <ol>
-                    <h4>{instruction.name}</h4>
-                    {
-                      instruction.steps.map(step=>(
-                        <li className={styles.instruction}>
-                          <p>{step.step}</p>
-                        </li>
-                      ))
-                    }
+                  <ol className={styles.preparation}>
+                    <h4 style={{marginBottom: instruction.name !== '' ? '1.5rem' : 0 }}>{instruction.name}</h4>
+                    <div className={styles.preparationSteps}>
+                      {
+                        instruction.steps.map(step=>(
+                          <li className={styles.instruction}>
+                            <p>{step.step}</p>
+                          </li>
+                        ))
+                      }
+                    </div>
+                    
                   </ol>
                 ))
               }
