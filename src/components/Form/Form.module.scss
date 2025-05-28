@@ -1,14 +1,15 @@
 @use "../../styles/base/variables" as v;
 @use "../../styles/base/mixins" as m;
-@use "../Buttons/ButtonPrimary.module.scss";
+@use "../Buttons/PrimaryButton.module.scss";
 
 .form {
   @include m.flex(column, 2rem);
   z-index: 10;
-
   @include m.mq(v.$desktop-2) {
     gap: 2.5rem
   }
+
+  
 
   .flexGroup {
     @include m.flex(column, 2rem);

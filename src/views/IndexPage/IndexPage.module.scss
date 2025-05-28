@@ -2,32 +2,4 @@
 @use '../../styles/base/variables' as v;
 @use '../../styles/base/mixins' as m;
 
-.searchSection { 
-  padding: 2.5rem;
-  background-color: rgba(v.$white, 0.3);
-  @include m.flex(column, 2rem);
-  border-radius: v.$radius;
-  position: relative;
-  z-index: 10;
-
-  @include m.mq(v.$mobile-2) {
-    gap: 0;
-  }
-
-  &::before {
-    content: "";
-    border-radius: v.$radius;
-    position: absolute;
-    inset: 0;
-    backdrop-filter: blur(1rem);
-    z-index: 0;
-  }
-
-  h2 {
-    z-index: 10;
-  }
-
-  
-}
-
 

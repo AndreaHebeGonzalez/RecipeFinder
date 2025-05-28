@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'
 import Nav from "../Nav/Nav"
 import styles from "./Header.module.scss"
 import { useAppStore } from '../../stores/useAppStore'
@@ -11,8 +10,6 @@ const Header = () => {
   const [openMenu, setOpenMenu] = useState(false)
 
   const windowWidth = useAppStore(state => state.windowWidth)
-  const isLightMode = useAppStore(state => state.isLightMode)
-  const toggleMode = useAppStore(state => state.toggleMode )
 
   const isMobile = useMemo(() => windowWidth < 1024, [windowWidth])
 
@@ -39,13 +36,9 @@ const Header = () => {
               isMobile = {isMobile }
               openMenu = { openMenu }
             />
-            
-            <div className={styles.iconToggle} onClick={toggleMode}>
-              {isLightMode ? 
-                <SunIcon stroke= '#fff' className='icon-size-2' />
-                : 
-                <MoonIcon stroke= '#fff' className='icon-size-2' />
-              }
+
+            <div className={styles.user}>
+              <img src="/icons/user-solid-icon.svg" alt="Go to profile" />
             </div>
           </div>
         </div>

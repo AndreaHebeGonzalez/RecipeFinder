@@ -18,14 +18,6 @@ const FormPreferencies = () => {
   const { selectedAllergies,  handleSelectAllergies } = useAllergyPreferences(intolerancesArray)
 
 
- /*  const isSaveEnable = useMemo(() => Object.entries(selectedDiets).some(([_, value]) => (
-    value.selected
-  )) 
-  || Object.entries(selectedAllergies).some(([_, value]) => (
-    value
-  )) , [selectedDiets, selectedAllergies]) */
-
-
   const handleSave = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const diet = Object.entries(selectedDiets)
@@ -92,7 +84,6 @@ const FormPreferencies = () => {
           type="submit"
           value='Save Preferences'
           className={styles.btnSecondary}
-          
         />
       </form>
     </>    

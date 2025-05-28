@@ -1,30 +1,14 @@
 @use "../../styles/base/variables" as v;
 @use "../../styles/base/mixins" as m;
 
-.cardsContainer {
-  @include m.flex(column, 1rem);
-
-  @include m.mq(v.$desktop) {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1.95fr 1fr;
-  }
-
-  @include m.mq(1100px) {
-    grid-template-columns: 2.5fr 1fr;
-  }
-
-  @include m.mq(v.$desktop-2) {
-    grid-template-columns: 3fr 1fr;
-  }
-  
-
-  .displayedItems,
-  .filtersSection {
-    backdrop-filter: blur(1rem);
-    background-color: rgba(v.$white, 0.2);
+.displayedItems {
+    @include m.blur-bg;
+    background-color: rgba(v.$white, 0.3);
+    border: 3px solid v.$white;
     border-radius: v.$radius;
     padding: 2rem;
+
+
     @include m.flex(column, 2rem);
 
     @include m.mq(v.$mobile) {
@@ -38,60 +22,36 @@
     @include m.mq(v.$tablet) {
       padding: 2.8rem;
     }
-  }
 
-  .loadingWrapp {
+    .loadingWrap {
     height: 100%;
     @include m.flex(row, 0);
     justify-content: center;
     //align-items: center;
   }
 
-  .filtersSection {
-    @include m.mq(v.$desktop) {
-      padding: 2.8rem; 
-    }
-
-    .headerFilterSection {
-      @include m.flex(row, 0);
-      justify-content: space-between;
-      align-items: center;
-
-      .btnApplyFilters {
-        @include m.btn(v.$primary-color);
-        font-size: 1.5rem;
-        padding: 0.5rem 0.8rem;
-        border-radius: 0.5rem;
-      }
-      h3 {
-        font-size: 3rem;
-      }
-    }
+  .headerCardsContainer {
+    @include m.flex(row, 0);
+    justify-content: space-between;
   }
 
   .cardsScroll {
     overflow-y: auto;
-    scroll-snap-type: y mandatory; 
     scrollbar-width: thin;               // <-- Firefox
-    scrollbar-color: rgba(0, 0, 0, 0.438) transparent;  // <-- Firefox
+    scrollbar-color: rgba(v.$black, 0.438) transparent;  // <-- Firefox
     padding-right: 2rem;
     max-height: 100vh;
 
-    
     &::-webkit-scrollbar {
       width: 8px; 
     }
   
     &::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.438);
+      background-color: rgba(v.$black, 0.438);
       border-radius: 4px;
     }
 
     scrollbar-gutter: stable;   
-
-    & > * {
-      scroll-snap-align: start;
-    }
   }
 
   .cardsList {
@@ -112,44 +72,7 @@
     }
 
     @include m.mq(1280px) {
-      @include m.grid-c(3, 2.2rem); 
-    }
-  }
-
-  .extraItems .cardList {
-    
-    @include m.flex(row, 2rem);
-    overflow-x: auto; 
-    scroll-snap-type: x mandatory; 
-    padding-bottom: 2rem;
-    
-    &::-webkit-scrollbar {
-      height: 8px; 
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.438);
-      border-radius: 4px;
-    }
-  
-    max-width: 100%; 
-    white-space: nowrap; 
-
-    
-    @include m.mq(v.$desktop) {
-      @include m.flex(column, 2rem);
-      overflow-x: initial;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory; 
-      padding-right: 2rem;
-      &::-webkit-scrollbar {
-        width: 8px; 
-      }
-    
-      &::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.438);
-        border-radius: 4px;
-      }
+      @include m.grid-c(4, 2.2rem); 
     }
   }
 }

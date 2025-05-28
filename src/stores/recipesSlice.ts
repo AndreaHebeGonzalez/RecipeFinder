@@ -30,6 +30,7 @@ export const recipeSlice : StateCreator<RecipeSliceType> = (set, get) => {
     filtersValues: {} as RangesType,
     isLoading: false,
     setFiltersValues: (filterValues : RangesType) => { //define una función genérica
+      console.log(filterValues)
       set({
         filtersValues: {
           ...get().filtersValues,

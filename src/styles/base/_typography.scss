@@ -31,9 +31,9 @@ h2 {
 h3 {
   font-size: 3rem;
   
-  @include m.mq(v.$tablet) {
+  /* @include m.mq(v.$tablet) {
     font-size: 3.5rem;
-  }
+  } */
 }
 
 h4 {

@@ -21,10 +21,6 @@ body {
   font-size: 1.8rem;
   color: v.$black;
   position: relative;
-
-  @include m.mq(768px) {
-    font-size: 2rem;
-  }
 }
 
 #root {
@@ -61,11 +57,10 @@ main {
 }
 
 .background-1 {
-  background-color: v.$primary-color;
-  background-image: url('/images/bg-body.jpg');
+  background-image: url('/images/recipeBg.png'), url('/images/salad.png');
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-position: top right, bottom left;
+  background-size: auto, 30% auto;
 }
 
 .icon-size {

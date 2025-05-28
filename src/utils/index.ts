@@ -8,6 +8,7 @@ export const getHeight = (element: HTMLElement | null) => {
     return height //parseFloat(height.toFixed(2))
 }
 
+/*
 export const getPadding = (element: HTMLElement | null) => {
     if (!element) return 0;
     const style = window.getComputedStyle(element);
@@ -19,7 +20,7 @@ export const getGap = (element: HTMLElement | null) => {
     if(!element) return 0
     const style = window.getComputedStyle(element)
     return parseFloat(style.rowGap)
-}
+} */
 
 export const getRecipeFilterValues = (recipe : RecipeCard) : { [key in FilterCardsName] : number } => {
     const filtersKey = (Object.keys(filters) as Array<FilterCardsName>)

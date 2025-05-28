@@ -1,6 +1,6 @@
 @use "../../styles/base/variables" as v;
 @use "../../styles/base/mixins" as m;
-@use "../Buttons/ButtonSecondary.module.scss";
+@use "../Buttons/SecondaryButton.module.scss";
 
 .formContainer {
   @include m.flex(column, 2rem);

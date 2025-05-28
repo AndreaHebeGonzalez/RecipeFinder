@@ -1,15 +1,27 @@
 @use '../../styles/base/variables' as v;
 @use '../../styles/base/mixins' as m;
+@use "../Buttons/SecondaryButton.module.scss";
 
-.formFilters {
-  max-height: 100vh;
+.formFilterWrap {
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+  @include m.flex(column, 2rem);
 
-  .filtersWrap {
-    width: 100%;
-    @include m.flex(column, 2rem);
+  .formFilters {
+    max-height: 100vh;
 
-    .rangeWrap {
+    .filtersWrap {
       width: 100%;
+      @include m.flex(column, 2rem);
+
+      .rangeWrap {
+        width: 100%;
+      }
     }
+  }
+
+  button {
+    align-self: start;
   }
 }

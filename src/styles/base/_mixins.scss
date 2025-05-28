@@ -40,7 +40,11 @@
   }
 }  
 
+/* Blur */
 
+@mixin blur-bg {
+  backdrop-filter: blur(v.$blur);
+}
 
 /* 
 

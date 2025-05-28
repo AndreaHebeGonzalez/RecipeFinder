@@ -1,46 +1,37 @@
-import { useLayoutEffect, useRef, useMemo, useState } from "react"
+import { useMemo } from "react"
 import Lottie from 'lottie-react';
 import loadingSpinner from '../../assets/loadingPrimaryColor.json'
 import styles from "./CardsContainer.module.scss";
-import { getGap, getHeight, getPadding, getRecipesFiltersValues } from "../../utils"
+import { getRecipesFiltersValues } from "../../utils"
 import { useAppStore } from "../../stores/useAppStore"
-import type { FilterCardsName, RangesType, RecipeCardList } from "../../types";
-import { filters } from "../../data";
+import type { FilterCardsName, RecipeCardList } from "../../types";
 import Card from "../Card/Card"
 import FormFilters from "../FormFilters/FormFilters";
 
 
-const buildInitialFilters = () : RangesType =>
-    (Object.keys(filters) as Array<FilterCardsName>).reduce((acc, filter) => {
-      acc[filter] = [filters[filter].min, filters[filter].max]
-      return acc
-    }, {} as RangesType)
 
 type CardsContainerProps = {
   title: string,
-  secondaryTitle: string,
   recipes: RecipeCardList,
   hasRecipes: boolean
 }
 
-const CardsContainer = ({ title, secondaryTitle, recipes, hasRecipes } : CardsContainerProps) => {
-
-  const windowWidth = useAppStore(state=> state.windowWidth)
-  const isTablet = useAppStore(state => state.isTablet)
+const CardsContainer = ({ title, recipes, hasRecipes } : CardsContainerProps) => {
   const filtersValues = useAppStore(state => state.filtersValues)
-  const setFiltersValues = useAppStore(state=>state.setFiltersValues)
   const isLoading = useAppStore(state=>state.isLoading)
+  const openModal = useAppStore(state=>state.openModal)
 
-  const [draftFilterValues, setDraftFilterValues] = useState(buildInitialFilters())
 
   //Formateo de recipe para incluir metricas de items para filtrado
   const recipesWithMetrics = useMemo(() => getRecipesFiltersValues(recipes), [recipes]) 
 
   //Funcion para filtrado de recetas segun valores de filtersValues
   const filteredRecipes = useMemo(() => {
+    console.log('los filtersValues son', filtersValues)
+    console.log('Recipes con metricas', recipesWithMetrics)
     if(!recipesWithMetrics) return []
 
-    if(Object.keys(filtersValues).length === 0) return recipes
+    if(Object.keys(filtersValues).length === 0) return recipes //retorna todas si no hay filtros 
 
     const updateRecipes = recipesWithMetrics.filter(recipe => {
       return Object.keys(filtersValues).every(key => {
@@ -58,96 +49,48 @@ const CardsContainer = ({ title, secondaryTitle, recipes, hasRecipes } : CardsCo
 
   }, [recipesWithMetrics, filtersValues])
 
-
-  const displayedItemsRef = useRef<HTMLElement | null>(null)
-  const sectionFiltersRef = useRef<HTMLElement | null>(null)
-  const cardListRef = useRef<HTMLDivElement | null>(null)
-  const cardRef = useRef<HTMLDivElement | null>(null)
-  const h3Ref = useRef<HTMLDivElement | null>(null)
-
-  /* const resetHeight = () => {
-    sectionFiltersRef.current!.style.height = ""
-  } */
-
-  /* const getHeightRecipes = () => {
-    const totalPadding = getPadding(displayedItemsRef.current)
-    const gapBox = getGap(displayedItemsRef.current)
-    const gapCards = getGap(cardListRef.current)
-    const heightCard = getHeight(cardRef.current)
-    const h3Height = getHeight(h3Ref.current)
-      return (totalPadding + gapBox + gapCards + (heightCard * 2 ) + h3Height)
-  } */
-
-  const applyFilters = () => {
-    setFiltersValues(draftFilterValues)
-  }
-
-  /* useLayoutEffect(() => {
-    if(hasRecipes) {
-      const height = getHeightRecipes()
-      if(displayedItemsRef.current) {
-        displayedItemsRef.current.style.height = `${height}px`
-      }
-      if (!isTablet && sectionFiltersRef.current) {
-        sectionFiltersRef.current.style.height =  `${height}px`;
-      } else {
-        resetHeight()
-      }
-    } else {
-      resetHeight()
-    }
-  }, [windowWidth, hasRecipes]);  */
   
   return (
     <>
-      <div className={styles.cardsContainer}>
-        <section ref={displayedItemsRef} className={styles.displayedItems}>
-          <h3 ref={h3Ref}>{ title }</h3>
-            {
-              hasRecipes ?  (
-                <div className={styles.cardsScroll}>
-                  <div ref={cardListRef} className={styles.cardsList}>
-                    {
-                      filteredRecipes.map((recipe, i) => {
-                        if(i === 0) {
-                          return <Card 
-                          key={recipe.id}
-                          recipe = { recipe }
-                          ref = {cardRef}
-                          />
-                        }
+      <section className={styles.displayedItems}>
+        <div className={styles.headerCardsContainer}>
+          <h3>{title}</h3>
+          <img src="/icons/icon--filter.svg" alt="Filters" onClick={()=>openModal(<FormFilters />, 'Filters')}/>
+        </div> 
+        
+          {
+            hasRecipes ?  (
+              <div className={styles.cardsScroll}>
+                <div className={styles.cardsList}>
+                  {
+                    filteredRecipes.map((recipe, i) => {
+                      if(i === 0) {
                         return <Card 
-                          key={recipe.id}
-                          recipe = { recipe }
+                        key={recipe.id}
+                        recipe = { recipe }
                         />
-                      })
-                    }
-                  </div>
+                      }
+                      return <Card 
+                        key={recipe.id}
+                        recipe = { recipe }
+                      />
+                    })
+                  }
                 </div>
-              ) : (isLoading ? 
-                <div className={styles.loadingWrapp}>
-                  <Lottie 
-                  animationData = {loadingSpinner}
-                  loop = {true}
-                  style={{ width: '50%', height: '50%' }}
-                  />
-                </div>
-                : (
-                <p>No results yet. Use the form to search for recipes.</p>
-              ))
-            }
-        </section>  
-        <aside ref={sectionFiltersRef} className={styles.filtersSection}>
-          <div className={styles.headerFilterSection}>
-            <h3>{secondaryTitle}</h3>
-            <button className={styles.btnApplyFilters} onClick={applyFilters}>Apply</button>
-          </div>
-          <FormFilters 
-            onChange={setDraftFilterValues}
-            draftFilterValues = {draftFilterValues}
-          />
-        </aside>
-      </div>
+              </div>
+            ) : (isLoading ? 
+              <div className={styles.loadingWrap}>
+                <Lottie 
+                animationData = {loadingSpinner}
+                loop = {true}
+                style={{ width: '40%', height: '40%' }}
+                />
+              </div>
+              : (
+              <p>No results yet. Use the form to search for recipes.</p>
+            ))
+          }
+      </section>
     </>
   )
 }

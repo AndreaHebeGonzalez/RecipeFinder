@@ -24,6 +24,18 @@ const getParams = (filters : Filters) : ParamsType =>  {
 export const recipeSearchFetch = async (filters : Filters) => {
   try {
     const params = getParams(filters)
+
+    /*   // Construir config de Axios
+    const config = {
+      params,
+      url: `${urlBase}complexSearch`,
+      method: 'get'
+    } */
+
+    /* // Mostrar la URL completa que Axios va a usar
+    const fullUrl = axios.getUri(config)
+    console.log('Request URL:', fullUrl) */
+
     const {data : { results } } = await axios.get(`${urlBase}complexSearch`, { params })
 
     console.log(results)

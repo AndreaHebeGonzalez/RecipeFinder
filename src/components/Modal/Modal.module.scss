@@ -18,24 +18,41 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transform-origin: center;
+  width: 80%;
   padding: 2.5rem;
   background-color: v.$bg-body;
   z-index: 50;
   border-radius: v.$radius;
   max-width: 90vw; 
   max-height: 95vh; 
-  overflow-y: auto; 
   z-index: 1000;
-  
-  
   @include m.flex(column, 2rem);
+
+  @include m.mq(768px) {
+    width: 50%;
+  }  
+
+  .contentWrap {
+    overflow-y: auto; 
+    scrollbar-width: thin;               // <-- Firefox
+    scrollbar-color: rgba(v.$black, 0.438) transparent; // <-- Firefox
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(v.$black, 0.438);
+      border-radius: 4px;
+    }
+
+    scrollbar-gutter: stable;   
+  }
 
   .closeIcon {
     position: absolute;
-    right: 2%;
-    top: 2%;
+    right: 3%;
+    top: 3%;
     width: 2rem;
     height: 2rem;
   }

@@ -2,10 +2,13 @@
 /* Colors */
 $primary-color: #BA9C01;
 $secondary-color: #42390A;
+$tertiary-button: #E3DAAB;
 $white: #fff;
 $black: #000;
-$bg-body: #F5F5F5;
+$bg-body: #F2F2F2;
 $grey-line: #B7B5B5;
+$check: #03B309;
+$error: #E83C2F;
 
 
 
@@ -14,9 +17,10 @@ $primary-font: "Josefin Sans", sans-serif;
 $secondary-font: "Roboto Flex", sans-serif;
 
 /* utils */
-$spacing-mobile: 1rem;
-$spacing-desktop: 2rem;
+$spacing-mobile: 2rem;
+$spacing-desktop: 4rem;
 $radius: 1rem;
+$blur: 0.3rem;
 
 //Media Queries
 $mobile: 480px;  

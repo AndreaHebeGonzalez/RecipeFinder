@@ -59,7 +59,7 @@ const RecipeDetails = () => {
           <span className={styles.timePreparation}>{isTablet ? '':'Preparation time: '} <span>{`${recipeDetails.readyInMinutes}'`}</span></span>  
           <div className={styles.recipeContent}>
             <h2>{recipeDetails.title}</h2>
-            <div className={styles.contentWrapp}>
+            <div className={styles.contentWrap}>
               <div className={styles.imageContainer}>
                 <img src={`${urlBase}${id}-636x393.jpg`} alt={recipeDetails.title} />
               </div>

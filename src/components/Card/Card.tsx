@@ -1,7 +1,7 @@
-import { forwardRef, useEffect } from "react"
+import { forwardRef } from "react"
 import { Link } from "react-router-dom"
 import styles from "./Card.module.scss"
-import ButtonPrimary from "../Buttons/ButtonPrimary"
+import ButtonPrimary from "../Buttons/PrimaryButton"
 import type { RecipeCard } from "../../types"
 import { useAppStore } from "../../stores/useAppStore"
 
@@ -12,7 +12,6 @@ type CardProps = {
 
 const Card = forwardRef<HTMLDivElement, CardProps >(({ recipe }, ref) => {
 
-  const favorites = useAppStore(state=>state.favorites)
   const isFavorite = useAppStore(state=>state.isFavorite)
   const handleClickFavorites = useAppStore(state=>state.handleClickFavorites)
 
@@ -24,10 +23,6 @@ const Card = forwardRef<HTMLDivElement, CardProps >(({ recipe }, ref) => {
       return ''
     }
   } 
-
-  useEffect(() => {
-    console.log(favorites)
-  }, [favorites])
   
   return (
     <div ref={ref} className={styles.card}>

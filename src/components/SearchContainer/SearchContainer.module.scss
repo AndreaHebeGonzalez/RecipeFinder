@@ -1,0 +1,38 @@
+@use 'sass:color';
+@use '../../styles/base/variables' as v;
+@use '../../styles/base/mixins' as m;
+
+.searchSection { 
+    padding: 2.5rem;
+    @include m.blur-bg;
+    background-color: rgba(v.$white, 0.3);
+    @include m.flex(column, 2rem);
+    border-radius: v.$radius;
+    position: relative;
+    z-index: 10;
+    border: 3px solid v.$white;
+
+    @include m.mq(v.$mobile-2) {
+        gap: 0;
+    }
+
+    h2 {
+        z-index: 10;
+    }
+
+    .toast {
+        position: absolute;
+        top: 0%;
+        left: 2.5rem;
+        z-index: 15;
+    }
+
+    .buttonsWrap {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translateY(-50%);
+        @include m.flex(row, 1.5rem);
+
+    }
+}

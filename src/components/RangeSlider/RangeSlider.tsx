@@ -6,7 +6,7 @@ import { useAppStore } from "../../stores/useAppStore"
 
 type RangeSliderProps = {
   name: FiltersName,
-  nameApi: FilterCardsName,
+  nameApi: FilterCardsName, //Nombres de paramentros de filtrado de la api
   min: number,
   max: number,
   step: number,
@@ -47,7 +47,7 @@ const RangeSliderComponent : FC<RangeSliderProps> = ({ name, nameApi, min, max, 
 
   
   const handleChangeMin = (e: ChangeEvent<HTMLInputElement>) : void => {
-    if(minInputRef && minInputRef.current && maxInputRef && maxInputRef.current) {
+    if(minInputRef.current && maxInputRef.current) {
       minInputRef.current.style.zIndex = Z_INDEX_MAX
       maxInputRef.current.style.zIndex = Z_INDEX_MIN
     }
@@ -70,11 +70,12 @@ const RangeSliderComponent : FC<RangeSliderProps> = ({ name, nameApi, min, max, 
   }
 
   const handleChangeMax = (e: ChangeEvent<HTMLInputElement>) : void => {
-    if(minInputRef && minInputRef.current && maxInputRef && maxInputRef.current) {
+    if(minInputRef.current && maxInputRef.current) {
       minInputRef.current.style.zIndex = Z_INDEX_MIN
       maxInputRef.current.style.zIndex = Z_INDEX_MAX
     }
     const value = Number(e?.target.value)
+
     if(value >= minValue) {
       setMaxValue(value)
       setMaxDisplay(value)
