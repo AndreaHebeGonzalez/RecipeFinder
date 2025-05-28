@@ -4,18 +4,32 @@
 
 
 .circularBtn {
+    @include m.flex(column, 0);
+    justify-content: center;
+    align-items: center;
     color: v.$black;
     font-weight: 600;
     background-color: v.$tertiary-button;
     border: none;
     border-radius: 50%;
-    width: 7.5rem;
-    height: 7.5rem;
-    font-family: v.$primary-font;
+    width: 7rem;
+    height: 7rem;
+    z-index: 100;
     cursor: pointer;
+    
+    @include m.mq(v.$tablet-2) {
+        width: 7.5rem;
+        height: 7.5rem;
+    }
 
     &:hover {
         background-color: color.scale(v.$tertiary-button, $lightness: 15%);
+    }
+
+    
+
+    span {
+        width: 80%;
     }
 }
 

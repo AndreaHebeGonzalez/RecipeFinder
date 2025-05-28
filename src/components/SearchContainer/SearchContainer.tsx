@@ -14,7 +14,7 @@ const SearchContainer = () => {
         <div className={styles.searchSection}>
             <div className={styles.buttonsWrap}>
                 <CircularButton 
-                    text='Search whith IA'
+                    text='Search with IA'
                 />
                 <CircularButton 
                     text='Search by name'

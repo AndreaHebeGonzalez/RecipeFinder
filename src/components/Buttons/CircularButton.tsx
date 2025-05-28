@@ -8,8 +8,8 @@ const CircularButton = ({ text } : CircularButtonProps) => {
 
   return (
 
-    <button className={`${styles.circularBtn} ${(text === "Search whith IA") ? styles.starIA : ''}`}>
-			{ text }
+    <button className={`${styles.circularBtn} ${(text === "Search with IA") ? styles.starIA : ''}`}>
+			<span>{ text }</span>
     </button>
   )
 }

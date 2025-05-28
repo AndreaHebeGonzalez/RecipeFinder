@@ -3,7 +3,7 @@
 @use '../../styles/base/mixins' as m;
 
 .searchSection { 
-    padding: 2.5rem;
+    padding: 4rem 2.5rem;
     @include m.blur-bg;
     background-color: rgba(v.$white, 0.3);
     @include m.flex(column, 2rem);
