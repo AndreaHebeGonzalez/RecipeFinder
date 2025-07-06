@@ -33,9 +33,10 @@
 .dropdownMenu {
   height: 0;
   overflow: hidden;
-  position: fixed;
-  top: 15%;
-  right: 10%;
+  position: absolute;
+  top: 100%;
+  right: 0%;
+  
   background: #fff;
   border-radius: 1rem;
   transition: all .5s;

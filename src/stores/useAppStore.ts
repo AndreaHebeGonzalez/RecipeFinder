@@ -1,20 +1,24 @@
 import { create } from "zustand";
-import { UtilsSliceTypes, utilsSliceStore } from "./utilsSlice";
-import { userPreferencesSlice, UserPreferencesSliceType } from "./userPreferencesSlice";
-import { modalSliceStore, ModalSliceType } from "./modalSlice";
-import { recipeSlice, RecipeSliceType } from "./recipesSlice";
-import { createFavoriteSlice, FavoriteSliceType } from "./favoritesSlice";
-import { createNotificationSlice, NotificationSliceType } from "./notificationSlice";
+import { UtilsSliceTypes, utilsSliceStore } from "./utilsSlice"
+import { createuserPreferencesSlice, UserPreferencesSliceType } from "./user/userPreferencesSlice"
+import { modalSliceStore, ModalSliceType } from "./ui/modalSlice"
+import { recipeSlice, RecipeSliceType } from "./recipes/recipesSlice"
+import { createFavoriteSlice, FavoriteSliceType } from "./recipes/favoritesSlice"
+import { createNotificationSlice, NotificationSliceType } from "./ui/notificationSlice"
+import { createAISlice, AISlice } from "./ai/aiSlice";
+import { creatorErrorSlice, ErrorSliceType } from "./errorSlice";
 
 
-export const useAppStore = create<UtilsSliceTypes & UserPreferencesSliceType & ModalSliceType & RecipeSliceType & FavoriteSliceType & NotificationSliceType>(
+export const useAppStore = create<UtilsSliceTypes & UserPreferencesSliceType & ModalSliceType & RecipeSliceType & FavoriteSliceType & NotificationSliceType & AISlice & ErrorSliceType>(
   (...a) => ({
     ...utilsSliceStore(...a),
-    ...userPreferencesSlice(...a),
+    ...createuserPreferencesSlice(...a),
     ...modalSliceStore(...a),
     ...recipeSlice(...a),
     ...createFavoriteSlice(...a),
-    ...createNotificationSlice(...a)
+    ...createNotificationSlice(...a),
+    ...createAISlice(...a),
+    ...creatorErrorSlice(...a)
   })
 )
 

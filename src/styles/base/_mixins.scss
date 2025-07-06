@@ -31,10 +31,12 @@
   background-color: $color;
   padding: 1rem 2rem;
   font-size: 1.5rem;
+  font-family: v.$primary-font;
   border: none;
   border-radius: 1rem;
   color: v.$white;
 
+  
   &:hover {
     background-color: color.scale($color, $lightness: 4%);
   }
@@ -46,20 +48,46 @@
   backdrop-filter: blur(v.$blur);
 }
 
-/* 
+/* Blur Container */
 
-Aclarar y oscurecer colores 
-
-@use 'sass:color';
-
-$primary: #3498db; // Azul
-
-.lighter {
-  background-color: color.lighten($primary, 20%); // Aclara el color
+@mixin blur-container {
+  min-height: 90dvh;
+  background-color: v.$bg-color-blur;
+  border: 3px solid v.$white;
+  border-radius: v.$radius;
+  padding: 4rem 2.5rem;
+  width: 100%;
+  backdrop-filter: blur(v.$blur);
 }
 
-.darker {
-  background-color: color.darken($primary, 20%); // Oscurece el color
+
+/* Layouts */
+
+@mixin content-layout-flex($padding-mobile, $gap-mobile, $padding-desktop, $gap-desktop) { //Crea filas, disponiendo en flex columns los contenedores, usado en Home, RecipeDetails
+  padding: $padding-mobile 0; //v.$spacing-mobile
+  display: flex;
+  flex-direction: column;
+  gap: $gap-mobile; //v.$spacing-mobile
+
+  @media (min-width: v.$desktop) {
+    padding: $padding-desktop 0; //v.$spacing-desktop
+    gap: $gap-desktop; //v.$spacing-desktop
+  }
 }
 
-*/
+@mixin content-layout-grid($first-column, $second-column, $gap-mobile, $gap-desktop, $padding-mobile, $padding ) { 
+  display: grid;
+  grid-template-rows: $first-column $second-column;
+  row-gap: $gap-mobile;
+  padding: $padding 0;
+
+  @media (min-width: v.$tablet) {
+    grid-template-rows: none;
+    row-gap: 0;
+    grid-template-columns: $first-column $second-column;
+    column-gap: $gap-desktop;
+    padding: $padding-mobile 0;
+  }
+}
+
+

@@ -1,0 +1,84 @@
+@use '../../styles/base/variables' as v;
+@use '../../styles/base/mixins' as m;
+
+.pageBackground {
+  background-image: url('/images/recipeBg.png'), url('/images/salad.png');
+  background-repeat: no-repeat;
+  background-position: top right, bottom left;
+  background-size: auto, 30% auto;
+  min-height: 100vh;
+}
+
+.contentLayout {
+  align-items: center;
+  @include m.content-layout-flex(v.$spacing-mobile, v.$spacing-mobile, v.$spacing-desktop, v.$spacing-desktop);
+  
+  .aiButtonGroup {
+    justify-content: center;
+    flex-wrap: wrap;
+    @include m.flex(row, 1.5rem);
+    
+  }
+
+  .aiSection {
+    background-color: v.$bg-color-blur;
+    border-radius: v.$radius;
+    border: 3px solid v.$white;
+    width: 100%;
+    padding: 4rem 2rem;
+    @include m.blur-bg;
+    @include m.flex(column, v.$spacing-title-content-primary);
+    justify-content: center;
+    align-items: center;
+
+    @include m.mq(v.$tablet-2) {
+      padding: 6rem 4rem;
+      width: 90%;
+    }
+    
+    h2 {
+      font-size: 3rem;
+      text-align: center;
+      padding-bottom: 1rem;
+
+      @include m.mq(v.$tablet-2) {
+        font-size: 3.5rem;
+      }
+    }
+
+    .result {
+      width: 100%;
+      
+      @include m.flex(row, 2rem);
+      justify-content: center;
+
+      @include m.mq(v.$tablet) {
+        padding-right: 4rem;
+        width: 90%;
+      }
+
+      @include m.mq(v.$tablet-2) {
+        width: 80%;
+      }
+    }
+  }
+
+  .errorBox {
+    align-items: center;
+    @include m.flex(column, 1rem);
+
+
+    .buttonsError {
+      @include m.flex(column, 1rem);
+
+      @include m.mq(v.$mobile-2) {
+        flex-direction: row;
+      }
+
+      button {
+        font-size: 15px;
+      }
+    }
+    
+  }
+}

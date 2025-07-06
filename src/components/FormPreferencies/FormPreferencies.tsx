@@ -83,7 +83,7 @@ const FormPreferencies = () => {
         <input
           type="submit"
           value='Save Preferences'
-          className={styles.btnSecondary}
+          className={styles.primaryBtn}
         />
       </form>
     </>    

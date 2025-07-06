@@ -1,11 +1,13 @@
 @use 'sass:color';
 @use '../../styles/base/variables' as v;
 @use '../../styles/base/mixins' as m;
+@use '../Buttons/PrimaryButton.module.scss';
+@use '../Buttons/WhiteButton.module.scss';
 
 .searchSection { 
     padding: 4rem 2.5rem;
     @include m.blur-bg;
-    background-color: rgba(v.$white, 0.3);
+    background-color: v.$bg-color-blur;
     @include m.flex(column, 2rem);
     border-radius: v.$radius;
     position: relative;
@@ -14,10 +16,6 @@
 
     @include m.mq(v.$mobile-2) {
         gap: 0;
-    }
-
-    h2 {
-        z-index: 10;
     }
 
     .toast {
@@ -33,6 +31,42 @@
         right: 0;
         transform: translateY(-50%);
         @include m.flex(row, 1.5rem);
-
     }
+
+    .searchHeader {
+        @include m.flex(column, v.$spacing-title-content-secondary);
+
+        h3 {
+            z-index: 10;
+        }
+        .buttonsGroup {
+
+            .primaryBtn {
+                position: relative;
+                border-radius: 0.5rem;
+                border: 1px solid v.$primary-color;
+                font-size: 1.6rem;
+
+                @include m.mq(v.$desktop-2) {
+                    font-size: 1.6rem;
+                }
+            }        
+
+            .whiteButton {
+                position: relative;
+                border-radius: 0.5rem;
+                font-size: 1.6rem;
+            }
+
+            .translateBtn {
+                @include m.mq(v.$mobile) {
+                    transform: translateX(-1rem)
+                }
+                
+            }
+        }
+    }
+
+    
+    
 }

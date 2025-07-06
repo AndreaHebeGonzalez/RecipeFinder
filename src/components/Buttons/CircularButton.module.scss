@@ -9,7 +9,7 @@
     align-items: center;
     color: v.$black;
     font-weight: 600;
-    background-color: v.$tertiary-button;
+    background-color: v.$circular-button-bg;
     border: none;
     border-radius: 50%;
     width: 7rem;
@@ -23,7 +23,7 @@
     }
 
     &:hover {
-        background-color: color.scale(v.$tertiary-button, $lightness: 15%);
+        background-color: color.scale(v.$circular-button-bg, $lightness: 15%);
     }
 
     

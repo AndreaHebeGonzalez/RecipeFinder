@@ -4,7 +4,6 @@ export const searchFilters  = ['query', 'includeIngredients', 'type'] as const
 
 export const searchParamsKeys = ['includeIngredients', 'diet'] as const 
 
-
 export const dietsList = [
   "Gluten free",
   "Ketogenic",
@@ -13,8 +12,6 @@ export const dietsList = [
   "Ovo-vegetarian",
   "Vegan"
 ] as const 
-
-
 
 export const intolerancesList = [
   "Dairy",
@@ -49,7 +46,7 @@ export const mealTypes = [
   "drink"
 ] as const 
 
-/* mealTypes[2] = 'dsf' */
+
 
 export const nutrients = ["Calories", "Protein", "Carbohydrates", "Fat"] as const 
 
@@ -77,7 +74,7 @@ export const filters = {
     min: 0,
     max: 70,
     unit: "g"
-  },
+  }/* ,
   "healthScore": {
     name: "Health score",
     min: 0,
@@ -89,6 +86,9 @@ export const filters = {
     min: 0,
     max: 1000,
     unit: 'min'
-  },
+  }, */
 } as const
 
+/*  Categorias favoritos */
+
+export const categorysRecipes = ['customRecipe',  'searchRecipe', 'aiRecipe'] as const

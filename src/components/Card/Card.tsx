@@ -1,19 +1,21 @@
-import { forwardRef } from "react"
-import { Link } from "react-router-dom"
+import { Link  } from "react-router-dom"
 import styles from "./Card.module.scss"
 import ButtonPrimary from "../Buttons/PrimaryButton"
-import type { RecipeCard } from "../../types"
+import type { AIRecipe, RecipeCard } from "../../types"
 import { useAppStore } from "../../stores/useAppStore"
+import { useEffect  } from "react"
 
 
-type CardProps = {
-  recipe: RecipeCard
+type CardProps<T extends RecipeCard | AIRecipe> = { //El tipo puede ser 
+  recipe: T
 }
 
-const Card = forwardRef<HTMLDivElement, CardProps >(({ recipe }, ref) => {
+const Card = <T extends RecipeCard | AIRecipe>({ recipe } : CardProps<T>) => {
+
 
   const isFavorite = useAppStore(state=>state.isFavorite)
   const handleClickFavorites = useAppStore(state=>state.handleClickFavorites)
+  const favorites = useAppStore(state=>state.favorites)
 
   const getCalories = () : number | string =>  {
     const calories = recipe.nutrition.nutrients.find(nutrient=>nutrient.name === "Calories")?.amount
@@ -23,9 +25,15 @@ const Card = forwardRef<HTMLDivElement, CardProps >(({ recipe }, ref) => {
       return ''
     }
   } 
+
+  useEffect(() => {
+    isFavorite(recipe.id)
+  }, [favorites])
+  
+
   
   return (
-    <div ref={ref} className={styles.card}>
+    <div className={styles.card}>
       <div className={styles.cardContainer}>
         <div className={styles.favorite}>
           <img 
@@ -41,10 +49,15 @@ const Card = forwardRef<HTMLDivElement, CardProps >(({ recipe }, ref) => {
           <img src={recipe.image} alt={`${recipe.title}`} />
         </div>
         <div className={styles.cardInfo}>
-          <p>{`${recipe.readyInMinutes}min | ${getCalories()}kcal`}</p>
+          {
+            recipe.categoryRecipe === 'searchRecipe' ? <p>{`${recipe.readyInMinutes}min | ${getCalories()}kcal`}</p>
+            :
+            <p>{` ${getCalories()}kcal`}</p>
+          }
           <Link to={`/recipe/${recipe.id}`}>
             <ButtonPrimary
               text="View"
+              type="button"
             />
           </Link>
           
@@ -52,6 +65,6 @@ const Card = forwardRef<HTMLDivElement, CardProps >(({ recipe }, ref) => {
       </div>
     </div>
   )
-})
+}
 
 export default Card

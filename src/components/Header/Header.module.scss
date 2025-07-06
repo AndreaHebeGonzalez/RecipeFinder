@@ -6,6 +6,7 @@
 .header {
   background-color: v.$white;
   padding: 1rem 0;
+  position: relative;
 
   .flexHeader {
     @include m.flex(row, 0);
@@ -17,6 +18,19 @@
     @include m.flex(row, 0.5rem);
     align-items: center;
 
+    span {
+      font-size: 2.5rem;
+      font-weight: 400;
+
+      @include m.mq(v.$mobile) {
+        font-size: 2.8rem;
+      }
+
+      @include m.mq(v.$tablet) {
+        font-size: 3rem;
+      }
+    }
+    
     & div {
       width: 7rem;
       height: auto;

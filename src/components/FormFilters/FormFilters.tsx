@@ -52,7 +52,7 @@ const FormFilters = () => {
           }
         </div>
       </form>
-      <button onClick={applyFilters} className={styles.btnSecondary}>Apply Filters</button>
+      <button onClick={applyFilters} className={styles.primaryBtn}>Apply Filters</button>
     </div>
     
   )

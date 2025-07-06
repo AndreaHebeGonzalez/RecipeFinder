@@ -18,8 +18,6 @@ const RecipeDetails = () => {
   const recipes = useAppStore(state => state.recipes)
   const isTablet = useAppStore(state=>state.isTablet)
 
-  console.log(isTablet)
-
   const [recipeDetails, setRecipeDetails] = useState<RecipeDetails>({} as RecipeDetails)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -100,12 +98,12 @@ const RecipeDetails = () => {
             <div className={styles.instructions}>
               {
                 recipeDetails.instructions.map(instruction => (
-                  <ol className={styles.preparation}>
+                  <ol className={styles.preparation} key={instruction.name}>
                     <h4 style={{marginBottom: instruction.name !== '' ? '1.5rem' : 0 }}>{instruction.name}</h4>
                     <div className={styles.preparationSteps}>
                       {
                         instruction.steps.map(step=>(
-                          <li className={styles.instruction}>
+                          <li className={styles.instruction} key={step.number}>
                             <p>{step.step}</p>
                           </li>
                         ))

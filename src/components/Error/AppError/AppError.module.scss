@@ -1,0 +1,53 @@
+
+@use '../../../styles/base/variables' as v;
+@use '../../../styles/base/mixins' as m; 
+
+.errorPage {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  @include m.flex(column, 3rem);
+ 
+
+  .errorPageHeader {
+
+    img {
+      width: 18rem;
+      height: auto;
+
+      @include m.mq(v.$mobile-2) {
+        width: 20rem;
+      }
+    }
+  }
+
+  .messagesWrapper {
+    @include m.flex(column, 4rem);
+    align-items: center;
+  }
+
+  .messageBox {
+    @include m.flex(row, 1rem);
+    align-items: center;
+
+    .errorIcon {
+      width: 4rem;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .message {
+
+      p {
+        font-weight: 400;
+      }
+    }
+  }
+
+
+}

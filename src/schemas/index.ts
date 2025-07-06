@@ -14,7 +14,7 @@ export const NutrientSchema = z.object({
 });
 
 export const RecipeCardSchema = z.object({
-  id: z.number(),
+  id: z.union([z.string(), z.number()]),
   title: z.string(),
   image: z.string(),
   summary: z.string(),
@@ -33,7 +33,7 @@ export const IngredientSchema = z.object({
   name: z.string(),
   originalName: z.string(),
   id: z.number(),
-  image: z.string(),
+  image: z.string().nullable(),
   measures: z.object({
     metric: z.object({
       amount: z.number(),
@@ -54,7 +54,7 @@ export const RecipeInformationSchema = z.object({
   extendedIngredients: z.array(IngredientSchema)
 })
 
-const stepSchema = z.object({
+const StepSchema = z.object({
   equipment: z.array(z.object({
     id: z.number(),
     image: z.string(),
@@ -71,12 +71,38 @@ const stepSchema = z.object({
 
 /* Instructions Schema */
 
-const intructionSchema = z.object({
+const IntructionSchema = z.object({
   name: z.string(), //Nombre de la preparación
-  steps: z.array(stepSchema)
+  steps: z.array(StepSchema)
 })
 
-export const RecipeInstructionsSchema = z.array(intructionSchema)
+export const RecipeInstructionsSchema = z.array(IntructionSchema)
 
+/* AI Schemas */
 
+export const RecipeAISchema = z.object({
+  title: z.string(),
+  ingredients: z.array(z.object({
+    name: z.string(),
+    quantity: z.string()
+  })),
+  steps: z.array(z.object({
+    title: z.string().optional(),
+    steps: z.array(z.object({
+      stepNumber: z.number(),
+      step: z.string()
+    }))
+  })),
+  nutrition: z.object({
+    nutrients: z.array(z.object({
+  name: z.string(),
+  amount: z.number(),
+  unit: z.string(),
+})), // Nutrientes que necesitas
+  }),
+})
+
+export const RecipeAIErrorSchema = z.object({
+  error: z.string()
+}) 
 

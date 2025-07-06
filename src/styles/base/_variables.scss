@@ -2,14 +2,25 @@
 /* Colors */
 $primary-color: #BA9C01;
 $secondary-color: #42390A;
-$tertiary-button: #E3DAAB;
+$tertiary-color: #3A513D;
+$circular-button-bg: #E3DAAB;
+$bg-color-blur: rgba(#CFC8C8, 0.4);
 $white: #fff;
 $black: #000;
 $bg-body: #F2F2F2;
+$light-gray: #F0F0F0;
 $grey-line: #B7B5B5;
 $check: #03B309;
 $error: #E83C2F;
+$secondary-error: #FF725F;
 
+/* Nutrients */
+$calories: #B0BEC5;
+$protein: #0078D7;
+$fat: #E81224;
+$carb: #FF9800;
+$sodium: #F54245;
+$fiber: #8267D9;
 
 
 /* Fonts */
@@ -17,10 +28,15 @@ $primary-font: "Josefin Sans", sans-serif;
 $secondary-font: "Roboto Flex", sans-serif;
 
 /* utils */
-$spacing-mobile: 3.5rem;
-$spacing-desktop: 4rem;
+$spacing-mobile: 4rem; //Espacio entre secciones de una vista mobile
+$spacing-desktop: 6rem; //Espacio entre secciones de una vista desktop
+$spacing-elements: 2rem; //Espacio entre elementos de una seccion
+$spacing-title-content-primary: 2.5rem; //Espacio entre titulo y elemento  h1, h2, h3
+$spacing-title-content-primary-mobile: 2rem;
+$spacing-title-content-secondary: 1.5rem; // Espacio entre titulo y elemento h4
 $radius: 1rem;
 $blur: 0.3rem;
+$padding-blur-container: 4rem 2.5rem;
 
 //Media Queries
 $mobile: 480px;  

@@ -7,7 +7,7 @@ type SecondaryButtonProps = {
 
 const SecondaryButton = ({ text } : SecondaryButtonProps) => {
   return (
-    <button className={styles.btnSecondary}>
+    <button className={styles.secondaryBtn}>
       { text }
     </button>
   )

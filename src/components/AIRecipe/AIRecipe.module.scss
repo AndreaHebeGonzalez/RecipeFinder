@@ -1,0 +1,138 @@
+@use '../../styles/base/variables' as v;
+@use '../../styles/base/mixins' as m;
+
+.aiRecipe {
+  position: relative;
+  padding: 3.5rem 3rem;
+  background-color: v.$white;
+  width: 100%;
+  border-radius: v.$radius;
+
+  @include m.mq(v.$tablet-2) {
+    padding: 4rem 5rem;
+  }
+
+  .recipeCard {
+    @include m.content-layout-flex(0, v.$spacing-title-content-primary-mobile, 0, v.$spacing-title-content-primary);
+
+    .recipeTitle {
+      font-size: 2.5rem;
+      text-align: left;
+      font-weight: 700;
+
+      @include m.mq(v.$tablet-2) {
+        font-size: 2.5rem;
+        text-align: left;
+      }
+    }
+
+    .recipeContent {
+      @include m.content-layout-flex(0, v.$spacing-title-content-primary-mobile, 0, v.$spacing-title-content-primary);
+      
+      .IngredientsNutrients {
+        @include m.flex(row, 2rem);
+        justify-content: space-between;
+      }
+
+      .recipeSection {
+
+        @include m.flex(column, 2rem);
+
+        .sectionHeader {
+          @include m.flex(row, 1rem);
+          align-items: center;
+
+          h4 {
+            font-weight: 600;
+            font-size: 2.2rem;
+          }
+
+          img {
+            width: 3.5rem;
+            height: auto;
+          }
+        }
+
+        .stepsWrapper {
+          @include m.flex(column, 1.5rem);
+        }
+
+        .nameStepsBox {
+          @include m.flex(column, 1rem);
+
+
+          h4 {
+            font-size: 1.8rem;
+            font-weight: 600;
+          }
+        }
+
+        .ingredientList {
+          @include m.flex(column, 1rem);
+          
+          .ingredientItem {
+            flex-wrap: nowrap;
+            @include m.flex(row, 1rem);
+          }
+        }
+
+        .instructionList {
+          padding-left: 1.5rem;
+          list-style: circle;
+          @include m.flex(column, 1rem);
+        }
+      }
+    }
+
+    .nutrientsWrapper {
+      position: absolute;
+      top: 5%;
+      right: 5%;
+      border-radius: 1rem;
+      background-color: rgba(v.$primary-color, 0.3);
+      align-self: start;
+      padding: 2rem;
+      box-shadow: 5px 5px 10px #babecc4d,
+      -5px -5px 10px #ffffff46;
+      @include m.flex(column, 1.5rem);
+
+      h4 {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .nutrients {
+        align-self: center;
+        padding-right: 5rem; 
+        
+        @include m.flex(column, 1rem);
+        
+        @include m.mq(v.$tablet-2) {
+          gap: 2rem;
+        }
+
+        p {
+          font-size: 1.5rem;
+        }
+      }
+    }
+    
+
+    .buttonGroup {
+      @include m.flex(row, 0rem);
+      flex-wrap: wrap;
+      column-gap: 2rem;
+      row-gap: 1rem;
+
+      button {
+        font-size: 1.5rem;
+      }
+
+      .primaryColor {
+        border: 1px solid v.$primary-color;
+        color: v.$primary-color;
+      }
+    }
+  }
+}
+

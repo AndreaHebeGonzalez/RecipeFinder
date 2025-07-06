@@ -2,13 +2,7 @@
 @use '../../styles/base/mixins' as m;
 
 .recipe {
-  padding: 6rem 0 ;
-
-  @include m.flex(column, 3rem);
-
-  @include m.mq(v.$desktop) {
-    gap: 6rem
-  }
+  @include m.content-layout-flex(v.$spacing-mobile, v.$spacing-mobile, v.$spacing-desktop,  v.$spacing-desktop);
 
   .recipeHeader {
     display: grid;
@@ -35,11 +29,16 @@
     }
 
     .recipeContent {
-      @include m.flex(column, 3rem);
+      @include m.flex(column, v.$spacing-title-content-primary-mobile);
       width: 100%;
+
+      @include m.mq(v.$desktop) {
+        gap: v.$spacing-title-content-primary;
+      }
 
       h2 {
         width: 75%;
+        font-size: 3.8rem;
 
         @include m.mq(v.$desktop) {
           width: 68%;
@@ -54,7 +53,7 @@
       border-radius: 2rem;
       top: 0;
       right: 0;
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       font-weight: 600;
       color: v.$secondary-color;
 
@@ -105,7 +104,7 @@
           position: absolute;
           top: -8%;
           right: 35%;
-          background-image: url(/public/images/clip.png);
+          background-image: url(/images/clip.png);
           background-size: contain;
           background-repeat: no-repeat;
           background-position: center;
@@ -119,7 +118,7 @@
 
   .recipeDescription > div {
     font-weight: 300; 
-    line-height: 1.15
+    line-height: 1.3
   }
 
   .recipeDetails {
@@ -156,9 +155,13 @@
     }
 
     .instructionsContainer {
-      @include m.flex(column, 3rem);
+      @include m.flex(column, v.$spacing-title-content-primary-mobile);
       max-height: 100vh;
       overflow: hidden;
+
+      @include m.mq(v.$desktop) {
+        gap: v.$spacing-title-content-primary;
+      }
 
       .instructions {
         @include m.flex(column, 2rem);

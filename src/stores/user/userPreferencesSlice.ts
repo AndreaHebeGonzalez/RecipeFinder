@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
-import { PreferencesSearchType } from "../types";
-import { getState } from "./useAppStore";
+import { PreferencesSearchType } from "../../types";
+import { getState } from "../useAppStore";
 
 
 export type UserPreferencesSliceType = {
@@ -10,7 +10,7 @@ export type UserPreferencesSliceType = {
   loadFromStorage: () => void
 }
 
-export const userPreferencesSlice : StateCreator<UserPreferencesSliceType> = (set, get) => {
+export const createuserPreferencesSlice : StateCreator<UserPreferencesSliceType> = (set, get) => {
 
   let storedPreferences : PreferencesSearchType = {
     diet: '',

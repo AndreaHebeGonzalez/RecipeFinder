@@ -1,6 +1,6 @@
 @use '../../styles/base/variables' as v;
 @use '../../styles/base/mixins' as m;
-@use "../Buttons/SecondaryButton.module.scss";
+@use "../Buttons/PrimaryButton.module.scss";
 
 .formFilterWrap {
   width: 90%;

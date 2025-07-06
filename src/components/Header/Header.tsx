@@ -25,7 +25,7 @@ const Header = () => {
             <div>
               <img src="/images/logoRecipeFinder.png" alt="logo" />
             </div>
-            <h1>RecipeFinder</h1>
+            <span>RecipeFinder</span>
           </div>
 
           <div className={styles.navWrapper}>
@@ -36,10 +36,9 @@ const Header = () => {
               isMobile = {isMobile }
               openMenu = { openMenu }
             />
-
-            <div className={styles.user}>
-              <img src="/icons/user-solid-icon.svg" alt="Go to profile" />
-            </div>
+            {/* <div className={styles.user}>
+                <img src="/icons/user-solid-icon.svg" alt="Go to profile" />
+            </div> */}
           </div>
         </div>
       </div>

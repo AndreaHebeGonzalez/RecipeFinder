@@ -1,27 +1,23 @@
 @use "../../styles/base/variables" as v;
 @use "../../styles/base/mixins" as m;
 
+
+
+.displayedItemsWrapper {
+  justify-content: center;
+  align-items: center;
+  @include m.flex(column, 0);
+}
 .displayedItems {
-    @include m.blur-bg;
-    background-color: rgba(v.$white, 0.3);
+    min-height: 90dvh;
+    background-color: v.$bg-color-blur;
     border: 3px solid v.$white;
     border-radius: v.$radius;
-    padding: 2rem;
-
-
+    padding: 4rem 2.5rem;
+    width: 100%;
+    @include m.blur-bg;
     @include m.flex(column, 2rem);
-
-    @include m.mq(v.$mobile) {
-      padding: 3rem;
-    }
-
-    @include m.mq(v.$mobile-2) {
-      padding: 3rem 4rem;
-    }
     
-    @include m.mq(v.$tablet) {
-      padding: 2.8rem;
-    }
 
     .loadingWrap {
     height: 100%;
@@ -67,12 +63,36 @@
       @include m.grid-c(3, 1.5rem); 
     }
 
-    @include m.mq(1024px) {
-      @include m.grid-c(2, 1.5rem); 
-    }
-
     @include m.mq(1280px) {
       @include m.grid-c(4, 2.2rem); 
+    }
+  }
+
+  .notResult {
+    width: 100%;
+    align-items: center;
+    @include m.flex(column, 0);
+
+
+    img {
+
+      
+      @include m.mq(v.$mobile) {
+        width: 50%;
+      }
+
+      @include m.mq(v.$mobile-2) {
+        width: 45%;
+      }
+
+      @include m.mq(v.$tablet) {
+        width: 33%;
+      }
+    }
+
+    p {
+      text-align: center;
+      font-weight: 400;
     }
   }
 }

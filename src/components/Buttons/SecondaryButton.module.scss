@@ -2,9 +2,8 @@
 @use '../../styles/base/variables' as v;
 @use 'sass:color';
 
-.btnSecondary {
-  @include m.btn(v.$primary-color);
-  border-radius: 0.5rem;
+.secondaryBtn {
+  @include m.btn(v.$secondary-color);
   
   @include m.mq(768px) {
     font-size: 1.8rem;

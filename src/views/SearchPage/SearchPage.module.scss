@@ -1,0 +1,26 @@
+@use 'sass:color';
+@use '../../styles/base/variables' as v;
+@use '../../styles/base/mixins' as m;
+
+
+.pageBackground {
+  height: 100%;
+  background-image: url('/images/recipeBg.png'), url('/images/salad.png');
+  background-repeat: no-repeat;
+  background-position: top right, bottom left;
+  background-size: auto, 30% auto;
+
+  .mainLayout {
+    gap: 1rem;
+    @include m.content-layout-flex(v.$spacing-mobile, v.$spacing-mobile, v.$spacing-desktop, v.$spacing-desktop);
+    
+
+    @include m.mq(v.$desktop) {
+      gap: 1rem;
+    }
+
+  .wrapper {
+    @include m.blur-container;
+  }
+  }
+}

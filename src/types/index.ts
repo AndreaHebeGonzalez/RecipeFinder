@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { searchFilters, mealTypes, preferencesParams, filters, intolerancesList, dietsList } from "../data";
-import { IngredientSchema, NutrientSchema, RecipeCardSchema, RecipeCardsListSchema, RecipeInformationSchema, RecipeInstructionsSchema } from "../schemas";
+import { IngredientSchema, NutrientSchema, RecipeAIErrorSchema, RecipeAISchema, RecipeCardSchema, RecipeInformationSchema, RecipeInstructionsSchema } from "../schemas";
 
 /* Preferences Types */
 
@@ -57,11 +57,14 @@ export type FiltersName = FiltersCards[keyof FiltersCards]['name']
 /* Recipe Types */
 
 export type NutrientType = z.infer<typeof NutrientSchema>
-export type RecipeCard = z.infer<typeof RecipeCardSchema>
-export type RecipeCardList = z.infer<typeof RecipeCardsListSchema>
+export type RecipeCard = z.infer<typeof RecipeCardSchema> & {
+  categoryRecipe : 'searchRecipe'
+}
+
+export type RecipeCardList = RecipeCard[] /* z.infer<typeof RecipeCardsListSchema> */
 export type RecipeMetrics = { [key in FilterCardsName] : number }
-export type RecipesWithMetrics = {
-  recipe: RecipeCard
+export type RecipeWithMetrics<T extends RecipeCard | AIRecipe> = {
+  recipe: T
   metrics: RecipeMetrics
 }
 
@@ -71,7 +74,7 @@ export type RangesType = {
   [key in FilterCardsName] : Range
 }
 
-export type RangeType<K extends FilterCardsName> = Pick<RangesType, K>; //Defino el tipo genérico RangeType 
+export type RangeType<K extends FilterCardsName> = Pick<RangesType, K> //Defino el tipo genérico RangeType 
 
 export type RecipeIngredients = z.infer<typeof IngredientSchema>
 
@@ -86,3 +89,67 @@ export type RecipeDetailSubset = RecipeInformation & {
 export type RecipeDetails = RecipeDetailSubset &  {
   nutrients: NutrientType[]
 }
+
+/* Favorites type */
+
+export type FavoriteRecipe = RecipeCard | AIRecipe
+
+export type FavoritesList = FavoriteRecipe[]
+
+/* AI Types */
+
+export type AIRequest = {
+  input : string
+}
+
+export type AIRecipe = z.infer<typeof RecipeAISchema> & {
+  id: number | string,
+  image: string,
+  categoryRecipe : 'aiRecipe'
+}
+
+export type AIErrorRecipe = z.infer<typeof RecipeAIErrorSchema>
+
+
+// Este error indica que la IA devolvió un error esperado por una mala entrada del usuario (por ej: ingredientes inválidos)
+export type RecipeAIResponse = 
+  | { sucess: true, data: AIRecipe }
+  | { sucess: false, tagError: true, error: string }
+  | { sucess: false, tagError: false, error: string, technicalMessage: string, errorKind: ErrorKind }
+
+
+export type CustomRecipe = {
+  title: string,
+  id: number,
+  instructions: string[],
+  ingredients: string[],
+  image: string
+}
+
+/* export type NutrientKeys = typeof nutrients[number]
+ */
+
+export type ErrorKind = //tipo de errores
+  | "http"         // Errores HTTP con status (400, 500, etc.)
+  | "network"   // No hay respuesta del servidor (sin status)
+  | "apiAuth"     //Error de key //  autenticación fallida con proveedor externo (ej OpenRouter)
+  | "auth"         // Usuario no autenticado o sin permisos (redirigir al login)
+  | "validation"   // Falló Zod o una validación explícita de campos
+  | "parsing"      // JSON inválido o datos incoherentes
+  | "unexpected";  // Fallback genérico para bugs o errores no previstos
+
+export type ErrorSource = "ai" | "auth" | "api" | "other" // fuente de errores
+
+
+export type AppErrorType = {
+    hasError: boolean,
+    kind: ErrorKind,
+    source: ErrorSource,
+    status?: number | null,
+    generalMessage: string | null,
+    technicalMessage: string | null,
+  }
+
+
+
+

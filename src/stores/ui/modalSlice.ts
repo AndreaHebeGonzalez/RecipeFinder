@@ -1,6 +1,6 @@
 import { ReactNode, RefObject } from "react";
 import { StateCreator } from "zustand";
-import { modalOpenAnimation , modalCloseAnimation } from "../animations";
+import { modalOpenAnimation , modalCloseAnimation } from "../../animations";
 
 export type ModalSliceType = {
   isModalOpen: boolean,

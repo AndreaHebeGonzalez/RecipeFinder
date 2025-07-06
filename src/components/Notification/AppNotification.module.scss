@@ -1,6 +1,12 @@
 @use '../../styles/base/variables' as v;
 @use '../../styles/base/mixins' as m;
 
+.notificationBox {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
 .notificationWrap {
     background-color: v.$white;
     width: max-content;

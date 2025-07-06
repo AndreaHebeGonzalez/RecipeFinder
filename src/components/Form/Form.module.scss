@@ -25,13 +25,12 @@
     border: none;
     width: 100%;
     font-size: 1.6rem;
-    font-family: "Roboto Flex", sans-serif;
+    font-family: v.$secondary-font;
     border-radius: v.$radius;
     padding: 1rem;
 
     @include m.mq(v.$tablet-2) {
       width: 50%;
-      font-size: 1.8rem;
     }
 
     &:focus {
@@ -40,8 +39,8 @@
     }
 
     &::placeholder {
-      font-size: 1.3rem;
-      font-family: "Roboto Flex", sans-serif;
+      font-size: 1.6rem;
+      font-family: v.$secondary-font;
     }
   }
   

@@ -1,5 +1,5 @@
 
-import { HomeIcon, BookmarkIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, BookmarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom'
 import styles from './Nav.module.scss'
 import { useRef, useState, useLayoutEffect } from 'react';
@@ -50,6 +50,13 @@ const Nav = ({ openMenu, isMobile } : NavProps) => {
           <BookmarkIcon className='icon-size'/>
           <Link to= {'/favorites'}>
             Favorites
+          </Link> 
+        </li>
+
+        <li className={styles.navItem}>
+          <MagnifyingGlassIcon className='icon-size'/>
+          <Link to= {'/search'}>
+            Search
           </Link> 
         </li>
       </ul>

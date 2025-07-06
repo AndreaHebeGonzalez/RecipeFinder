@@ -17,7 +17,6 @@ export const modalOpenAnimation = (element: HTMLDivElement ) => {
 
   tl.to(element, {
     display: 'block',
-    duration: 0.5,
   }).to(element, {
     opacity: 1,
     duration: 0.5,
@@ -92,6 +91,38 @@ export const progressBarNotification = (notificationBox: HTMLDivElement, progres
   })
 }
 
+
+/* Loading */
+
+export const openLoading = (element: HTMLDivElement) => {
+  const loading = element.querySelector('#loading')
+
+  gsap.set(element, {opacity: 0})
+
+  gsap.set(loading, {
+    scale: 0,
+    transformOrigin: 'center center',
+  })
+
+  const tl: GSAPTimeline = gsap.timeline()
+  tl.to(element, {
+    opacity: 1,
+    duration: 0.08,
+  })
+  .to(loading, {
+    scale: 1,
+    duration: 0.2
+  })
+}
+
+/* 
+export const closeLoading = (element: HTMLDivElement) => {
+  const tl: GSAPTimeline = gsap.timeline()
+  tl.to(element, {
+    opacity: 0,
+    duration: 0.5,
+  })
+} */
 
 /* 
 gsap.to('.ventana', {

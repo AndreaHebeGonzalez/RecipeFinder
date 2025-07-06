@@ -16,7 +16,7 @@ type RangeSliderProps = {
 
 const RangeSliderComponent : FC<RangeSliderProps> = ({ name, nameApi, min, max, step, values, onChange }) => {
 
-  const  hasRecipe = useAppStore(state=>state.hasRecipe)
+  const  recipes = useAppStore(state=>state.recipes)
 
   const [minValue, setMinValue] = useState(values[0])
   const [maxValue, setMaxValue] = useState(values[1])
@@ -94,7 +94,7 @@ const RangeSliderComponent : FC<RangeSliderProps> = ({ name, nameApi, min, max, 
   return (
     <div className={styles.rangeSliderContainer}>
       <span className= {styles.filterName}>{name}:</span>
-      <div className={`${styles.rangeSlider} ${hasRecipe ? '': styles.disabledFilter}`}>
+      <div className={`${styles.rangeSlider} ${recipes.length > 0 ? '': styles.disabledFilter}`}>
         <div className={styles.track}  ref={trackRef} />
         <input 
           className={`${styles.input} ${styles.input_min}`}
@@ -106,7 +106,7 @@ const RangeSliderComponent : FC<RangeSliderProps> = ({ name, nameApi, min, max, 
           step={step}
           value={minValue}
           onChange={handleChangeMin}
-          disabled= {!hasRecipe}
+          disabled= {recipes.length === 0}
         />
 
         <input 
@@ -119,10 +119,10 @@ const RangeSliderComponent : FC<RangeSliderProps> = ({ name, nameApi, min, max, 
           step={step}
           value={maxValue}
           onChange={handleChangeMax}
-          disabled= {!hasRecipe}
+          disabled= {recipes.length === 0}
         />
       </div>
-      <div className={`${styles.containerValues} ${hasRecipe ? '': styles.disabled}`}>
+      <div className={`${styles.containerValues} ${recipes.length > 0 ? '': styles.disabled}`}>
         <div className={`${styles.containerValue} ${styles.containerValueMin}`} ref={minDisplayRef}>
           <div className={styles.valuesMin}>{minDisplay}</div>
         </div>

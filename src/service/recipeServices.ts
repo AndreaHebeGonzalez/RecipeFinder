@@ -1,42 +1,29 @@
-import axios from "axios"
+import { api } from "../lib/axios";
 import type { Filters, RecipeDetailSubset, RecipeCard } from "../types"
 import { RecipeCardsListSchema, RecipeInformationSchema, RecipeInstructionsSchema } from "../schemas";
 
 
+const apiKey = import.meta.env.VITE_API_KEY
 
-const urlBase = "https://api.spoonacular.com/recipes/"
-const appId : string = import.meta.env.VITE_API_KEY
-
-if (!appId) {
+if (!apiKey) {
   throw new Error("VITE_API_KEY is missing in your environment variables."); //evitar que la clave sea undefined y la request falle silenciosamente.
 }
 
-type ParamsType = Filters & { apiKey: string,  addRecipeNutrition: boolean}
+type ParamsType = Filters & { apiKey: string,  addRecipeNutrition: boolean }
 
 const getParams = (filters : Filters) : ParamsType =>  {
   return ({
     ...filters,
-    apiKey: appId,
+    apiKey,
     addRecipeNutrition: true,
   })
 }
 
-export const recipeSearchFetch = async (filters : Filters) => {
+export const recipeSearchFetch = async (filters : Filters) : Promise<RecipeCard[] | null | undefined> => {
   try {
     const params = getParams(filters)
-
-    /*   // Construir config de Axios
-    const config = {
-      params,
-      url: `${urlBase}complexSearch`,
-      method: 'get'
-    } */
-
-    /* // Mostrar la URL completa que Axios va a usar
-    const fullUrl = axios.getUri(config)
-    console.log('Request URL:', fullUrl) */
-
-    const {data : { results } } = await axios.get(`${urlBase}complexSearch`, { params })
+    const url = 'complexSearch'
+    const {data : { results } } = await api.get(url, { params })
 
     console.log(results)
 
@@ -49,14 +36,17 @@ export const recipeSearchFetch = async (filters : Filters) => {
 
     console.log(result.data)
 
-    const data = result.data.map(recipe => (
+    const data: RecipeCard[] = result.data.map(recipe => (
       {
         ...recipe,
         nutrition: {
           nutrients: recipe.nutrition.nutrients.filter(n=>["Calories", "Protein", "Carbohydrates", "Fat", "Sodium", "Cholesterol"].includes(n.name))
-        }
+        },
+        categoryRecipe: "searchRecipe"
       }
     ))
+    
+    console.log(data)
     return data
   } catch (error) {
     console.log(error)
@@ -69,8 +59,8 @@ export const getRecipeDetailSubset = async(recipe : RecipeCard) : Promise<Recipe
     const id = recipe.id
 
     /* Obtengo informacion de recetas */
-
-    const { data : recipeInformation }  = await axios(`${urlBase}${id}/information?apiKey=${appId}`)
+    const url = `${id}/information?apiKey=${apiKey}`
+    const { data : recipeInformation }  = await api(url)
     const information = RecipeInformationSchema.safeParse(recipeInformation)
 
     if(!information.success) { 
@@ -78,9 +68,11 @@ export const getRecipeDetailSubset = async(recipe : RecipeCard) : Promise<Recipe
       throw new Error('Invalid response structure')
     }
 
-    /* Obtengo instrucciones de recetas */
+    console.log(information)
 
-    const { data : instructionsRecipe } = await axios(`${urlBase}${id}/analyzedInstructions?apiKey=${appId}`) 
+    /* Obtengo instrucciones de recetas */
+    const urlApi = `${id}/analyzedInstructions?apiKey=${apiKey}`
+    const { data : instructionsRecipe } = await api(urlApi) 
 
     const instructions = RecipeInstructionsSchema.safeParse(instructionsRecipe) 
 
