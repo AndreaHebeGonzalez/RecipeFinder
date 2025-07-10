@@ -155,7 +155,7 @@ Return one of the two valid raw JSON objects below:
   "nutrition": {
     "nutrients": [
       {
-        "name": "calories" | "protein" | "carbohydrates" | "fat",
+        "name": "Calories" | "Protein" | "Carbohydrates" | "Fat",
         "amount": number,
         "unit": "kcal" | "g"
       }
@@ -236,6 +236,7 @@ Repeat: Your entire output must be one of the two valid JSON objects above, with
 
     if(result.success) {
       console.log(result.data)
+
       return ({
         sucess: true,
         data: {

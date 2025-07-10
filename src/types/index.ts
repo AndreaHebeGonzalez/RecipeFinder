@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { searchFilters, mealTypes, preferencesParams, filters, intolerancesList, dietsList } from "../data";
-import { IngredientSchema, NutrientSchema, RecipeAIErrorSchema, RecipeAISchema, RecipeCardSchema, RecipeInformationSchema, RecipeInstructionsSchema } from "../schemas";
+import { aiIngredientsSchema, aiInstructionsSchema, IngredientSchema, NutrientSchema, RecipeAIErrorSchema, RecipeAISchema, RecipeCardSchema, RecipeInformationSchema, RecipeInstructionsSchema } from "../schemas";
 
 /* Preferences Types */
 
@@ -87,7 +87,10 @@ export type RecipeDetailSubset = RecipeInformation & {
 }
 
 export type RecipeDetails = RecipeDetailSubset &  {
-  nutrients: NutrientType[]
+  categoryRecipe: 'searchRecipe',
+  nutrition: {
+    nutrients: NutrientType[]
+  }
 }
 
 /* Favorites type */
@@ -101,6 +104,10 @@ export type FavoritesList = FavoriteRecipe[]
 export type AIRequest = {
   input : string
 }
+
+export type aiIngredients = z.infer<typeof aiIngredientsSchema>
+
+export type aiInstructions = z.infer<typeof aiInstructionsSchema>
 
 export type AIRecipe = z.infer<typeof RecipeAISchema> & {
   id: number | string,

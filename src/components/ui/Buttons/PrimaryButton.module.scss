@@ -1,0 +1,21 @@
+@use '../../../styles/base/variables' as v;
+@use '../../../styles/base/mixins' as m;
+@use 'sass:color';
+
+
+.primaryBtn {
+  @include m.btn(v.$primary-color);
+
+  @include m.mq(v.$desktop-2) {
+    font-size: 1.8rem;
+  }
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: color.scale(v.$primary-color, $lightness: 0%);
+  }
+}

@@ -9,7 +9,7 @@ export const PreferencesSearchSchema = z.object({
 export const NutrientSchema = z.object({
   name: z.string(),
   amount: z.number(),
-  percentOfDailyNeeds: z.number(),
+  percentOfDailyNeeds: z.number().optional(),
   unit: z.string(),
 });
 
@@ -44,7 +44,7 @@ export const IngredientSchema = z.object({
 })
 
 export const RecipeInformationSchema = z.object({
-  id: z.number(),
+  id: z.union([z.string(), z.number()]),
   title: z.string(),
   image: z.string(),
   summary: z.string(),
@@ -80,25 +80,26 @@ export const RecipeInstructionsSchema = z.array(IntructionSchema)
 
 /* AI Schemas */
 
-export const RecipeAISchema = z.object({
-  title: z.string(),
-  ingredients: z.array(z.object({
+export const aiIngredientsSchema = z.array(z.object({
     name: z.string(),
-    quantity: z.string()
-  })),
-  steps: z.array(z.object({
+    quantity: z.string(),
+    id: z.string()
+  }))
+
+export const aiInstructionsSchema = z.array(z.object({
     title: z.string().optional(),
     steps: z.array(z.object({
       stepNumber: z.number(),
       step: z.string()
     }))
-  })),
+  }))
+
+export const RecipeAISchema = z.object({
+  title: z.string(),
+  ingredients: aiIngredientsSchema,
+  steps: aiInstructionsSchema,
   nutrition: z.object({
-    nutrients: z.array(z.object({
-  name: z.string(),
-  amount: z.number(),
-  unit: z.string(),
-})), // Nutrientes que necesitas
+    nutrients: z.array(NutrientSchema), // Nutrientes que necesitas
   }),
 })
 

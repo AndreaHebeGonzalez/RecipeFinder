@@ -1,0 +1,20 @@
+@use '../../../styles/base/variables' as v;
+@use '../../../styles/base/mixins' as m;
+
+.nutrient {
+  @include m.flex(row, 1rem);
+  align-items: center;
+  div {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+  }
+
+  p {
+    font-size: 1.4rem;
+    span {
+      font-weight: 400;
+      font-size: 1.4rem;
+    }
+  }
+}

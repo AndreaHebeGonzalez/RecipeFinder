@@ -1,0 +1,13 @@
+@use '../../../../styles/base/variables' as v;
+@use '../../../../styles/base/mixins' as m;
+
+
+.formError {
+  width: max-content;
+  //background-color: rgba(v.$white, 0.5);
+
+  & p {
+    color: v.$error;
+    font-weight: 400;
+  }
+}

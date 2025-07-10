@@ -25,8 +25,6 @@ export const recipeSearchFetch = async (filters : Filters) : Promise<RecipeCard[
     const url = 'complexSearch'
     const {data : { results } } = await api.get(url, { params })
 
-    console.log(results)
-
     const result = RecipeCardsListSchema.safeParse(results)
 
     if(!result.success) {
@@ -36,15 +34,18 @@ export const recipeSearchFetch = async (filters : Filters) : Promise<RecipeCard[
 
     console.log(result.data)
 
-    const data: RecipeCard[] = result.data.map(recipe => (
-      {
+    const data: RecipeCard[] = result.data.map(recipe => {
+      let id = recipe.id
+      id = id.toString()
+      console.log(typeof id)
+      return {
         ...recipe,
+        id,
         nutrition: {
           nutrients: recipe.nutrition.nutrients.filter(n=>["Calories", "Protein", "Carbohydrates", "Fat", "Sodium", "Cholesterol"].includes(n.name))
         },
         categoryRecipe: "searchRecipe"
-      }
-    ))
+      }})
     
     console.log(data)
     return data
@@ -68,8 +69,6 @@ export const getRecipeDetailSubset = async(recipe : RecipeCard) : Promise<Recipe
       throw new Error('Invalid response structure')
     }
 
-    console.log(information)
-
     /* Obtengo instrucciones de recetas */
     const urlApi = `${id}/analyzedInstructions?apiKey=${apiKey}`
     const { data : instructionsRecipe } = await api(urlApi) 
@@ -83,10 +82,9 @@ export const getRecipeDetailSubset = async(recipe : RecipeCard) : Promise<Recipe
 
     recipeDetailsSubmit = {
       ...information.data,
+      id: id.toString(),
       instructions: instructions.data
     }
-
-    console.log(recipeDetailsSubmit)
 
     return recipeDetailsSubmit
 

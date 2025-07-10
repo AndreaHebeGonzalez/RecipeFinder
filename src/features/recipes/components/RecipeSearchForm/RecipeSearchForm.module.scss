@@ -1,0 +1,97 @@
+@use "../../../../styles/base/variables" as v;
+@use "../../../../styles/base/mixins" as m;
+@use "../../../../components/ui/Buttons/PrimaryButton.module.scss";
+
+.form {
+  @include m.flex(column, 2rem);
+  z-index: 10;
+  @include m.mq(v.$desktop-2) {
+    gap: 2.5rem
+  }
+
+  
+
+  .flexGroup {
+    @include m.flex(column, 2rem);
+
+    @include m.mq(v.$mobile-2) {
+      @include m.flex(row, 2rem);
+      align-items: end;
+    }
+  }
+
+  input[type="text"], .mealType select {
+    background-color: v.$white;
+    border: none;
+    width: 100%;
+    font-size: 1.6rem;
+    font-family: v.$secondary-font;
+    border-radius: v.$radius;
+    padding: 1rem;
+
+    @include m.mq(v.$tablet-2) {
+      width: 50%;
+    }
+
+    &:focus {
+      outline: none;  
+      border: 0.8px solid #616161
+    }
+
+    &::placeholder {
+      font-size: 1.6rem;
+      font-family: v.$secondary-font;
+    }
+  }
+  
+  .mealType {
+    @include m.flex(column, 1rem);
+
+    select {
+      width: 100%;
+    }
+    option {
+      font-size: 1.6rem;
+      font-family: "Roboto Flex", sans-serif;
+    }
+  }
+
+  .searchActions {
+    @include m.flex(row, 0);
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @include m.mq(v.$tablet-2) {
+      width: 70%;
+    }
+  }
+
+  .searchPreferencies {
+    @include m.flex(column, 1.5rem);
+    cursor: pointer;
+    
+    text-align: end;
+    align-items: end;
+
+    @include m.mq(v.$mobile-2) {
+      text-align: initial;
+      align-items: initial;
+    }
+
+    p {
+      width: 70%;
+      font-weight: 500;
+
+      @include m.mq(v.$mobile-2) {
+        width: 100%;
+      }
+    }
+
+    .line {
+      height: 1px;
+      width: 50%;
+      background-color: v.$black;
+    }
+  }
+}

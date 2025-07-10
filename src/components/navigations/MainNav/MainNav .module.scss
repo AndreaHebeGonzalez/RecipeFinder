@@ -1,0 +1,47 @@
+@use '../../../styles/base/variables' as v;
+@use '../../../styles/base/mixins' as m;
+
+.nav {
+  z-index: 100;
+  
+  .navItems {
+    padding: 2rem;
+    @include m.flex(row, 1rem);
+    
+    @include m.mq(1024px) {
+      padding: 0;
+    }
+  }
+  .navItem {
+    width: 95%;
+    margin: 0 auto;
+
+    @include m.flex(row, 1rem);
+    align-items: center;
+
+    img {
+      width: 1.8rem;
+      height: auto;
+    }
+
+    a {
+      line-height: 0;
+    }
+  }
+}
+
+.dropdownMenu {
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 100%;
+  right: 0%;
+  
+  background: #fff;
+  border-radius: 1rem;
+  transition: all .5s;
+}
+
+
+
+/*  */

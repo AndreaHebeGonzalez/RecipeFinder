@@ -75,8 +75,6 @@ export const recipeSlice : StateCreator<RecipeSliceType> = (set, get) => {
 
         if(!recipes) throw new Error('Not rescipes')
 
-        console.log(recipes)
-
         if(recipes.length === 0) {
           set({
             isLoading: false,

@@ -33,7 +33,6 @@ export const getRecipeFilterValues = <T extends RecipeCard | AIRecipe>(recipe : 
 }
 
 export const getRecipesFiltersValues = <T extends RecipeCard | AIRecipe>(recipes : T[]) : RecipeWithMetrics<T>[] => {
-  console.log(recipes)
   const recipesWithMetrics = recipes.map(recipe => ({
       recipe,
       metrics: getRecipeFilterValues(recipe)
@@ -45,9 +44,9 @@ export const getRecipesFiltersValues = <T extends RecipeCard | AIRecipe>(recipes
 export const getRecipeFormat = (recipe : RecipeCard, recipeDetailSubset : RecipeDetailSubset ) : RecipeDetails => {
     const recipeDetails = {
     ...recipeDetailSubset,
-    nutrients: recipe.nutrition.nutrients
+    nutrition: recipe.nutrition,
+    categoryRecipe: recipe.categoryRecipe
     }
-    console.log(recipeDetails)
     return recipeDetails
 }
 

@@ -1,0 +1,224 @@
+@use '../../../../styles/base/variables' as v;
+@use '../../../../styles/base/mixins' as m;
+
+.recipe {
+  @include m.content-layout-flex(v.$spacing-mobile, v.$spacing-mobile, v.$spacing-desktop,  v.$spacing-desktop);
+
+  .recipeHeader {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 2.5rem;
+    position: relative;
+    place-items: center;
+
+    .timePreparation {
+      padding: 1rem 2rem;
+      position: absolute;
+      border-radius: 2rem;
+      top: 0;
+      right: 0;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: v.$secondary-color;
+
+      span {
+        font-size: 3.5rem;
+      }
+    }
+
+    .recipeContent {
+      @include m.flex(column, v.$spacing-title-content-primary-mobile);
+      width: 100%;
+
+      @include m.mq(v.$desktop) {
+        gap: v.$spacing-title-content-primary;
+      }
+
+      h2 {
+        width: 75%;
+        font-size: 3.8rem;
+
+        @include m.mq(v.$desktop) {
+          width: 68%;
+        }
+      }
+    }
+
+    .contentWrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 4rem;
+      
+
+      @include m.mq(v.$desktop) {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: initial;
+        align-content: center;
+        justify-content: center
+      }
+  
+      @include m.mq(desktop-2) {
+        grid-template-columns: 0.6fr 0.4fr;
+      }
+    }
+
+    .imageContainer {
+      overflow: hidden;
+      border-radius: v.$radius;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      border: 1rem solid white;
+      transform: rotate(0deg);
+      
+
+
+      @include m.mq(v.$tablet) {
+        max-width: 70rem;
+      } 
+      
+      @include m.mq(v.$desktop) {
+        max-width: 60rem;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .infoContainer {
+      align-self: center;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      justify-self: end;
+      @include m.flex(row, 0);
+      
+
+      @include m.mq(v.$desktop) {
+        background-color: rgba(v.$primary-color, 0.3);
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        width: 85%;
+        transform: translateY(2rem) rotate(4deg);
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: -8%;
+          right: 35%;
+          background-image: url(/images/clip.png);
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          z-index: 100;
+          width: 9rem;
+          height: 10rem; 
+        }
+      };
+    }
+  }
+
+  .recipeDescription > div {
+    font-weight: 300; 
+    line-height: 1.3
+  }
+
+  .searchRecipeDetails {
+    @include m.grid-c(1, 3rem);
+
+    @include m.mq(v.$desktop) {
+      @include m.grid-c(2, 2.5rem);
+    } 
+    
+  }
+
+  .ingredientsContainer {
+    @include m.flex(column, 3rem);
+
+    .ingredientsScroll {
+      max-height: 100vh;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.438);
+        border-radius: 4px;
+      }
+
+      .ingredients {
+        @include m.flex(row, 2rem);
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  .instructionsContainer {
+    @include m.flex(column, v.$spacing-title-content-primary-mobile);
+    max-height: 100vh;
+    overflow: hidden;
+
+    @include m.mq(v.$desktop) {
+      gap: v.$spacing-title-content-primary;
+    }
+
+    .instructions {
+      @include m.flex(column, 2rem);
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.438);
+        border-radius: 4px;
+      }
+      //padding-left: 6rem;
+
+
+      .preparation {
+        list-style: none;
+        padding-right: 1rem;
+
+        h4 {
+          font-weight: 400;
+          font-size: 2.8rem;
+        }
+
+        .preparationSteps {
+          @include m.flex(column, 1rem);
+        }
+      }
+
+      .instruction {
+        @include m.flex(row, 1.5rem);
+        align-items: start;
+
+        p {
+          line-height: 1.2;
+        }
+
+        span {
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+    
+  .aiRecipeDetails {
+    
+    @include m.flex(column, 3rem);
+
+    .aiIngredients {
+      @include m.flex(column, 1rem);
+
+      .ingredientItem {
+        @include m.flex(row, 1rem);
+      }
+    }
+  }
+}
+

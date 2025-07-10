@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import Nav from "../Nav/Nav"
+import MainNav from "../navigations/MainNav/MainNav "
 import styles from "./Header.module.scss"
 import { useAppStore } from '../../stores/useAppStore'
 
@@ -32,7 +32,7 @@ const Header = () => {
 
             {isMobile && <img onClick = {handleClick} className={`icon-size ${styles.menuMobile}`} src="/icons/menu-icon.svg" alt="menu mobile" />}
             
-            <Nav 
+            <MainNav 
               isMobile = {isMobile }
               openMenu = { openMenu }
             />
