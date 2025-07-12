@@ -26,7 +26,7 @@
 
 /* Buttons */
 
-@mixin btn($color) {
+@mixin btn($color, $text) {
   cursor: pointer;
   background-color: $color;
   padding: 1rem 2rem;
@@ -34,7 +34,7 @@
   font-family: v.$primary-font;
   border: none;
   border-radius: 1rem;
-  color: v.$white;
+  color: $text;
 
   
   &:hover {

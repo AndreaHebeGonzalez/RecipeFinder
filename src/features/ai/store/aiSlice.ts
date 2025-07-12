@@ -1,9 +1,10 @@
 import axios from "axios";
 import { StateCreator } from "zustand";
-import { getState } from "../useAppStore";
-import { generateRecipe } from "../../service/aiServices";
-import { AIRecipe, AIRequest, ErrorKind } from "../../types";
-import { getMessageError } from "../../utils";
+import { getState } from "../../../stores/useAppStore";
+import { generateRecipe } from "../services/aiServices";
+import { AIRecipe, AIRequest } from "../types";
+import { ErrorKind } from "../../../types";
+import { getMessageError } from "../../../utils";
 
 
 export type AISlice = {
@@ -125,6 +126,7 @@ export const createAISlice : StateCreator<AISlice> = (set) => ({
       } 
     }
   },
+  
   getRecipeImage: async (title) => {
 
   }

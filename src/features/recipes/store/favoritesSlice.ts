@@ -1,6 +1,7 @@
 import { StateCreator } from "zustand";
-import type { RecipeCard, FavoritesList, FavoriteRecipe, AIRecipe } from "../../types";
-import { getState } from "../useAppStore";
+import type { RecipeCard, FavoritesList, FavoriteRecipe } from "../types";
+import type { AIRecipe } from "../../ai/types";
+import { getState } from "../../../stores/useAppStore";
 
 
 export type FavoriteSliceType= {

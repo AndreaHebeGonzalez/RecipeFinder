@@ -1,6 +1,3 @@
-import { filters } from "../data";
-import { RecipeCard, FilterCardsName, RecipeWithMetrics, RecipeDetailSubset, RecipeDetails, AIRecipe } from "../types";
-
 export const getHeight = (element: HTMLElement | null) => {
     if (!element) return 0;
     //const rect = element.getBoundingClientRect()
@@ -21,34 +18,6 @@ export const getGap = (element: HTMLElement | null) => {
     const style = window.getComputedStyle(element)
     return parseFloat(style.rowGap)
 } */
-
-export const getRecipeFilterValues = <T extends RecipeCard | AIRecipe>(recipe : T) : { [key in FilterCardsName] : number } => {
-    const filtersKey = (Object.keys(filters) as Array<FilterCardsName>)
-    const recipeFilterValues = filtersKey.reduce((acc, filter) => {
-      const nutrient = recipe.nutrition?.nutrients?.find(nutrient => nutrient.name === filter)
-      acc[filter] = nutrient ? nutrient.amount : 0
-      return acc
-    }, {} as { [key in FilterCardsName] : number })
-    return recipeFilterValues
-}
-
-export const getRecipesFiltersValues = <T extends RecipeCard | AIRecipe>(recipes : T[]) : RecipeWithMetrics<T>[] => {
-  const recipesWithMetrics = recipes.map(recipe => ({
-      recipe,
-      metrics: getRecipeFilterValues(recipe)
-  }))
-  return recipesWithMetrics
-}
-
-
-export const getRecipeFormat = (recipe : RecipeCard, recipeDetailSubset : RecipeDetailSubset ) : RecipeDetails => {
-    const recipeDetails = {
-    ...recipeDetailSubset,
-    nutrition: recipe.nutrition,
-    categoryRecipe: recipe.categoryRecipe
-    }
-    return recipeDetails
-}
 
 
 export const getMessageError = (status: number, isAuthError = false) => {

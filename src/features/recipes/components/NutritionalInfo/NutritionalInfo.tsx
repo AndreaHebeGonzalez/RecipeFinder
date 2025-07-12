@@ -1,5 +1,5 @@
 import styles from "./NutritutionalInfo.module.scss"
-import type { NutrientType } from "../../../../types"
+import type { NutrientType } from "../../types"
 
 type NutritionalInfo = {
   nutrients: NutrientType[]

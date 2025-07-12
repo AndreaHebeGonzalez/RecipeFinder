@@ -1,9 +1,9 @@
 import styles from './RecipeSearchForm.module.scss';
 import { useAppStore } from '../../../../stores/useAppStore';
-import { mealTypes, searchFilters } from '../../../../data';
+import { mealTypes, searchFilters } from '../../../../data'
 import FormPreferencies from '../../../user/components/UserPreferencesForm/UserPreferencesForm';
 import useForm from '../../../../hooks/useForm';
-import type { SearchFilterType, MealTypes } from '../../../../types';
+import type { SearchFilterType, MealTypes } from '../../types';
 import FormError from '../../../../components/ui/Error/FormError/FormError';
 
 

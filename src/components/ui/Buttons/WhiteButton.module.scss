@@ -3,9 +3,8 @@
 @use 'sass:color';
 
 .whiteButton {
-  @include m.btn(v.$white);
+  @include m.btn(v.$white, color.scale(v.$black, $lightness: 35%));
   border: 1px solid  color.scale(v.$black, $lightness: 60%);
-  color: color.scale(v.$black, $lightness: 35%);
   transition: all .2s;
 
 

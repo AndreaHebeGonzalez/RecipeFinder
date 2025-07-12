@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import { apirouter } from "../lib/axios";
+import { apirouter } from "../../../lib/axios";
 import { RecipeAIErrorSchema, RecipeAISchema } from "../schemas";
 import type { AIRequest, RecipeAIResponse } from "../types";
-import { getAIJson } from '../utils';
+import { getAIJson } from '../../../utils';
 
 
 export const generateRecipe = async(data : AIRequest['input']) : Promise<RecipeAIResponse | null | undefined>  => {

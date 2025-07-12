@@ -1,6 +1,5 @@
-
 import styles from  "./IngredientCard.module.scss"
-import type { RecipeIngredients } from "../../../../types"
+import type { RecipeIngredients } from "../../types"
 
 type IngredientCard = {
   ingredient: RecipeIngredients 

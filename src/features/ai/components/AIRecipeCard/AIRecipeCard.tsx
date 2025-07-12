@@ -3,7 +3,7 @@ import PrimaryButton from '../../../../components/ui/Buttons/PrimaryButton'
 import WhiteButton from '../../../../components/ui/Buttons/WhiteButton'
 import Nutrient from '../../../../components/ui/Nutrients/Nutrient'
 import { useAppStore } from '../../../../stores/useAppStore'
-import type { AIRecipe } from '../../../../types'  
+import type { AIRecipe } from '../../../ai/types'  
 import { useState } from 'react'
 
 type AIRecipeType = {

@@ -1,0 +1,16 @@
+@use '../../../../styles/base/variables' as v;
+@use '../../../../styles/base/mixins' as m;
+
+
+.dividerWithText {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    @include m.flex(row, 3rem);
+
+    .dividerLine {
+      width: 30%;
+      height: 1px;
+      background-color: v.$black;
+    }
+  }

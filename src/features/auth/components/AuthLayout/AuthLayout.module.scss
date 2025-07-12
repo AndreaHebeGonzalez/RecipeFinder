@@ -1,0 +1,36 @@
+@use '../../../../styles/base/variables' as v;
+@use '../../../../styles/base/mixins' as m;
+
+.loginPage {
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden; 
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  @include m.flex(row, 0);
+
+  .bgImage {
+    z-index: 0;
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 30%;
+    height: auto;
+    transform: rotate(50deg);
+    transform-origin: center center;
+  }
+
+  .loginBox {
+    position: relative;;
+    background-color: rgba(v.$primary-color, 0.3);
+    width: 70%;
+    padding: 6rem;
+    border-radius: 1rem;
+    border: 0.4rem solid v.$white;
+    @include m.blur-bg;
+    justify-content: center;
+    align-items: center;
+    @include m.flex(column, 3rem)
+  }
+}

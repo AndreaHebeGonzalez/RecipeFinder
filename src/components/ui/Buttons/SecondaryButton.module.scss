@@ -3,7 +3,7 @@
 @use 'sass:color';
 
 .secondaryBtn {
-  @include m.btn(v.$secondary-color);
+  @include m.btn(v.$secondary-color, v.$white);
   
   @include m.mq(768px) {
     font-size: 1.8rem;

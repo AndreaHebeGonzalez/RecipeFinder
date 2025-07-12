@@ -2,7 +2,7 @@ import styles from './RecipesSearch.module.scss'
 import CardsContainer from "../../components/CardsContainer/CardsContainer"
 import { useAppStore } from "../../../../stores/useAppStore"
 import SearchContainer from "../../components/SearchContainer/SearchContainer"
-import { RecipeCard } from '../../../../types'
+import { RecipeCard } from '../../types'
 import NoDataMessage from '../../../../components/ui/feedback/NoDataMessage/NoDataMessage'
 
 
@@ -38,3 +38,29 @@ const RecipesSearch = () => {
 }
 
 export default RecipesSearch
+
+
+
+/* features/
+├── recipes/
+│   ├── components/
+│   ├── pages/               # RecipesPage, RecipeDetailsPage
+│   ├── services/
+│   ├── schemas/
+│   └── types/
+
+├── ai/
+│   ├── components/          # AIRecipeCard, IAInstruction, etc.
+│   ├── forms/               # AIRecipeForm, etc.
+│   ├── pages/               # GenerateRecipePage, NutritionAssistantPage
+│   ├── services/            # generateRecipe, analyzeImage
+│   ├── schemas/             # aiRecipeSchema, nutritionSchema
+│   └── types/               # IARecipe, IANutritionData, etc.
+
+├── customRecipes/
+│   ├── forms/               # CreateCustomRecipeForm
+│   ├── pages/               # CreateCustomRecipePage
+│   ├── schemas/
+│   ├── services/
+│   └── types/
+ */

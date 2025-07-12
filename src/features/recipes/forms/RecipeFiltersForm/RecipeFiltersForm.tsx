@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from './RecipeFiltersForm.module.scss'
-import type { FilterCardsName, RangesType  } from '../../../../types'
+import type { FilterCardsName, RangesType  } from '../../types'
 import { RangeSlider } from '../../../../components/ui/RangeSlider/RangeSlider'
 import { filters } from '../../../../data'
 import { useAppStore } from '../../../../stores/useAppStore'

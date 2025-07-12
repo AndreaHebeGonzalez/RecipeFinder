@@ -3,7 +3,7 @@ import styles from './AIForm.module.scss'
 import { useAppStore } from '../../../../stores/useAppStore'
 import FormError from '../../../../components/ui/Error/FormError/FormError'
 import useForm from '../../../../hooks/useForm'
-import type { AIRequest } from '../../../../types'
+import type { AIRequest } from '../../types'
 
 const AIForm = () => {
 

@@ -1,8 +1,8 @@
 import { StateCreator } from "zustand"
-import { getState } from "../useAppStore";
-import { recipeSearchFetch } from "../../service/recipeServices"
-import type { QueryFilters, SearchFilterType, Filters, RecipeCardList, RangesType } from "../../types"
-import { buildRecipeParams } from "../../service/apiParams";
+import { getState } from "../../../stores/useAppStore"
+import { recipeSearchFetch } from "../services/recipeServices"
+import type { QueryFilters, SearchFilterType, Filters, RecipeCardList, RangesType } from "../types"
+import { buildRecipeParams } from "../utils"
 
 
 export type RecipeSliceType = {

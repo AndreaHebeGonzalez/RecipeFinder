@@ -5,9 +5,10 @@ import NutritionalInfo from "../../components/NutritionalInfo/NutritionalInfo";
 import { useAppStore } from "../../../../stores/useAppStore"
 import styles from "./RecipeDetails.module.scss"
 import { useParams } from "react-router-dom";
-import type { AIRecipe, RecipeCard, RecipeDetailSubset, RecipeDetails } from "../../../../types";
-import { getRecipeDetailSubset } from "../../../../service/recipeServices";
-import { getRecipeFormat } from "../../../../utils";
+import type { RecipeCard, RecipeDetailSubset, RecipeDetails } from "../../types";
+import type { AIRecipe } from "../../../ai/types";
+import { getRecipeDetailSubset } from "../../services/recipeServices";
+import { getRecipeFormat } from "../../utils";
 
 const urlBase = 'https://img.spoonacular.com/recipes/'
 

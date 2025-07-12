@@ -1,7 +1,7 @@
 import styles from "./FavoritePage.module.scss"
 import CardsContainer from "../../components/CardsContainer/CardsContainer"
 import { useAppStore } from "../../../../stores/useAppStore"
-import type { FavoriteRecipe } from "../../../../types"
+import type { FavoriteRecipe } from "../../types"
 import NoDataMessage from "../../../../components/ui/feedback/NoDataMessage/NoDataMessage"
 
 

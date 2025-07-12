@@ -3,7 +3,7 @@ import styles from './PrimaryButton.module.scss'
 
 type PrimaryButtonProps = {
   text: string
-  type?: 'button'
+  type?: "submit" | "reset" | "button" 
   onClick?: () => void
 }
 

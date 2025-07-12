@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom'
 import styles from './SearchContainer.module.scss'
-import RecipeSearchForm from "../RecipeSearchForm/RecipeSearchForm"
+import RecipeSearchForm from '../../forms/RecipeSearchForm/RecipeSearchForm'
 import { useAppStore } from '../../../../stores/useAppStore'
 import CircularButton from '../../../../components/ui/Buttons/CircularButton'
-import { Link } from 'react-router-dom'
 import Loading from '../../../../components/ui/Loading/Loading'
 
 

@@ -1,9 +1,11 @@
+import { useEffect  } from "react"
 import { Link  } from "react-router-dom"
 import styles from "./RecipeCard.module.scss"
-import ButtonPrimary from "../../../../components/ui/Buttons/PrimaryButton"
-import type { AIRecipe, RecipeCard } from "../../../../types"
+import type { RecipeCard } from "../../types"
+import type { AIRecipe } from "../../../ai/types"
 import { useAppStore } from "../../../../stores/useAppStore"
-import { useEffect  } from "react"
+import ButtonPrimary from "../../../../components/ui/Buttons/PrimaryButton"
+
 
 
 type CardProps<T extends RecipeCard | AIRecipe> = { //El tipo puede ser 

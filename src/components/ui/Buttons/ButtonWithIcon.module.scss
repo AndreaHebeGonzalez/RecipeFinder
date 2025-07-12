@@ -1,0 +1,42 @@
+@use "sass:map";
+@use '../../../styles/base/variables' as v;
+@use '../../../styles/base/mixins' as m;
+
+$button-variants: (
+  facebook: ( 
+    background: v.$facebook-color,
+    label: v.$white,
+  ),
+  google: ( 
+    background: v.$google-color,
+    label: v.$black,
+    
+  ),
+);
+
+@each $name, $variant in $button-variants {
+  .#{$name} {
+    width: 100%;
+    @include m.btn(
+      map.get($variant, background),
+      map.get($variant, label)
+    );
+  }
+}
+
+.buttonWithIcon {
+  justify-content: center;
+  align-items: center;
+  @include m.flex(row, 5rem);
+  
+  .label {
+    font-size: 1.8rem;  
+  }
+
+  .icon {
+    width: 4rem;
+  }
+
+} 
+
+

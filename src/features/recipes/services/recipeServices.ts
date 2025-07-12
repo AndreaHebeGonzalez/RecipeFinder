@@ -1,4 +1,4 @@
-import { api } from "../lib/axios";
+import { api } from "../../../lib/axios";
 import type { Filters, RecipeDetailSubset, RecipeCard } from "../types"
 import { RecipeCardsListSchema, RecipeInformationSchema, RecipeInstructionsSchema } from "../schemas";
 

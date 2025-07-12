@@ -4,7 +4,7 @@
 
 
 .primaryBtn {
-  @include m.btn(v.$primary-color);
+  @include m.btn(v.$primary-color, v.$white);
 
   @include m.mq(v.$desktop-2) {
     font-size: 1.8rem;

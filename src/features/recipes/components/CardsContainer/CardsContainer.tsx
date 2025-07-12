@@ -1,11 +1,12 @@
 import { useEffect, useMemo } from "react"
-import styles from "./CardsContainer.module.scss";
-import { getRecipesFiltersValues } from "../../../../utils"
-import { useAppStore } from "../../../../stores/useAppStore"
-import type { FilterCardsName, RecipeCard, AIRecipe } from "../../../../types";
-import Card from "../RecipeCard/RecipeCard"
-import RecipeFiltersForm from "../RecipeFiltersForm/RecipeFiltersForm";
 import { useLocation } from "react-router-dom";
+import styles from "./CardsContainer.module.scss";
+import { getRecipesFiltersValues } from "../../utils";
+import { useAppStore } from "../../../../stores/useAppStore"
+import type { FilterCardsName, RecipeCard } from "../../types"
+import type { AIRecipe } from "../../../ai/types";
+import Card from "../RecipeCard/RecipeCard"
+import RecipeFiltersForm from "../../forms/RecipeFiltersForm/RecipeFiltersForm";
 import NoDataMessage from "../../../../components/ui/feedback/NoDataMessage/NoDataMessage";
 
 
