@@ -34,7 +34,7 @@
     }
 
     .searchHeader {
-        @include m.flex(column, v.$spacing-title-content-secondary);
+        @include m.flex(column, v.$spacing-between-fields-form);
 
         h3 {
             z-index: 10;

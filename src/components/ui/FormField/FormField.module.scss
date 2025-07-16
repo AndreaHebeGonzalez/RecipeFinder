@@ -1,0 +1,32 @@
+@use '../../../styles/base/variables' as v;
+@use '../../../styles/base/mixins' as m;
+
+
+.fieldBox {
+  width: 100%;
+  @include m.flex(column, v.$spacing-fieldForm);
+
+  label {
+    font-size: 1.8rem;
+  }
+
+  input {
+    background-color: v.$white;
+    border: none;
+    width: 100%;
+    font-size: 1.6rem;
+    font-family: v.$secondary-font;
+    border-radius: v.$radius;
+    padding: 1rem;
+    
+    &:focus {
+      outline: none;  
+    }
+
+    &::placeholder {
+      font-size: 1.6rem;
+      font-family: v.$secondary-font;
+    }
+  }
+
+}

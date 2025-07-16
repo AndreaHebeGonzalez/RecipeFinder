@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import PrimaryButton from '../../components/ui/Buttons/PrimaryButton'
 import SecondaryButton from '../../components/ui/Buttons/SecondaryButton'
 import styles from './Home.module.scss'
@@ -18,13 +19,19 @@ const Home = () => {
           </h1>
           <p>Your tool to plan meals, explore recipes, and stay in control of your nutrition.</p>
           <div className={styles.buttonGroup}>
-            <SecondaryButton
-              text='Login'
-            />
-            <PrimaryButton 
-              text='Create account'
-              type='button'
-            />
+            <Link to={'/login'}>
+              <SecondaryButton
+                text='Login'
+              />
+            </Link>
+            
+            <Link to={'/register'}>
+              <PrimaryButton 
+                text='Create account'
+                type='button'
+              />
+            </Link>
+            
           </div>
         </div>
       </section>

@@ -27,14 +27,26 @@ $button-variants: (
 .buttonWithIcon {
   justify-content: center;
   align-items: center;
-  @include m.flex(row, 5rem);
+  @include m.flex(row, 1rem);
+
+  @include m.mq(v.$tablet) {
+    gap: 5rem;
+  }
   
   .label {
-    font-size: 1.8rem;  
+    font-size: 1.5rem;  
+    
+    @include m.mq(v.$desktop-2) {
+      font-size: 1.8rem;
+    }
   }
 
   .icon {
-    width: 4rem;
+    width: 3rem;
+
+    @include m.mq(v.$tablet) {
+      width: 4rem;
+    }
   }
 
 } 

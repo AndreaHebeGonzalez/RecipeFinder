@@ -1,4 +1,4 @@
-import LoginForm from '../../components/LoginForm/LoginForm'
+import LoginForm from '../../components/AuthForm/LoginForm'
 import AuthLayout from '../../components/AuthLayout/AuthLayout'
 import DividerWhithText from '../../components/DividirWithText/DividerWhithText'
 import SocialAuthButtons from '../../components/SocialAuthButtons/SocialAuthButtons'
@@ -8,7 +8,13 @@ import SocialAuthButtons from '../../components/SocialAuthButtons/SocialAuthButt
 const LoginPage = () => {
 
   return (
-    <AuthLayout title='Login'>
+    <AuthLayout 
+      title= {
+        <>
+          Login
+        </>
+      }
+    >
       <LoginForm />
       <DividerWhithText />
       <SocialAuthButtons 

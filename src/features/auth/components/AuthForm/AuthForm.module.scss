@@ -1,0 +1,58 @@
+@use '../../../../styles/base/variables' as v;
+@use '../../../../styles/base/mixins' as m;
+
+.form {
+  width: 90%;
+  @include m.flex(column, v.$spacing-between-fields-form);
+
+  @include m.mq(v.$mobile-2) {
+    width: 80%;
+  }
+
+  .fieldsBox {
+    @include m.flex(column, v.$spacing-between-fields-form);
+  }
+
+  .fieldGroup {
+    width: 100%;
+
+    @include m.flex(column, v.$spacing-between-fields-form);
+
+    @include m.mq(v.$mobile-2) {
+      flex-direction: row;
+    }
+    
+  }
+
+  .recoveryBox {
+    cursor: pointer;
+
+    .recoveryText {
+      font-size: 1.5rem;
+    }
+  }
+
+  .submitBox {
+    
+    @include m.flex(column, 2rem);
+
+    @include m.mq(v.$mobile-2) {
+      flex-direction: row;
+      align-items: end;
+      justify-content: space-between;
+    }
+
+    button {
+      padding: 1rem 4rem;
+    }
+
+    .signUpText {
+      font-size: 1.5rem;
+    }
+  }
+
+  .ctaLink {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

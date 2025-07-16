@@ -1,14 +1,12 @@
 @use '../../../../styles/base/variables' as v;
 @use '../../../../styles/base/mixins' as m;
 
-.loginPage {
+.authPage {
   min-height: 100dvh;
   position: relative;
   overflow: hidden; 
-  justify-content: center;
-  align-items: center;
   z-index: 5;
-  @include m.flex(row, 0);
+  
 
   .bgImage {
     z-index: 0;
@@ -21,16 +19,39 @@
     transform-origin: center center;
   }
 
-  .loginBox {
+  .mainLayout {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    @include m.flex(row, 0);
+    @include m.content-layout-flex(v.$spacing-mobile, v.$spacing-mobile, v.$spacing-desktop, v.$spacing-desktop);
+  }
+
+  .authBox {
     position: relative;;
     background-color: rgba(v.$primary-color, 0.3);
-    width: 70%;
-    padding: 6rem;
+    width: 95%;
+    margin: 0 auto;
+    padding: 4rem 3rem;
     border-radius: 1rem;
     border: 0.4rem solid v.$white;
     @include m.blur-bg;
     justify-content: center;
     align-items: center;
-    @include m.flex(column, 3rem)
+    @include m.flex(column, v.$spacing-section-form-mobile);
+
+    @include m.mq(v.$tablet) {
+      gap: v.$spacing-section-form-desktop;
+      width: 65%;
+      padding: 6rem;
+    }
+
+    h3 {
+      margin-bottom: 1rem;
+    }
+
+    .brand {
+      color: v.$primary-color;
+    }
   }
 }

@@ -3,10 +3,12 @@
 @use "../../../../components/ui/Buttons/PrimaryButton.module.scss";
 
 .form {
-  @include m.flex(column, 2rem);
+  @include m.flex(column, v.$spacing-between-fields-form);
+
   z-index: 10;
+
   @include m.mq(v.$desktop-2) {
-    gap: 2.5rem
+    gap: v.$spacing-between-fields-form;
   }
 
   
@@ -15,7 +17,7 @@
     @include m.flex(column, 2rem);
 
     @include m.mq(v.$mobile-2) {
-      @include m.flex(row, 2rem);
+      @include m.flex(row, v.$spacing-between-fields-form);
       align-items: end;
     }
   }
@@ -35,7 +37,6 @@
 
     &:focus {
       outline: none;  
-      border: 0.8px solid #616161
     }
 
     &::placeholder {

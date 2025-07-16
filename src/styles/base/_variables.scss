@@ -40,6 +40,12 @@ $radius: 1rem;
 $blur: 0.3rem;
 $padding-blur-container: 4rem 2.5rem;
 
+/* Spacing Forms */
+$spacing-fieldForm: 2rem; //espacio dentro de un campo
+$spacing-between-fields-form: 2.5rem; //espacio entre campos
+$spacing-section-form-mobile: 2rem;//espacio entre secciones de un formulario, ej: login, register
+$spacing-section-form-desktop: 4rem;
+
 //Media Queries
 $mobile: 480px;  
 $mobile-2: 665px;  
